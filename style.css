@@ -258,3 +258,98 @@ footer { padding: 60px 48px 36px; border-top: 1px solid var(--bdr2); background:
   margin-top: 28px;
   pointer-events: all;
 }
+
+/* ─── NAV RIGHT (cart + hamburger) ─── */
+.nav-right {
+  display: flex; align-items: center; gap: 20px;
+}
+
+.cart-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--cream2); position: relative;
+  width: 22px; height: 22px; padding: 0;
+  transition: color 0.3s;
+}
+.cart-btn:hover { color: var(--gold); }
+.cart-btn svg { width: 100%; height: 100%; }
+
+.cart-count {
+  position: absolute; top: -6px; right: -8px;
+  background: var(--gold); color: var(--bg);
+  font-size: 0.55rem; font-weight: 500;
+  width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--db); letter-spacing: 0;
+  opacity: 0; transition: opacity 0.3s;
+}
+.cart-count:not(:empty) { opacity: 1; }
+
+/* ─── SNIPCART BRAND OVERRIDES ─── */
+:root {
+  --color-default: #e6ddd0;
+  --color-alt: #b5aa9a;
+  --color-badge: #c9a96e;
+  --color-badge-active: #dfc48b;
+  --color-input: #1a1610;
+  --color-input-border: rgba(201,169,110,0.2);
+  --color-input-border-active: #c9a96e;
+  --color-button-default: #c9a96e;
+  --color-button-default-hover: #dfc48b;
+  --color-button-danger: #a05050;
+  --color-button-danger-hover: #c06060;
+  --color-link: #c9a96e;
+  --color-link-hover: #dfc48b;
+  --borderRadius-sm: 0;
+  --borderRadius-md: 0;
+  --borderRadius-lg: 0;
+  --shadow-md: none;
+  --shadow-lg: none;
+}
+
+#snipcart {
+  --color-default: #e6ddd0;
+  --color-alt: #b5aa9a;
+  --color-badge: #c9a96e;
+  --color-badge-active: #dfc48b;
+  --color-input: #1a1610;
+  --color-input-border: rgba(201,169,110,0.2);
+  --color-input-border-active: #c9a96e;
+  --color-button-default: #c9a96e;
+  --color-button-default-hover: #dfc48b;
+  --color-link: #c9a96e;
+  --color-link-hover: #dfc48b;
+  --color-bg: #0d0b09;
+  --color-bg-alt: #13110d;
+  --color-error: #c06060;
+}
+
+.snipcart-modal__container {
+  background: #0d0b09 !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+.snipcart-cart__secondary-header,
+.snipcart-cart__header {
+  background: #13110d !important;
+  border-bottom: 1px solid rgba(201,169,110,0.12) !important;
+}
+
+.snipcart__font--secondary,
+.snipcart__font--subtitle,
+.snipcart__font--title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  color: #e6ddd0 !important;
+}
+
+.snipcart-button-primary {
+  background: #c9a96e !important;
+  color: #0d0b09 !important;
+  border-radius: 0 !important;
+  font-family: 'Outfit', sans-serif !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  font-size: 0.72rem !important;
+}
+.snipcart-button-primary:hover {
+  background: #dfc48b !important;
+}
