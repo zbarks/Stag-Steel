@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart — Stag & Steel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.cart-page { padding: 140px 48px 100px; background: var(--bg); min-height: 100vh; max-width: 900px; margin: 0 auto; }
+.cart-page h1 { font-family: var(--df); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: var(--cream); margin-bottom: 48px; }
+
+.cart-empty { text-align: center; padding: 80px 0; }
+.cart-empty p { font-size: 0.9rem; color: var(--cream2); margin-bottom: 32px; }
+
+.cart-items { border-top: 1px solid var(--bdr2); margin-bottom: 48px; }
+.cart-item {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  gap: 24px; align-items: center;
+  padding: 24px 0; border-bottom: 1px solid var(--bdr2);
+}
+.cart-item-img { width: 80px; height: 80px; object-fit: cover; border: 1px solid var(--bdr2); }
+.cart-item-name { font-family: var(--df); font-size: 1.2rem; font-weight: 300; color: var(--cream); margin-bottom: 4px; }
+.cart-item-sub { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.1em; }
+.cart-item-price { font-family: var(--df); font-size: 1.4rem; color: var(--gold); text-align: right; }
+
+.cart-summary {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 40px; flex-wrap: wrap;
+}
+.cart-totals { flex: 1; }
+.cart-total-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--bdr2); font-size: 0.8rem; color: var(--cream2); }
+.cart-total-row.grand { border-bottom: none; padding-top: 20px; }
+.cart-total-row.grand span:first-child { font-family: var(--df); font-size: 1.1rem; color: var(--cream); }
+.cart-total-row.grand span:last-child { font-family: var(--df); font-size: 1.4rem; color: var(--gold); }
+
+.cart-actions { display: flex; flex-direction: column; gap: 12px; min-width: 220px; }
+.btn-checkout {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 18px 40px; background: var(--gold); border: none;
+  color: var(--bg); font-family: var(--db); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
+  transition: all 0.3s; text-decoration: none;
+}
+.btn-checkout:hover { background: var(--gold2); }
+.btn-continue {
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px 40px; background: transparent; border: 1px solid var(--bdr2);
+  color: var(--cream2); font-family: var(--db); font-size: 0.68rem;
+  letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+  transition: all 0.3s; text-decoration: none;
+}
+.btn-continue:hover { border-color: var(--gold); color: var(--cream); }
+
+@media (max-width: 600px) {
+  .cart-page { padding: 120px 24px 60px; }
+  .cart-item { grid-template-columns: 60px 1fr auto; gap: 16px; }
+  .cart-summary { flex-direction: column; }
+  .cart-actions { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav id="nav" class="show">
+  <a href="/" class="logo">Stag <span>&</span> Steel</a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#product">The Opener</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn snipcart-checkout" aria-label="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="cart-count snipcart-items-count"></span>
+    </button>
+    <button class="mob-btn" aria-label="Menu" id="mobBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <a href="/#about">About</a>
+  <a href="/#product">The Opener</a>
+  <a href="shop.html">Shop</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<div class="cart-page">
+  <h1>Your Bag</h1>
+
+  <!-- Snipcart renders cart items here via JS below -->
+  <div id="cart-contents">
+    <div class="cart-empty" id="cart-empty">
+      <p>Your bag is empty.</p>
+      <a href="shop.html" class="btn">Shop Now <span class="arr">→</span></a>
+    </div>
+    <div id="cart-filled" style="display:none">
+      <div class="cart-items" id="cart-items-list"></div>
+      <div class="cart-summary">
+        <div class="cart-totals">
+          <div class="cart-total-row"><span>Subtotal</span><span id="cart-subtotal">—</span></div>
+          <div class="cart-total-row"><span>Shipping</span><span>Calculated at checkout</span></div>
+          <div class="cart-total-row grand"><span>Total</span><span id="cart-total">—</span></div>
+        </div>
+        <div class="cart-actions">
+          <button class="btn-checkout snipcart-checkout">Proceed to Checkout →</button>
+          <a href="shop.html" class="btn-continue">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbtm" style="border-top: 1px solid var(--bdr2); padding: 36px 48px; display:flex; justify-content:space-between; align-items:center;">
+    <a href="/" class="logo">Stag <span>&</span> Steel</a>
+    <p style="font-size:0.65rem; color:var(--dim);">Handmade in the UK &nbsp;·&nbsp; &copy; 2026 Stag & Steel</p>
+    <div style="display:flex; gap:24px;">
+      <a href="shop.html" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Shop</a>
+      <a href="/#about" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">About</a>
+      <a href="/#contact" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Snipcart -->
+<script>
+  window.SnipcartSettings = {
+    publicApiKey: 'YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2',
+    loadStrategy: 'on-user-interaction',
+  };
+  (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
+</script>
+
+<script>
+document.addEventListener('snipcart.ready', () => {
+  function renderCart() {
+    const state = Snipcart.store.getState();
+    const items = state.cart.items.items;
+    const count = items.length;
+    const subtotal = state.cart.subtotal;
+
+    const empty = document.getElementById('cart-empty');
+    const filled = document.getElementById('cart-filled');
+    const list = document.getElementById('cart-items-list');
+
+    if (count === 0) {
+      empty.style.display = 'block';
+      filled.style.display = 'none';
+      return;
+    }
+
+    empty.style.display = 'none';
+    filled.style.display = 'block';
+
+    list.innerHTML = items.map(item => `
+      <div class="cart-item">
+        <img class="cart-item-img" src="${item.image}" alt="${item.name}">
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-sub">Qty: ${item.quantity}</div>
+        </div>
+        <div class="cart-item-price">£${(item.price * item.quantity).toFixed(2)}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('cart-subtotal').textContent = `£${subtotal.toFixed(2)}`;
+    document.getElementById('cart-total').textContent = `£${subtotal.toFixed(2)}`;
+  }
+
+  renderCart();
+  Snipcart.store.subscribe(renderCart);
+});
+
+document.getElementById('mobBtn').addEventListener('click', () => {
+  document.getElementById('mobMenu').classList.toggle('open');
+});
+</script>
+</body>
+</html>
