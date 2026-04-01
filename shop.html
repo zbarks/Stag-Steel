@@ -8,117 +8,51 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-/* ─── SHOP PAGE SPECIFIC ─── */
 .shop-page { padding: 140px 48px 100px; background: var(--bg); min-height: 100vh; }
+.shop-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; }
 
-.shop-layout {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; max-width: 1200px; margin: 0 auto;
-}
-
-/* Gallery */
 .gallery { position: relative; }
-.gallery-main {
-  aspect-ratio: 1; overflow: hidden; margin-bottom: 16px;
-  border: 1px solid var(--bdr2); background: var(--bg2);
-}
-.gallery-main img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: opacity 0.4s ease;
-}
+.gallery-main { aspect-ratio: 1; overflow: hidden; margin-bottom: 16px; border: 1px solid var(--bdr2); background: var(--bg2); }
+.gallery-main img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s ease; }
 
-.gallery-thumbs {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
-}
-.thumb {
-  aspect-ratio: 1; overflow: hidden; cursor: pointer;
-  border: 1px solid var(--bdr); opacity: 0.5;
-  transition: all 0.3s;
-}
+.gallery-thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.thumb { aspect-ratio: 1; overflow: hidden; cursor: pointer; border: 1px solid var(--bdr); opacity: 0.5; transition: all 0.3s; }
 .thumb:hover { opacity: 0.8; }
 .thumb.active { opacity: 1; border-color: var(--gold); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Gallery arrows */
-.gallery-nav {
-  position: absolute; top: 0; left: 0; right: 0;
-  aspect-ratio: 1; display: flex; justify-content: space-between; align-items: center;
-  padding: 0 12px; pointer-events: none;
-}
-.gallery-arrow {
-  width: 44px; height: 44px; border: none;
-  background: rgba(13,11,9,0.7); backdrop-filter: blur(8px);
-  color: var(--cream); font-size: 1.2rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  pointer-events: all; transition: background 0.3s;
-  border: 1px solid var(--bdr2);
-}
+.gallery-nav { position: absolute; top: 0; left: 0; right: 0; aspect-ratio: 1; display: flex; justify-content: space-between; align-items: center; padding: 0 12px; pointer-events: none; }
+.gallery-arrow { width: 44px; height: 44px; background: rgba(13,11,9,0.7); backdrop-filter: blur(8px); color: var(--cream); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; pointer-events: all; transition: background 0.3s; border: 1px solid var(--bdr2); }
 .gallery-arrow:hover { background: rgba(201,169,110,0.2); }
 
-/* Product info */
 .shop-info { padding-top: 20px; }
-.shop-breadcrumb {
-  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--dim); margin-bottom: 24px;
-}
+.shop-breadcrumb { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); margin-bottom: 24px; }
 .shop-breadcrumb a { color: var(--dim); text-decoration: none; transition: color 0.3s; }
 .shop-breadcrumb a:hover { color: var(--gold); }
+.shop-product-name { font-family: var(--df); font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 300; color: var(--cream); margin-bottom: 12px; line-height: 1.1; }
+.shop-product-sub { font-size: 0.82rem; font-weight: 200; color: var(--cream2); margin-bottom: 32px; letter-spacing: 0.05em; }
+.shop-price { font-family: var(--df); font-size: 2.2rem; color: var(--gold); margin-bottom: 32px; }
+.shop-desc { font-size: 0.84rem; font-weight: 200; line-height: 1.9; color: var(--cream2); margin-bottom: 40px; max-width: 440px; }
 
-.shop-product-name {
-  font-family: var(--df); font-size: clamp(2.2rem, 4vw, 3.6rem);
-  font-weight: 300; color: var(--cream); margin-bottom: 12px; line-height: 1.1;
-}
-.shop-product-sub {
-  font-size: 0.82rem; font-weight: 200; color: var(--cream2);
-  margin-bottom: 32px; letter-spacing: 0.05em;
-}
-.shop-price {
-  font-family: var(--df); font-size: 2.2rem; color: var(--gold); margin-bottom: 32px;
-}
-.shop-desc {
-  font-size: 0.84rem; font-weight: 200; line-height: 1.9; color: var(--cream2);
-  margin-bottom: 40px; max-width: 440px;
-}
-
-/* Add to cart button */
-.add-to-cart {
-  display: inline-flex; align-items: center; gap: 12px;
-  padding: 20px 56px; background: var(--gold); border: none;
-  color: var(--bg); font-family: var(--db); font-size: 0.72rem; font-weight: 500;
-  letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-  margin-bottom: 48px;
-}
+.add-to-cart { display: inline-flex; align-items: center; gap: 12px; padding: 20px 56px; background: var(--gold); border: none; color: var(--bg); font-family: var(--db); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); margin-bottom: 48px; }
 .add-to-cart:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.2); }
 
 .shop-specs { margin-bottom: 48px; }
 .shop-specs .sp { max-width: 100%; }
 
-/* Shipping info */
-.shipping-note {
-  padding: 24px; border: 1px solid var(--bdr2);
-  background: linear-gradient(145deg, rgba(30,25,19,0.5), rgba(26,22,16,0.2));
-}
-.shipping-note h4 {
-  font-family: var(--df); font-size: 1.1rem; font-weight: 400;
-  color: var(--cream); margin-bottom: 8px;
-}
-.shipping-note p {
-  font-size: 0.76rem; font-weight: 200; line-height: 1.7; color: var(--cream2);
-}
+.shipping-note { padding: 24px; border: 1px solid var(--bdr2); background: linear-gradient(145deg, rgba(30,25,19,0.5), rgba(26,22,16,0.2)); }
+.shipping-note h4 { font-family: var(--df); font-size: 1.1rem; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
+.shipping-note p { font-size: 0.76rem; font-weight: 200; line-height: 1.7; color: var(--cream2); }
 
-/* Responsive */
 @media (max-width: 900px) {
   .shop-page { padding: 120px 24px 60px; }
   .shop-layout { grid-template-columns: 1fr; gap: 40px; }
-  .gallery-thumbs { grid-template-columns: repeat(6, 1fr); }
 }
 </style>
 </head>
 <body>
 <div class="grain"></div>
 
-<!-- NAV — always visible on shop page -->
 <nav id="nav" class="show">
   <a href="/" class="logo">Stag <span>&</span> Steel</a>
   <ul class="nav-links">
@@ -143,7 +77,7 @@
     <!-- Gallery -->
     <div class="gallery">
       <div class="gallery-main">
-        <img id="mainImg" src="assets/photo_5933886817583173058_y.jpg" alt="Stag & Steel Opener">
+        <img id="mainImg" src="assets/photo_5933886817583173059_y.jpg" alt="Stag & Steel Opener">
       </div>
       <div class="gallery-nav">
         <button class="gallery-arrow" id="prevBtn">‹</button>
@@ -155,7 +89,7 @@
         <div class="thumb" data-idx="2"><img src="assets/photo_5933886817583173056_y.jpg" alt="Shot 3"></div>
         <div class="thumb" data-idx="3"><img src="assets/photo_5933886817583173057_y.jpg" alt="Shot 4"></div>
         <div class="thumb" data-idx="4"><img src="assets/photo_5933886817583173054_y.jpg" alt="Shot 5"></div>
-        <div class="thumb" data-idx="5"><img src="assets/photo_5933886817583173059_y.jpg" alt="Shot 6"></div>
+        <div class="thumb" data-idx="5"><img src="assets/photo_5933886817583173055_y.jpg" alt="Shot 6"></div>
       </div>
     </div>
 
@@ -195,10 +129,7 @@
 
       <div class="shipping-note">
         <h4>Shipping & Delivery</h4>
-        <p>
-          UK delivery within 3–5 working days. Each opener is carefully 
-          wrapped and boxed. International shipping available at checkout.
-        </p>
+        <p>UK delivery within 3–5 working days. Each opener is carefully wrapped and boxed. International shipping available at checkout.</p>
       </div>
     </div>
   </div>
@@ -206,16 +137,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="fgr">
-    <div class="footer-brand">
-      <a href="/" class="logo">Stag <span>&</span> Steel</a>
-      <p>Handcrafted antler bottle openers. Naturally shed. Made by hand. Every one different.</p>
+  <div class="fbtm" style="border-top: 1px solid var(--bdr2); padding: 36px 48px; display:flex; justify-content:space-between; align-items:center;">
+    <a href="/" class="logo">Stag <span>&</span> Steel</a>
+    <p style="font-size:0.65rem; color:var(--dim);">Handmade in the UK &nbsp;·&nbsp; &copy; 2026 Stag & Steel</p>
+    <div style="display:flex; gap:24px;">
+      <a href="shop.html" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Shop</a>
+      <a href="/#about" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">About</a>
+      <a href="/#contact" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Contact</a>
     </div>
-    <div class="fc"><h5>Shop</h5><a href="shop.html">The Opener</a><a href="/#contact">Gift Enquiries</a></div>
-    <div class="fc"><h5>Info</h5><a href="/#about">About</a><a href="#">Shipping</a><a href="#">Returns</a></div>
-    <div class="fc"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Email Us</a></div>
   </div>
-  <div class="fbtm"><p>&copy; 2026 Stag & Steel</p><p>Handmade in the UK</p></div>
 </footer>
 
 <!-- Snipcart -->
@@ -229,26 +159,31 @@
 </script>
 
 <script>
-// Gallery
+// All 6 images in order — thumbs and main image both use this same array
 const images = [
-  'assets/photo_5933886817583173058_y.jpg',
+  'assets/photo_5933886817583173059_y.jpg',
   'assets/photo_5933886817583173052_y.jpg',
   'assets/photo_5933886817583173056_y.jpg',
-  'assets/photo_5933886817583173059_y.jpg',
+  'assets/photo_5933886817583173057_y.jpg',
   'assets/photo_5933886817583173054_y.jpg',
-  'assets/photo_5933886817583173060_y.jpg',
+  'assets/photo_5933886817583173055_y.jpg',
 ];
+
 let current = 0;
 const mainImg = document.getElementById('mainImg');
-const thumbs = document.querySelectorAll('.thumb');
+const thumbEls = document.querySelectorAll('.thumb');
 
 function setImage(idx) {
   current = idx;
-  mainImg.src = images[idx];
-  thumbs.forEach((t, i) => t.classList.toggle('active', i === idx));
+  mainImg.style.opacity = '0';
+  setTimeout(() => {
+    mainImg.src = images[idx];
+    mainImg.style.opacity = '1';
+  }, 200);
+  thumbEls.forEach((t, i) => t.classList.toggle('active', i === idx));
 }
 
-thumbs.forEach(t => {
+thumbEls.forEach(t => {
   t.addEventListener('click', () => setImage(parseInt(t.dataset.idx)));
 });
 
@@ -259,13 +194,11 @@ document.getElementById('nextBtn').addEventListener('click', () => {
   setImage((current + 1) % images.length);
 });
 
-// Keyboard nav
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') setImage((current - 1 + images.length) % images.length);
   if (e.key === 'ArrowRight') setImage((current + 1) % images.length);
 });
 
-// Mobile menu
 document.getElementById('mobBtn').addEventListener('click', () => {
   document.getElementById('mobMenu').classList.toggle('open');
 });
