@@ -113,18 +113,35 @@
         Shaped and finished entirely by hand. No two are ever the same.
       </p>
 
-      <button class="add-to-cart snipcart-add-item"
-        data-item-id="stag-and-steel-opener"
-        data-item-name="Stag & Steel Opener"
-        data-item-price="25.00"
-        data-item-url="/shop.html"
-        data-item-description="Handcrafted antler bottle opener — each one unique"
-        data-item-image="assets/photo_5933886817583173059_y.jpg"
-        data-item-weight="180"
-        data-item-max-quantity="1"
-        data-item-add-behavior="none">
-        Add to Bag →
-      </button>
+      <!-- Quantity + Add to Cart -->
+      <div class="qty-row" id="qty-row">
+        <div class="qty-ctrl">
+          <button class="qty-btn" id="qty-minus">−</button>
+          <span class="qty-val" id="qty-val">1</span>
+          <button class="qty-btn" id="qty-plus">+</button>
+        </div>
+        <button class="add-to-cart snipcart-add-item"
+          id="add-to-cart-btn"
+          data-item-id="stag-and-steel-opener"
+          data-item-name="Stag & Steel Opener"
+          data-item-price="25.00"
+          data-item-url="/shop.html"
+          data-item-description="Handcrafted antler bottle opener — each one unique"
+          data-item-image="assets/photo_5933886817583173059_y.jpg"
+          data-item-weight="180"
+          data-item-quantity="1">
+          Add to Bag →
+        </button>
+      </div>
+
+      <!-- Post-add state (hidden until item added) -->
+      <div class="post-add" id="post-add" style="display:none">
+        <p class="post-add-msg">✓ Added to your bag</p>
+        <div class="post-add-btns">
+          <a href="cart.html" class="add-to-cart" style="text-decoration:none; text-align:center;">Proceed to Checkout →</a>
+          <button class="post-add-keep" id="keep-shopping">Keep Browsing</button>
+        </div>
+      </div>
 
       <div class="shop-specs">
         <div class="specs">
