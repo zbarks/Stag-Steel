@@ -93,12 +93,12 @@ nav.show { transform: translateY(0); opacity: 1; }
 .hero-brand h1 em { font-style: italic; color: var(--gold); }
 .hero-sub-line {
   font-size: 0.72rem; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gold); text-shadow: 0 1px 20px rgba(0,0,0,0.6);
+  color: var(--gold); text-shadow: 0 2px 12px rgba(0,0,0,0.95), 0 4px 40px rgba(0,0,0,0.9);
   opacity: 0; transform: translateY(12px); animation: up 0.8s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
 }
 .hero-tag2 {
   font-size: 0.78rem; font-weight: 200; color: var(--cream2);
-  text-shadow: 0 1px 16px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.95), 0 4px 40px rgba(0,0,0,0.9);
   opacity: 0; transform: translateY(10px); animation: up 0.8s 1s cubic-bezier(0.16,1,0.3,1) forwards;
 }
 .scroll-cue {
