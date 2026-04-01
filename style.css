@@ -237,3 +237,19 @@ footer { padding: 60px 48px 36px; border-top: 1px solid var(--bdr2); background:
   .fgr { grid-template-columns: 1fr; }
   .email-row { flex-direction: column; }
 }
+
+/* Smooth video rendering */
+#scrolly-video video,
+#scrolly-video canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  will-change: transform;          /* hint GPU acceleration */
+  image-rendering: auto;
+}
+
+/* Prevent any layout jank during scroll */
+.hero-pin {
+  transform: translateZ(0);        /* force composited layer */
+  backface-visibility: hidden;
+}
