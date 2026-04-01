@@ -205,7 +205,7 @@
 </script>
 
 <script>
-// All 6 images in order — thumbs and main image both use this same array
+// Gallery
 const images = [
   'assets/photo_5933886817583173059_y.jpg',
   'assets/photo_5933886817583173052_y.jpg',
@@ -214,7 +214,6 @@ const images = [
   'assets/photo_5933886817583173054_y.jpg',
   'assets/photo_5933886817583173055_y.jpg',
 ];
-
 let current = 0;
 const mainImg = document.getElementById('mainImg');
 const thumbEls = document.querySelectorAll('.thumb');
@@ -222,29 +221,43 @@ const thumbEls = document.querySelectorAll('.thumb');
 function setImage(idx) {
   current = idx;
   mainImg.style.opacity = '0';
-  setTimeout(() => {
-    mainImg.src = images[idx];
-    mainImg.style.opacity = '1';
-  }, 200);
+  setTimeout(() => { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 200);
   thumbEls.forEach((t, i) => t.classList.toggle('active', i === idx));
 }
-
-thumbEls.forEach(t => {
-  t.addEventListener('click', () => setImage(parseInt(t.dataset.idx)));
-});
-
-document.getElementById('prevBtn').addEventListener('click', () => {
-  setImage((current - 1 + images.length) % images.length);
-});
-document.getElementById('nextBtn').addEventListener('click', () => {
-  setImage((current + 1) % images.length);
-});
-
+thumbEls.forEach(t => t.addEventListener('click', () => setImage(parseInt(t.dataset.idx))));
+document.getElementById('prevBtn').addEventListener('click', () => setImage((current - 1 + images.length) % images.length));
+document.getElementById('nextBtn').addEventListener('click', () => setImage((current + 1) % images.length));
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') setImage((current - 1 + images.length) % images.length);
   if (e.key === 'ArrowRight') setImage((current + 1) % images.length);
 });
 
+// Quantity
+let qty = 1;
+const qtyVal = document.getElementById('qty-val');
+const addBtn = document.getElementById('add-to-cart-btn');
+
+document.getElementById('qty-minus').addEventListener('click', () => {
+  if (qty > 1) { qty--; qtyVal.textContent = qty; addBtn.dataset.itemQuantity = qty; }
+});
+document.getElementById('qty-plus').addEventListener('click', () => {
+  qty++; qtyVal.textContent = qty; addBtn.dataset.itemQuantity = qty;
+});
+
+// After add to cart — show post-add UI
+document.addEventListener('snipcart.ready', () => {
+  Snipcart.events.on('item.added', () => {
+    document.getElementById('qty-row').style.display = 'none';
+    document.getElementById('post-add').style.display = 'block';
+  });
+});
+
+document.getElementById('keep-shopping').addEventListener('click', () => {
+  document.getElementById('post-add').style.display = 'none';
+  document.getElementById('qty-row').style.display = 'flex';
+});
+
+// Mobile menu
 document.getElementById('mobBtn').addEventListener('click', () => {
   document.getElementById('mobMenu').classList.toggle('open');
 });
