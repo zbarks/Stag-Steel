@@ -173,14 +173,16 @@
 </script>
 
 <script>
-// Init ScrollyVideo
+// Replace your existing ScrollyVideo init block with this:
+
 new ScrollyVideo({
   scrollyVideoContainer: 'scrolly-video',
   src: 'assets/scroll-video.mp4',
   cover: true,
-  sticky: false,
-  full: true,
-  transitionSpeed: 8,
+  sticky: true,          // ← was false — this is what broke it
+  transitionSpeed: 12,   // higher = smoother/faster catch-up (8–15 is good)
+  trackScroll: true,     // explicitly enable scroll tracking
+  debug: false,
 });
 
 // Nav show/hide
