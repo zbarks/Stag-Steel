@@ -253,3 +253,8 @@ footer { padding: 60px 48px 36px; border-top: 1px solid var(--bdr2); background:
   transform: translateZ(0);        /* force composited layer */
   backface-visibility: hidden;
 }
+
+.hero-btn {
+  margin-top: 28px;
+  pointer-events: all;
+}
