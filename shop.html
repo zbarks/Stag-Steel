@@ -40,7 +40,28 @@
 .shop-specs { margin-bottom: 48px; }
 .shop-specs .sp { max-width: 100%; }
 
-.shipping-note { padding: 24px; border: 1px solid var(--bdr2); background: linear-gradient(145deg, rgba(30,25,19,0.5), rgba(26,22,16,0.2)); }
+/* Quantity */
+.qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.qty-ctrl { display: flex; align-items: center; border: 1px solid var(--bdr2); }
+.qty-btn {
+  width: 40px; height: 48px; background: none; border: none;
+  color: var(--cream); font-size: 1.2rem; cursor: pointer;
+  transition: background 0.2s; font-family: var(--db);
+}
+.qty-btn:hover { background: rgba(201,169,110,0.1); color: var(--gold); }
+.qty-val { width: 40px; text-align: center; font-size: 0.85rem; color: var(--cream); }
+
+/* Post-add */
+.post-add { margin-bottom: 48px; }
+.post-add-msg { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 16px; }
+.post-add-btns { display: flex; flex-direction: column; gap: 10px; max-width: 280px; }
+.post-add-keep {
+  padding: 14px; background: none; border: 1px solid var(--bdr2);
+  color: var(--cream2); font-family: var(--db); font-size: 0.68rem;
+  letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+  transition: all 0.3s;
+}
+.post-add-keep:hover { border-color: var(--gold); color: var(--cream); }
 .shipping-note h4 { font-family: var(--df); font-size: 1.1rem; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
 .shipping-note p { font-size: 0.76rem; font-weight: 200; line-height: 1.7; color: var(--cream2); }
 
