@@ -5,173 +5,182 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop — Stag & Steel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ─── SHOP PAGE SPECIFIC ─── */
-.shop-page { padding: 140px 48px 100px; background: var(--bg); min-height: 100vh; }
-
-.shop-layout {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; max-width: 1200px; margin: 0 auto;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --wood-bg: #8B5E3C;
+  --dark: #1a1209;
+  --panel: rgba(20,14,8,0.88);
+  --cream: #f0e6d8;
+  --cream2: #c4b49e;
+  --gold: #d4a84b;
+  --gold2: #e8c06a;
+  --gold-dim: rgba(212,168,75,0.3);
+  --dim: #8a7d6d;
+  --bdr: rgba(212,168,75,0.2);
+  --shadow: rgba(10,6,2,0.5);
+  --ff: 'Playfair Display', Georgia, serif;
+  --fb: 'DM Sans', sans-serif;
 }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--fb); font-weight: 300; color: var(--cream);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  background: var(--wood-bg) url('assets/wood-bg.jpg') repeat;
+  background-size: 600px auto;
+}
+a { color: inherit; text-decoration: none; }
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+  box-shadow: inset 0 0 150px 60px rgba(10,6,2,0.5);
+}
+
+/* Nav (same as main) */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
+  background: var(--panel); backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--bdr); box-shadow: 0 4px 20px var(--shadow);
+}
+.logo { font-family: var(--ff); font-size: 1.3rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); }
+.logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream2); transition: color 0.3s; }
+.nav-links a:hover { color: var(--gold); }
+.mob-btn { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 20px; position: relative; }
+.mob-btn span { display: block; width: 100%; height: 1.5px; background: var(--cream); position: absolute; left: 0; }
+.mob-btn span:nth-child(1) { top: 0; } .mob-btn span:nth-child(2) { top: 50%; } .mob-btn span:nth-child(3) { bottom: 0; }
+
+/* Panel base */
+.panel {
+  background: var(--panel); border: 1px solid var(--bdr);
+  box-shadow: 0 8px 32px var(--shadow), inset 0 1px 0 rgba(212,168,75,0.06);
+  backdrop-filter: blur(8px); position: relative;
+}
+.panel::before { content: ''; position: absolute; top: 10px; left: 10px; width: 14px; height: 14px; border-top: 1.5px solid var(--gold-dim); border-left: 1.5px solid var(--gold-dim); }
+.panel::after { content: ''; position: absolute; bottom: 10px; right: 10px; width: 14px; height: 14px; border-bottom: 1.5px solid var(--gold-dim); border-right: 1.5px solid var(--gold-dim); }
+
+/* Shop layout */
+.shop-page { padding: 120px 48px 80px; max-width: 1200px; margin: 0 auto; }
+.shop-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 
 /* Gallery */
-.gallery { position: relative; }
-.gallery-main {
-  aspect-ratio: 1; overflow: hidden; margin-bottom: 16px;
-  border: 1px solid var(--bdr2); background: var(--bg2);
-}
-.gallery-main img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: opacity 0.4s ease;
-}
-
-.gallery-thumbs {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
-}
+.gallery-panel { padding: 16px; }
+.gallery-main { overflow: hidden; margin-bottom: 12px; border: 1px solid var(--bdr); }
+.gallery-main img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: opacity 0.3s; }
+.gallery-thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
 .thumb {
-  aspect-ratio: 1; overflow: hidden; cursor: pointer;
-  border: 1px solid var(--bdr); opacity: 0.5;
-  transition: all 0.3s;
+  aspect-ratio: 1; overflow: hidden; cursor: pointer; opacity: 0.4;
+  border: 1px solid transparent; transition: all 0.3s;
 }
-.thumb:hover { opacity: 0.8; }
+.thumb:hover { opacity: 0.7; }
 .thumb.active { opacity: 1; border-color: var(--gold); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Gallery arrows */
 .gallery-nav {
-  position: absolute; top: 0; left: 0; right: 0;
+  position: absolute; top: 16px; left: 16px; right: 16px;
   aspect-ratio: 1; display: flex; justify-content: space-between; align-items: center;
-  padding: 0 12px; pointer-events: none;
+  padding: 0 8px; pointer-events: none;
 }
-.gallery-arrow {
-  width: 44px; height: 44px; border: none;
-  background: rgba(13,11,9,0.7); backdrop-filter: blur(8px);
-  color: var(--cream); font-size: 1.2rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
+.garrow {
+  width: 40px; height: 40px; border: 1px solid var(--bdr);
+  background: var(--panel); color: var(--cream); font-size: 1.1rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
   pointer-events: all; transition: background 0.3s;
-  border: 1px solid var(--bdr2);
 }
-.gallery-arrow:hover { background: rgba(201,169,110,0.2); }
+.garrow:hover { background: rgba(212,168,75,0.15); }
 
 /* Product info */
-.shop-info { padding-top: 20px; }
-.shop-breadcrumb {
-  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--dim); margin-bottom: 24px;
+.product-panel { padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; }
+.breadcrumb { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-bottom: 20px; }
+.breadcrumb a { color: var(--dim); transition: color 0.3s; }
+.breadcrumb a:hover { color: var(--gold); }
+.product-name { font-family: var(--ff); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; color: var(--cream); margin-bottom: 8px; line-height: 1.1; }
+.product-sub { font-size: 0.78rem; color: var(--dim); margin-bottom: 28px; letter-spacing: 0.05em; }
+.product-price { font-family: var(--ff); font-size: 2rem; color: var(--gold); font-weight: 500; margin-bottom: 24px; }
+.product-desc { font-size: 0.84rem; font-weight: 300; line-height: 1.9; color: var(--cream2); margin-bottom: 36px; max-width: 400px; }
+.add-btn {
+  display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
+  padding: 18px 52px; background: var(--gold); border: none;
+  color: var(--dark); font-family: var(--fb); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;
+  transition: all 0.4s; box-shadow: 0 4px 16px rgba(212,168,75,0.25);
+  margin-bottom: 36px;
 }
-.shop-breadcrumb a { color: var(--dim); text-decoration: none; transition: color 0.3s; }
-.shop-breadcrumb a:hover { color: var(--gold); }
+.add-btn:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,168,75,0.3); }
+.spec-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(212,168,75,0.1); }
+.spec-row .lab { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); }
+.spec-row .val { font-size: 0.8rem; color: var(--cream); }
+.shipping-note { margin-top: 28px; padding: 20px; background: rgba(0,0,0,0.2); border: 1px solid rgba(212,168,75,0.08); }
+.shipping-note h4 { font-family: var(--ff); font-size: 1rem; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+.shipping-note p { font-size: 0.74rem; font-weight: 300; line-height: 1.7; color: var(--cream2); }
 
-.shop-product-name {
-  font-family: var(--df); font-size: clamp(2.2rem, 4vw, 3.6rem);
-  font-weight: 300; color: var(--cream); margin-bottom: 12px; line-height: 1.1;
+/* Footer */
+footer {
+  margin: 0 48px 48px; padding: 40px 48px;
+  background: var(--panel); border: 1px solid var(--bdr); box-shadow: 0 8px 32px var(--shadow);
 }
-.shop-product-sub {
-  font-size: 0.82rem; font-weight: 200; color: var(--cream2);
-  margin-bottom: 32px; letter-spacing: 0.05em;
-}
-.shop-price {
-  font-family: var(--df); font-size: 2.2rem; color: var(--gold); margin-bottom: 32px;
-}
-.shop-desc {
-  font-size: 0.84rem; font-weight: 200; line-height: 1.9; color: var(--cream2);
-  margin-bottom: 40px; max-width: 440px;
-}
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.foot-brand p { font-size: 0.74rem; font-weight: 300; line-height: 1.8; color: var(--cream2); max-width: 250px; margin-top: 12px; }
+.foot-col h5 { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.foot-col a { display: block; font-size: 0.74rem; font-weight: 300; color: var(--cream2); margin-bottom: 10px; transition: color 0.3s; }
+.foot-col a:hover { color: var(--cream); }
+.foot-btm { display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid rgba(212,168,75,0.1); }
+.foot-btm p { font-size: 0.6rem; color: var(--dim); }
 
-/* Add to cart button */
-.add-to-cart {
-  display: inline-flex; align-items: center; gap: 12px;
-  padding: 20px 56px; background: var(--gold); border: none;
-  color: var(--bg); font-family: var(--db); font-size: 0.72rem; font-weight: 500;
-  letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-  margin-bottom: 48px;
-}
-.add-to-cart:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.2); }
-
-.shop-specs { margin-bottom: 48px; }
-.shop-specs .sp { max-width: 100%; }
-
-/* Shipping info */
-.shipping-note {
-  padding: 24px; border: 1px solid var(--bdr2);
-  background: linear-gradient(145deg, rgba(30,25,19,0.5), rgba(26,22,16,0.2));
-}
-.shipping-note h4 {
-  font-family: var(--df); font-size: 1.1rem; font-weight: 400;
-  color: var(--cream); margin-bottom: 8px;
-}
-.shipping-note p {
-  font-size: 0.76rem; font-weight: 200; line-height: 1.7; color: var(--cream2);
-}
-
-/* Responsive */
 @media (max-width: 900px) {
-  .shop-page { padding: 120px 24px 60px; }
-  .shop-layout { grid-template-columns: 1fr; gap: 40px; }
-  .gallery-thumbs { grid-template-columns: repeat(6, 1fr); }
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .mob-btn { display: block; }
+  .shop-page { padding: 100px 24px 60px; }
+  .shop-layout { grid-template-columns: 1fr; }
+  footer { margin: 0 24px 24px; padding: 32px 24px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
 }
+@media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<div class="grain"></div>
-
-<!-- NAV — always visible on shop page -->
-<nav id="nav" class="show">
+<nav>
   <a href="/" class="logo">Stag <span>&</span> Steel</a>
   <ul class="nav-links">
     <li><a href="/#about">About</a></li>
-    <li><a href="/#product">The Opener</a></li>
+    <li><a href="/#specs">Details</a></li>
     <li><a href="shop.html" style="color:var(--cream)">Shop</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
-  <button class="mob-btn" aria-label="Menu" id="mobBtn"><span></span><span></span><span></span></button>
+  <button class="mob-btn" id="mobBtn"><span></span><span></span><span></span></button>
 </nav>
-
-<div class="mob-menu" id="mobMenu">
-  <a href="/#about">About</a>
-  <a href="/#product">The Opener</a>
-  <a href="shop.html">Shop</a>
-  <a href="/#contact">Contact</a>
-</div>
 
 <section class="shop-page">
   <div class="shop-layout">
-
-    <!-- Gallery -->
-    <div class="gallery">
-      <div class="gallery-main">
-        <img id="mainImg" src="assets/photo_5933886817583173058_y.jpg" alt="Stag & Steel Opener">
-      </div>
+    <div class="panel gallery-panel" style="overflow:visible;">
+      <div class="gallery-main"><img id="mainImg" src="assets/photo_5933886817583173058_y.jpg" alt="Stag & Steel Opener"></div>
       <div class="gallery-nav">
-        <button class="gallery-arrow" id="prevBtn">‹</button>
-        <button class="gallery-arrow" id="nextBtn">›</button>
+        <button class="garrow" id="prev">‹</button>
+        <button class="garrow" id="next">›</button>
       </div>
       <div class="gallery-thumbs" id="thumbs">
-        <div class="thumb active" data-idx="0"><img src="assets/photo_5933886817583173058_y.jpg" alt="Shot 1"></div>
-        <div class="thumb" data-idx="1"><img src="assets/photo_5933886817583173052_y.jpg" alt="Shot 2"></div>
-        <div class="thumb" data-idx="2"><img src="assets/photo_5933886817583173056_y.jpg" alt="Shot 3"></div>
-        <div class="thumb" data-idx="3"><img src="assets/photo_5933886817583173059_y.jpg" alt="Shot 4"></div>
-        <div class="thumb" data-idx="4"><img src="assets/photo_5933886817583173054_y.jpg" alt="Shot 5"></div>
-        <div class="thumb" data-idx="5"><img src="assets/photo_5933886817583173060_y.jpg" alt="Shot 6"></div>
+        <div class="thumb active" data-i="0"><img src="assets/photo_5933886817583173058_y.jpg" alt="1"></div>
+        <div class="thumb" data-i="1"><img src="assets/photo_5933886817583173052_y.jpg" alt="2"></div>
+        <div class="thumb" data-i="2"><img src="assets/photo_5933886817583173056_y.jpg" alt="3"></div>
+        <div class="thumb" data-i="3"><img src="assets/photo_5933886817583173059_y.jpg" alt="4"></div>
+        <div class="thumb" data-i="4"><img src="assets/photo_5933886817583173054_y.jpg" alt="5"></div>
+        <div class="thumb" data-i="5"><img src="assets/photo_5933886817583173060_y.jpg" alt="6"></div>
       </div>
     </div>
 
-    <!-- Product info -->
-    <div class="shop-info">
-      <p class="shop-breadcrumb"><a href="/">Home</a> / Shop</p>
-      <h1 class="shop-product-name">The Stag & Steel</h1>
-      <p class="shop-product-sub">Handcrafted Antler Bottle Opener</p>
-      <p class="shop-price">£25</p>
-      <p class="shop-desc">
+    <div class="panel product-panel">
+      <p class="breadcrumb"><a href="/">Home</a> / Shop</p>
+      <h1 class="product-name">The Stag & Steel</h1>
+      <p class="product-sub">Handcrafted Antler Bottle Opener</p>
+      <p class="product-price">£25</p>
+      <p class="product-desc">
         A one-of-a-kind bottle opener made from naturally shed antler 
         sourced from Mauldslie Farm, paired with polished stainless steel. 
         Shaped and finished entirely by hand. No two are ever the same.
       </p>
-
-      <button class="add-to-cart snipcart-add-item"
+      <button class="add-btn snipcart-add-item"
         data-item-id="stag-and-steel-opener"
         data-item-name="Stag & Steel Opener"
         data-item-price="25.00"
@@ -182,40 +191,32 @@
         data-item-max-quantity="1">
         Add to Cart →
       </button>
-
-      <div class="shop-specs">
-        <div class="specs">
-          <div class="sp"><span class="sp-l">Handle</span><span class="sp-v">Naturally Shed Antler</span></div>
-          <div class="sp"><span class="sp-l">Head</span><span class="sp-v">Stainless Steel</span></div>
-          <div class="sp"><span class="sp-l">Made</span><span class="sp-v">By Hand, United Kingdom</span></div>
-          <div class="sp"><span class="sp-l">Each One</span><span class="sp-v">Completely Unique</span></div>
-          <div class="sp"><span class="sp-l">Approx. Weight</span><span class="sp-v">180g</span></div>
-        </div>
+      <div>
+        <div class="spec-row"><span class="lab">Handle</span><span class="val">Naturally Shed Antler</span></div>
+        <div class="spec-row"><span class="lab">Head</span><span class="val">Stainless Steel</span></div>
+        <div class="spec-row"><span class="lab">Made</span><span class="val">By Hand, UK</span></div>
+        <div class="spec-row"><span class="lab">Source</span><span class="val">Mauldslie Farm</span></div>
+        <div class="spec-row"><span class="lab">Each One</span><span class="val">Completely Unique</span></div>
       </div>
-
       <div class="shipping-note">
-        <h4>Shipping & Delivery</h4>
-        <p>
-          UK delivery within 3–5 working days. Each opener is carefully 
-          wrapped and boxed. International shipping available at checkout.
-        </p>
+        <h4>Shipping</h4>
+        <p>UK delivery 3–5 working days. Carefully wrapped and boxed. International available at checkout.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="fgr">
-    <div class="footer-brand">
-      <a href="/" class="logo">Stag <span>&</span> Steel</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="logo">Stag <span>&</span> Steel</div>
       <p>Handcrafted antler bottle openers. Naturally shed. Made by hand. Every one different.</p>
     </div>
-    <div class="fc"><h5>Shop</h5><a href="shop.html">The Opener</a><a href="/#contact">Gift Enquiries</a></div>
-    <div class="fc"><h5>Info</h5><a href="/#about">About</a><a href="#">Shipping</a><a href="#">Returns</a></div>
-    <div class="fc"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Email Us</a></div>
+    <div class="foot-col"><h5>Shop</h5><a href="shop.html">The Opener</a><a href="/#contact">Gift Enquiries</a></div>
+    <div class="foot-col"><h5>Info</h5><a href="/#about">About</a><a href="#">Shipping</a></div>
+    <div class="foot-col"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Email Us</a></div>
   </div>
-  <div class="fbtm"><p>&copy; 2026 Stag & Steel</p><p>Handmade in the UK</p></div>
+  <div class="foot-btm"><p>&copy; 2026 Stag & Steel</p><p>Handmade in the UK</p></div>
 </footer>
 
 <!-- Snipcart -->
@@ -229,8 +230,7 @@
 </script>
 
 <script>
-// Gallery
-const images = [
+const imgs = [
   'assets/photo_5933886817583173058_y.jpg',
   'assets/photo_5933886817583173052_y.jpg',
   'assets/photo_5933886817583173056_y.jpg',
@@ -238,37 +238,15 @@ const images = [
   'assets/photo_5933886817583173054_y.jpg',
   'assets/photo_5933886817583173060_y.jpg',
 ];
-let current = 0;
-const mainImg = document.getElementById('mainImg');
+let cur = 0;
+const main = document.getElementById('mainImg');
 const thumbs = document.querySelectorAll('.thumb');
-
-function setImage(idx) {
-  current = idx;
-  mainImg.src = images[idx];
-  thumbs.forEach((t, i) => t.classList.toggle('active', i === idx));
-}
-
-thumbs.forEach(t => {
-  t.addEventListener('click', () => setImage(parseInt(t.dataset.idx)));
-});
-
-document.getElementById('prevBtn').addEventListener('click', () => {
-  setImage((current - 1 + images.length) % images.length);
-});
-document.getElementById('nextBtn').addEventListener('click', () => {
-  setImage((current + 1) % images.length);
-});
-
-// Keyboard nav
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') setImage((current - 1 + images.length) % images.length);
-  if (e.key === 'ArrowRight') setImage((current + 1) % images.length);
-});
-
-// Mobile menu
-document.getElementById('mobBtn').addEventListener('click', () => {
-  document.getElementById('mobMenu').classList.toggle('open');
-});
+function go(i) { cur = i; main.src = imgs[i]; thumbs.forEach((t,j) => t.classList.toggle('active', j===i)); }
+thumbs.forEach(t => t.addEventListener('click', () => go(+t.dataset.i)));
+document.getElementById('prev').addEventListener('click', () => go((cur-1+imgs.length)%imgs.length));
+document.getElementById('next').addEventListener('click', () => go((cur+1)%imgs.length));
+document.addEventListener('keydown', e => { if(e.key==='ArrowLeft') go((cur-1+imgs.length)%imgs.length); if(e.key==='ArrowRight') go((cur+1)%imgs.length); });
+document.getElementById('mobBtn')?.addEventListener('click', () => {});
 </script>
 </body>
 </html>
