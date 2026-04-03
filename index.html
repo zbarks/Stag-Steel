@@ -28,10 +28,11 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--fb); font-weight: 300; color: var(--cream);
   overflow-x: hidden; -webkit-font-smoothing: antialiased;
-  background-color: #6B4226;
+  background-color: #5a3418;
   background-image: url('assets/wood-bg.jpg');
   background-repeat: repeat;
-  background-size: 640px auto;
+  background-size: 560px auto;
+  background-blend-mode: multiply;
 }
 a { color: inherit; text-decoration: none; }
 body::before {
@@ -79,7 +80,17 @@ nav {
 .hero-image img { width: 100%; border: 2px solid var(--bdr); box-shadow: 0 16px 56px var(--shadow); transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
 .hero-image:hover img { transform: scale(1.02); }
 .hero-image::before { content: ''; position: absolute; inset: 6px; z-index: -1; background: rgba(0,0,0,0.4); filter: blur(18px); }
-.hero-text { display: flex; flex-direction: column; gap: 22px; }
+.hero-text {
+  display: flex; flex-direction: column; gap: 22px;
+  background: rgba(14,9,4,0.82);
+  border: 1px solid var(--bdr);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 48px rgba(10,6,2,0.6), inset 0 1px 0 rgba(212,168,75,0.07);
+  padding: 44px 48px;
+  position: relative;
+}
+.hero-text::before { content: ''; position: absolute; top: 12px; left: 12px; width: 14px; height: 14px; border-top: 1.5px solid var(--gold-dim); border-left: 1.5px solid var(--gold-dim); pointer-events: none; }
+.hero-text::after { content: ''; position: absolute; bottom: 12px; right: 12px; width: 14px; height: 14px; border-bottom: 1.5px solid var(--gold-dim); border-right: 1.5px solid var(--gold-dim); pointer-events: none; }
 .hero-tag { font-size: 0.6rem; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
 .hero-title { font-family: var(--ff); font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 500; line-height: 1.05; color: var(--cream); }
 .hero-title em { font-style: italic; color: var(--gold); }
@@ -390,14 +401,7 @@ footer { margin: 0 48px 48px; padding: 40px 48px; background: var(--panel); bord
     </div>
   </div>
 
-  <!-- Deer portrait strip: two images side by side -->
-  <div class="highland-strip r">
-    <img 
-      src="https://www.argyllcruising.com/wp-content/uploads/2016/05/Red-Deer-Small_Fotor-1884x1256.jpg" 
-      alt="Red deer in Scotland"
-    >
-    <p class="highland-caption">Red deer — Mauldslie Farm, Clyde Valley, Scotland</p>
-  </div>
+
 
   <!-- Reverse: image left, more story right -->
   <div class="farm-section" style="padding-top:0; padding-bottom: 80px;">
@@ -492,7 +496,7 @@ footer { margin: 0 48px 48px; padding: 40px 48px; background: var(--panel); bord
 </footer>
 
 <!-- Snipcart — update key when deploying -->
-<div hidden id="snipcart" data-api-key="YOUR_PUBLIC_API_KEY" data-currency="gbp"></div>
+<div hidden id="snipcart" data-api-key="YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2" data-currency="gbp"></div>
 <script async src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.css" />
 
