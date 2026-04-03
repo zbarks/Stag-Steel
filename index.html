@@ -7,22 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-  .hero-btn {
-    margin-top: 28px;
-    pointer-events: all;
-    background: rgba(13,11,9,0.75);
-    border: 1px solid var(--cream);
-    color: var(--cream);
-    backdrop-filter: blur(8px);
-  }
-  .hero-btn:hover { background: rgba(13,11,9,0.92); color: var(--gold); border-color: var(--gold); }
-  .hero-btn::before { display: none; }
-</style>
 </head>
 <body>
 <div class="grain"></div>
 
+<!-- NAV — hidden until after video hero -->
 <nav id="nav">
   <a href="/" class="logo">Stag <span>&</span> Steel</a>
   <ul class="nav-links">
@@ -31,17 +20,10 @@
     <li><a href="shop.html">Shop</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="nav-right">
-    <<a href="cart.html" class="cart-btn" aria-label="Cart">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
-  </svg>
-  <span class="cart-count snipcart-items-count"></span>
-</a>
-    <button class="mob-btn" aria-label="Menu" id="mobBtn"><span></span><span></span><span></span></button>
-  </div>
+  <button class="mob-btn" aria-label="Menu" id="mobBtn"><span></span><span></span><span></span></button>
 </nav>
 
+<!-- Mobile menu -->
 <div class="mob-menu" id="mobMenu">
   <a href="#about">About</a>
   <a href="#product">The Opener</a>
@@ -49,15 +31,19 @@
   <a href="#contact">Contact</a>
 </div>
 
-<!-- ═══ HERO ═══ -->
+<!-- ═══ HERO — ScrollyVideo ═══ -->
 <section class="hero" id="hero">
   <div class="hero-pin">
+    <!-- ScrollyVideo mounts here -->
     <div id="scrolly-video"></div>
     <div class="hero-dim"></div>
+
     <div class="hero-brand" id="heroBrand">
+      <p class="hero-sub-line">Handcrafted · One of a Kind</p>
       <h1>Stag <em>&</em> Steel</h1>
-      <a href="shop.html" class="btn hero-btn">Buy Now <span class="arr">→</span></a>
+      <p class="hero-tag2">Antler bottle openers, made by hand.</p>
     </div>
+
     <div class="scroll-cue" id="scrollCue">
       <span>Scroll</span>
       <div class="scroll-bar"></div>
@@ -77,12 +63,16 @@
   </div>
 </section>
 
-<!-- IMAGE BAND -->
+<div class="plank-divider"></div>
+
+<!-- IMAGE BAND — product shots -->
 <div class="band3">
   <div class="bi r"><img src="assets/photo_5933886817583173054_y.jpg" alt="Opener on table" loading="lazy"></div>
   <div class="bi r rd1"><img src="assets/photo_5933886817583173055_y.jpg" alt="Opener warm light" loading="lazy"></div>
   <div class="bi r rd2"><img src="assets/photo_5933886817583173053_y.jpg" alt="Opener lifestyle" loading="lazy"></div>
 </div>
+
+<div class="plank-divider"></div>
 
 <!-- ═══ PRODUCT ═══ -->
 <section class="product" id="product">
@@ -92,7 +82,7 @@
   </div>
   <div class="product-split">
     <div class="product-img r">
-      <img src="assets/photo_5933886817583173059_y.jpg" alt="Stag & Steel Antler Bottle Opener" loading="lazy">
+      <img src="assets/photo_5933886817583173058_y.jpg" alt="Stag & Steel Antler Bottle Opener" loading="lazy">
     </div>
     <div class="pinfo">
       <h3 class="pn r">The Stag<br>& Steel</h3>
@@ -112,6 +102,8 @@
     </div>
   </div>
 </section>
+
+<div class="plank-divider"></div>
 
 <!-- FEATURES -->
 <section class="features">
@@ -134,9 +126,11 @@
   </div>
 </section>
 
+<div class="plank-divider"></div>
+
 <!-- IMAGE BAND 2 -->
 <div class="band2">
-  <div class="bi r"><img src="assets/photo_5933886817583173056_y.jpg" alt="Opener detail" loading="lazy"></div>
+  <div class="bi r"><img src="assets/photo_5933886817583173060_y.jpg" alt="Opener detail" loading="lazy"></div>
   <div class="bi r rd1"><img src="assets/photo_5933886817583173057_y.jpg" alt="Opener studio" loading="lazy"></div>
 </div>
 
@@ -147,6 +141,8 @@
     <div class="mw">Handmade <div class="mdot"></div> <em>Antler</em> <div class="mdot"></div> Unique <div class="mdot"></div> <em>Mauldslie</em> <div class="mdot"></div> Steel <div class="mdot"></div> <em>Craft</em> <div class="mdot"></div> Natural <div class="mdot"></div> <em>Wild</em></div>
   </div>
 </div>
+
+<div class="plank-divider"></div>
 
 <!-- CTA -->
 <section class="cta" id="contact">
@@ -161,15 +157,16 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="fbtm" style="border-top: 1px solid var(--bdr2); padding: 36px 48px; display:flex; justify-content:space-between; align-items:center;">
-    <a href="/" class="logo">Stag <span>&</span> Steel</a>
-    <p style="font-size:0.65rem; color:var(--dim);">Handmade in the UK &nbsp;·&nbsp; &copy; 2026 Stag & Steel</p>
-    <div style="display:flex; gap:24px;">
-      <a href="shop.html" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Shop</a>
-      <a href="#about" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">About</a>
-      <a href="#contact" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Contact</a>
+  <div class="fgr">
+    <div class="footer-brand">
+      <a href="/" class="logo">Stag <span>&</span> Steel</a>
+      <p>Handcrafted antler bottle openers. Naturally shed. Made by hand. Every one different.</p>
     </div>
+    <div class="fc"><h5>Shop</h5><a href="shop.html">The Opener</a><a href="#contact">Gift Enquiries</a></div>
+    <div class="fc"><h5>Info</h5><a href="#about">About</a><a href="#">Shipping</a><a href="#">Returns</a></div>
+    <div class="fc"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Email Us</a></div>
   </div>
+  <div class="fbtm"><p>&copy; 2026 Stag & Steel</p><p>Handmade in the UK</p></div>
 </footer>
 
 <!-- ScrollyVideo.js -->
@@ -178,64 +175,64 @@
 <!-- Snipcart -->
 <script>
   window.SnipcartSettings = {
-    publicApiKey: 'YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2',
+    publicApiKey: 'Y2NiNzFkYzktMDQ4Yy00NWQyLWExMzQtYjMyZTg5MjgzNDJmNjM5MTA2Nzg0NTk0NDcyODA2',
     loadStrategy: 'on-user-interaction',
+    currency: 'gbp',
   };
   (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
 </script>
 
 <script>
-const sv = new ScrollyVideo({
+// Init ScrollyVideo
+new ScrollyVideo({
   scrollyVideoContainer: 'scrolly-video',
   src: 'assets/scroll-video.mp4',
   cover: true,
   sticky: false,
-  trackScroll: false,
+  full: true,
   transitionSpeed: 8,
 });
 
-const hero = document.querySelector('.hero');
-let ticking = false;
-
-function updateVideo() {
-  const rect = hero.getBoundingClientRect();
-  const heroScrollHeight = hero.offsetHeight - window.innerHeight;
-  const linear = Math.min(1, Math.max(0, -rect.top / heroScrollHeight));
-  const progress = 1 - (1 - linear) * (1 - linear);
-  sv.setVideoPercentage(progress);
-  ticking = false;
-}
-
-window.addEventListener('scroll', () => {
-  if (!ticking) { requestAnimationFrame(updateVideo); ticking = true; }
-}, { passive: true });
-
+// Nav show/hide
 const nav = document.getElementById('nav');
+const hero = document.querySelector('.hero');
+
 function checkNav() {
-  nav.classList.toggle('show', hero.getBoundingClientRect().bottom <= 0);
+  const heroBottom = hero.getBoundingClientRect().bottom;
+  if (heroBottom <= 0) {
+    nav.classList.add('show');
+  } else {
+    nav.classList.remove('show');
+  }
 }
 window.addEventListener('scroll', checkNav, { passive: true });
 checkNav();
 
+// Scroll cue fade
 const scrollCue = document.getElementById('scrollCue');
 window.addEventListener('scroll', () => {
-  scrollCue.style.opacity = Math.max(0, 1 - (window.scrollY / window.innerHeight) * 4);
+  const p = window.scrollY / window.innerHeight;
+  scrollCue.style.opacity = Math.max(0, 1 - p * 4);
 }, { passive: true });
 
+// Reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.r').forEach(el => obs.observe(el));
 
+// Smooth anchors
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
     e.preventDefault();
     const t = document.querySelector(a.getAttribute('href'));
     if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Close mobile menu
     document.getElementById('mobMenu').classList.remove('open');
   });
 });
 
+// Mobile menu
 document.getElementById('mobBtn').addEventListener('click', () => {
   document.getElementById('mobMenu').classList.toggle('open');
 });

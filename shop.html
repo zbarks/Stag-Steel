@@ -8,72 +8,117 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
+/* ─── SHOP PAGE SPECIFIC ─── */
 .shop-page { padding: 140px 48px 100px; background: var(--bg); min-height: 100vh; }
-.shop-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; }
 
+.shop-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; max-width: 1200px; margin: 0 auto;
+}
+
+/* Gallery */
 .gallery { position: relative; }
-.gallery-main { aspect-ratio: 1; overflow: hidden; margin-bottom: 16px; border: 1px solid var(--bdr2); background: var(--bg2); }
-.gallery-main img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s ease; }
+.gallery-main {
+  aspect-ratio: 1; overflow: hidden; margin-bottom: 16px;
+  border: 1px solid var(--bdr2); background: var(--bg2);
+}
+.gallery-main img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: opacity 0.4s ease;
+}
 
-.gallery-thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
-.thumb { aspect-ratio: 1; overflow: hidden; cursor: pointer; border: 1px solid var(--bdr); opacity: 0.5; transition: all 0.3s; }
+.gallery-thumbs {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+}
+.thumb {
+  aspect-ratio: 1; overflow: hidden; cursor: pointer;
+  border: 1px solid var(--bdr); opacity: 0.5;
+  transition: all 0.3s;
+}
 .thumb:hover { opacity: 0.8; }
 .thumb.active { opacity: 1; border-color: var(--gold); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-.gallery-nav { position: absolute; top: 0; left: 0; right: 0; aspect-ratio: 1; display: flex; justify-content: space-between; align-items: center; padding: 0 12px; pointer-events: none; }
-.gallery-arrow { width: 44px; height: 44px; background: rgba(13,11,9,0.7); backdrop-filter: blur(8px); color: var(--cream); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; pointer-events: all; transition: background 0.3s; border: 1px solid var(--bdr2); }
+/* Gallery arrows */
+.gallery-nav {
+  position: absolute; top: 0; left: 0; right: 0;
+  aspect-ratio: 1; display: flex; justify-content: space-between; align-items: center;
+  padding: 0 12px; pointer-events: none;
+}
+.gallery-arrow {
+  width: 44px; height: 44px; border: none;
+  background: rgba(13,11,9,0.7); backdrop-filter: blur(8px);
+  color: var(--cream); font-size: 1.2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: all; transition: background 0.3s;
+  border: 1px solid var(--bdr2);
+}
 .gallery-arrow:hover { background: rgba(201,169,110,0.2); }
 
+/* Product info */
 .shop-info { padding-top: 20px; }
-.shop-breadcrumb { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); margin-bottom: 24px; }
+.shop-breadcrumb {
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 24px;
+}
 .shop-breadcrumb a { color: var(--dim); text-decoration: none; transition: color 0.3s; }
 .shop-breadcrumb a:hover { color: var(--gold); }
-.shop-product-name { font-family: var(--df); font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 300; color: var(--cream); margin-bottom: 12px; line-height: 1.1; }
-.shop-product-sub { font-size: 0.82rem; font-weight: 200; color: var(--cream2); margin-bottom: 32px; letter-spacing: 0.05em; }
-.shop-price { font-family: var(--df); font-size: 2.2rem; color: var(--gold); margin-bottom: 32px; }
-.shop-desc { font-size: 0.84rem; font-weight: 200; line-height: 1.9; color: var(--cream2); margin-bottom: 40px; max-width: 440px; }
 
-.add-to-cart { display: inline-flex; align-items: center; gap: 12px; padding: 20px 56px; background: var(--gold); border: none; color: var(--bg); font-family: var(--db); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); margin-bottom: 48px; }
+.shop-product-name {
+  font-family: var(--df); font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 300; color: var(--cream); margin-bottom: 12px; line-height: 1.1;
+}
+.shop-product-sub {
+  font-size: 0.82rem; font-weight: 200; color: var(--cream2);
+  margin-bottom: 32px; letter-spacing: 0.05em;
+}
+.shop-price {
+  font-family: var(--df); font-size: 2.2rem; color: var(--gold); margin-bottom: 32px;
+}
+.shop-desc {
+  font-size: 0.84rem; font-weight: 200; line-height: 1.9; color: var(--cream2);
+  margin-bottom: 40px; max-width: 440px;
+}
+
+/* Add to cart button */
+.add-to-cart {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 20px 56px; background: var(--gold); border: none;
+  color: var(--bg); font-family: var(--db); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  margin-bottom: 48px;
+}
 .add-to-cart:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.2); }
 
 .shop-specs { margin-bottom: 48px; }
 .shop-specs .sp { max-width: 100%; }
 
-/* Quantity */
-.qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-.qty-ctrl { display: flex; align-items: center; border: 1px solid var(--bdr2); }
-.qty-btn {
-  width: 40px; height: 48px; background: none; border: none;
-  color: var(--cream); font-size: 1.2rem; cursor: pointer;
-  transition: background 0.2s; font-family: var(--db);
+/* Shipping info */
+.shipping-note {
+  padding: 24px; border: 1px solid var(--bdr2);
+  background: linear-gradient(145deg, rgba(30,25,19,0.5), rgba(26,22,16,0.2));
 }
-.qty-btn:hover { background: rgba(201,169,110,0.1); color: var(--gold); }
-.qty-val { width: 40px; text-align: center; font-size: 0.85rem; color: var(--cream); }
-
-/* Post-add */
-.post-add { margin-bottom: 48px; }
-.post-add-msg { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 16px; }
-.post-add-btns { display: flex; flex-direction: column; gap: 10px; max-width: 280px; }
-.post-add-keep {
-  padding: 14px; background: none; border: 1px solid var(--bdr2);
-  color: var(--cream2); font-family: var(--db); font-size: 0.68rem;
-  letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
-  transition: all 0.3s;
+.shipping-note h4 {
+  font-family: var(--df); font-size: 1.1rem; font-weight: 400;
+  color: var(--cream); margin-bottom: 8px;
 }
-.post-add-keep:hover { border-color: var(--gold); color: var(--cream); }
-.shipping-note h4 { font-family: var(--df); font-size: 1.1rem; font-weight: 400; color: var(--cream); margin-bottom: 8px; }
-.shipping-note p { font-size: 0.76rem; font-weight: 200; line-height: 1.7; color: var(--cream2); }
+.shipping-note p {
+  font-size: 0.76rem; font-weight: 200; line-height: 1.7; color: var(--cream2);
+}
 
+/* Responsive */
 @media (max-width: 900px) {
   .shop-page { padding: 120px 24px 60px; }
   .shop-layout { grid-template-columns: 1fr; gap: 40px; }
+  .gallery-thumbs { grid-template-columns: repeat(6, 1fr); }
 }
 </style>
 </head>
 <body>
 <div class="grain"></div>
 
+<!-- NAV — always visible on shop page -->
 <nav id="nav" class="show">
   <a href="/" class="logo">Stag <span>&</span> Steel</a>
   <ul class="nav-links">
@@ -82,15 +127,7 @@
     <li><a href="shop.html" style="color:var(--cream)">Shop</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
-  <div class="nav-right">
-    <a href="cart.html" class="cart-btn" aria-label="Cart">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
-  </svg>
-  <span class="cart-count snipcart-items-count"></span>
-</a>
-    <button class="mob-btn" aria-label="Menu" id="mobBtn"><span></span><span></span><span></span></button>
-  </div>
+  <button class="mob-btn" aria-label="Menu" id="mobBtn"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mob-menu" id="mobMenu">
@@ -106,19 +143,19 @@
     <!-- Gallery -->
     <div class="gallery">
       <div class="gallery-main">
-        <img id="mainImg" src="assets/photo_5933886817583173059_y.jpg" alt="Stag & Steel Opener">
+        <img id="mainImg" src="assets/photo_5933886817583173058_y.jpg" alt="Stag & Steel Opener">
       </div>
       <div class="gallery-nav">
         <button class="gallery-arrow" id="prevBtn">‹</button>
         <button class="gallery-arrow" id="nextBtn">›</button>
       </div>
       <div class="gallery-thumbs" id="thumbs">
-        <div class="thumb active" data-idx="0"><img src="assets/photo_5933886817583173059_y.jpg" alt="Shot 1"></div>
+        <div class="thumb active" data-idx="0"><img src="assets/photo_5933886817583173058_y.jpg" alt="Shot 1"></div>
         <div class="thumb" data-idx="1"><img src="assets/photo_5933886817583173052_y.jpg" alt="Shot 2"></div>
         <div class="thumb" data-idx="2"><img src="assets/photo_5933886817583173056_y.jpg" alt="Shot 3"></div>
-        <div class="thumb" data-idx="3"><img src="assets/photo_5933886817583173057_y.jpg" alt="Shot 4"></div>
+        <div class="thumb" data-idx="3"><img src="assets/photo_5933886817583173059_y.jpg" alt="Shot 4"></div>
         <div class="thumb" data-idx="4"><img src="assets/photo_5933886817583173054_y.jpg" alt="Shot 5"></div>
-        <div class="thumb" data-idx="5"><img src="assets/photo_5933886817583173055_y.jpg" alt="Shot 6"></div>
+        <div class="thumb" data-idx="5"><img src="assets/photo_5933886817583173060_y.jpg" alt="Shot 6"></div>
       </div>
     </div>
 
@@ -134,35 +171,17 @@
         Shaped and finished entirely by hand. No two are ever the same.
       </p>
 
-      <!-- Quantity + Add to Cart -->
-      <div class="qty-row" id="qty-row">
-        <div class="qty-ctrl">
-          <button class="qty-btn" id="qty-minus">−</button>
-          <span class="qty-val" id="qty-val">1</span>
-          <button class="qty-btn" id="qty-plus">+</button>
-        </div>
-        <button class="add-to-cart snipcart-add-item"
-          id="add-to-cart-btn"
-          data-item-id="stag-and-steel-opener"
-          data-item-name="Stag & Steel Opener"
-          data-item-price="25.00"
-          data-item-url="/shop.html"
-          data-item-description="Handcrafted antler bottle opener — each one unique"
-          data-item-image="assets/photo_5933886817583173059_y.jpg"
-          data-item-weight="180"
-          data-item-quantity="1">
-          Add to Bag →
-        </button>
-      </div>
-
-      <!-- Post-add state (hidden until item added) -->
-      <div class="post-add" id="post-add" style="display:none">
-        <p class="post-add-msg">✓ Added to your bag</p>
-        <div class="post-add-btns">
-          <a href="cart.html" class="add-to-cart" style="text-decoration:none; text-align:center;">Proceed to Checkout →</a>
-          <button class="post-add-keep" id="keep-shopping">Keep Browsing</button>
-        </div>
-      </div>
+      <button class="add-to-cart snipcart-add-item"
+        data-item-id="stag-and-steel-opener"
+        data-item-name="Stag & Steel Opener"
+        data-item-price="25.00"
+        data-item-url="/shop.html"
+        data-item-description="Handcrafted antler bottle opener — each one unique"
+        data-item-image="assets/photo_5933886817583173058_y.jpg"
+        data-item-weight="180"
+        data-item-max-quantity="1">
+        Add to Cart →
+      </button>
 
       <div class="shop-specs">
         <div class="specs">
@@ -176,7 +195,10 @@
 
       <div class="shipping-note">
         <h4>Shipping & Delivery</h4>
-        <p>UK delivery within 3–5 working days. Each opener is carefully wrapped and boxed. International shipping available at checkout.</p>
+        <p>
+          UK delivery within 3–5 working days. Each opener is carefully 
+          wrapped and boxed. International shipping available at checkout.
+        </p>
       </div>
     </div>
   </div>
@@ -184,22 +206,24 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="fbtm" style="border-top: 1px solid var(--bdr2); padding: 36px 48px; display:flex; justify-content:space-between; align-items:center;">
-    <a href="/" class="logo">Stag <span>&</span> Steel</a>
-    <p style="font-size:0.65rem; color:var(--dim);">Handmade in the UK &nbsp;·&nbsp; &copy; 2026 Stag & Steel</p>
-    <div style="display:flex; gap:24px;">
-      <a href="shop.html" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Shop</a>
-      <a href="/#about" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">About</a>
-      <a href="/#contact" style="font-size:0.7rem; color:var(--cream2); text-decoration:none;">Contact</a>
+  <div class="fgr">
+    <div class="footer-brand">
+      <a href="/" class="logo">Stag <span>&</span> Steel</a>
+      <p>Handcrafted antler bottle openers. Naturally shed. Made by hand. Every one different.</p>
     </div>
+    <div class="fc"><h5>Shop</h5><a href="shop.html">The Opener</a><a href="/#contact">Gift Enquiries</a></div>
+    <div class="fc"><h5>Info</h5><a href="/#about">About</a><a href="#">Shipping</a><a href="#">Returns</a></div>
+    <div class="fc"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Email Us</a></div>
   </div>
+  <div class="fbtm"><p>&copy; 2026 Stag & Steel</p><p>Handmade in the UK</p></div>
 </footer>
 
 <!-- Snipcart -->
 <script>
   window.SnipcartSettings = {
-    publicApiKey: 'YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2',
+    publicApiKey: 'Y2NiNzFkYzktMDQ4Yy00NWQyLWExMzQtYjMyZTg5MjgzNDJmNjM5MTA2Nzg0NTk0NDcyODA2',
     loadStrategy: 'on-user-interaction',
+    currency: 'gbp',
   };
   (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
 </script>
@@ -207,54 +231,38 @@
 <script>
 // Gallery
 const images = [
-  'assets/photo_5933886817583173059_y.jpg',
+  'assets/photo_5933886817583173058_y.jpg',
   'assets/photo_5933886817583173052_y.jpg',
   'assets/photo_5933886817583173056_y.jpg',
-  'assets/photo_5933886817583173057_y.jpg',
+  'assets/photo_5933886817583173059_y.jpg',
   'assets/photo_5933886817583173054_y.jpg',
-  'assets/photo_5933886817583173055_y.jpg',
+  'assets/photo_5933886817583173060_y.jpg',
 ];
 let current = 0;
 const mainImg = document.getElementById('mainImg');
-const thumbEls = document.querySelectorAll('.thumb');
+const thumbs = document.querySelectorAll('.thumb');
 
 function setImage(idx) {
   current = idx;
-  mainImg.style.opacity = '0';
-  setTimeout(() => { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 200);
-  thumbEls.forEach((t, i) => t.classList.toggle('active', i === idx));
+  mainImg.src = images[idx];
+  thumbs.forEach((t, i) => t.classList.toggle('active', i === idx));
 }
-thumbEls.forEach(t => t.addEventListener('click', () => setImage(parseInt(t.dataset.idx))));
-document.getElementById('prevBtn').addEventListener('click', () => setImage((current - 1 + images.length) % images.length));
-document.getElementById('nextBtn').addEventListener('click', () => setImage((current + 1) % images.length));
+
+thumbs.forEach(t => {
+  t.addEventListener('click', () => setImage(parseInt(t.dataset.idx)));
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  setImage((current - 1 + images.length) % images.length);
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  setImage((current + 1) % images.length);
+});
+
+// Keyboard nav
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') setImage((current - 1 + images.length) % images.length);
   if (e.key === 'ArrowRight') setImage((current + 1) % images.length);
-});
-
-// Quantity
-let qty = 1;
-const qtyVal = document.getElementById('qty-val');
-const addBtn = document.getElementById('add-to-cart-btn');
-
-document.getElementById('qty-minus').addEventListener('click', () => {
-  if (qty > 1) { qty--; qtyVal.textContent = qty; addBtn.dataset.itemQuantity = qty; }
-});
-document.getElementById('qty-plus').addEventListener('click', () => {
-  qty++; qtyVal.textContent = qty; addBtn.dataset.itemQuantity = qty;
-});
-
-// After add to cart — show post-add UI
-document.addEventListener('snipcart.ready', () => {
-  Snipcart.events.on('item.added', () => {
-    document.getElementById('qty-row').style.display = 'none';
-    document.getElementById('post-add').style.display = 'block';
-  });
-});
-
-document.getElementById('keep-shopping').addEventListener('click', () => {
-  document.getElementById('post-add').style.display = 'none';
-  document.getElementById('qty-row').style.display = 'flex';
 });
 
 // Mobile menu
