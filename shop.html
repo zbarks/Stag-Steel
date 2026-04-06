@@ -9,359 +9,153 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --dark: #1a1209;
-  --panel: rgba(20,14,8,0.93);
-  --cream: #f0e6d8;
-  --cream2: #c4b49e;
-  --gold: #d4a84b;
-  --gold2: #e8c06a;
-  --gold-dim: rgba(212,168,75,0.3);
-  --dim: #8a7d6d;
-  --bdr: rgba(212,168,75,0.2);
-  --bdr-strong: rgba(212,168,75,0.38);
-  --shadow: rgba(10,6,2,0.65);
+  --dark-walnut: #3E352D;
+  --charcoal: #4A3F36;
+  --antler-tan: #A08060;
+  --sand: #D4C5B5;
+  --cream: #F5EDE4;
   --ff: 'Playfair Display', Georgia, serif;
   --fb: 'DM Sans', sans-serif;
 }
-html { scroll-behavior: smooth; }
 body {
   font-family: var(--fb); font-weight: 300; color: var(--cream);
-  overflow-x: hidden; -webkit-font-smoothing: antialiased;
-  background-color: #6B4226;
-  background-image: url('assets/wood-bg.jpg');
-  background-repeat: repeat;
-  background-size: 640px auto;
-  min-height: 100vh;
+  background-color: var(--dark-walnut);
 }
 a { color: inherit; text-decoration: none; }
-body::before {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9998;
-  box-shadow: inset 0 0 200px 90px rgba(10,6,2,0.65);
-}
 
-/* NAV */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
-  background: var(--panel); backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--bdr); box-shadow: 0 4px 24px var(--shadow);
+  padding: 24px 48px; display: flex; justify-content: space-between; align-items: center;
+  background: var(--charcoal); border-bottom: 1px solid rgba(212, 197, 181, 0.1);
 }
-.logo { font-family: var(--ff); font-size: 1.3rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); }
-.logo span { color: var(--gold); }
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream2); transition: color 0.3s; }
-.nav-links a:hover, .nav-links a.active { color: var(--gold); }
-.mob-btn { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 20px; position: relative; }
-.mob-btn span { display: block; width: 100%; height: 1.5px; background: var(--cream); position: absolute; left: 0; }
-.mob-btn span:nth-child(1) { top: 0; } .mob-btn span:nth-child(2) { top: 50%; } .mob-btn span:nth-child(3) { bottom: 0; }
+.logo { font-family: var(--ff); font-size: 1.4rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); }
+.logo span { color: var(--antler-tan); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); transition: color 0.3s; }
+.nav-links a:hover { color: var(--cream); }
+.cart-nav-btn { display: flex; align-items: center; gap: 8px; color: var(--sand); cursor: pointer; background: none; border: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
-/* PANEL */
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--bdr);
-  box-shadow: 0 12px 48px var(--shadow), inset 0 1px 0 rgba(212,168,75,0.07);
-  backdrop-filter: blur(20px);
-  position: relative;
-}
-.panel::before { content: ''; position: absolute; top: 12px; left: 12px; width: 16px; height: 16px; border-top: 1.5px solid var(--gold-dim); border-left: 1.5px solid var(--gold-dim); pointer-events: none; }
-.panel::after { content: ''; position: absolute; bottom: 12px; right: 12px; width: 16px; height: 16px; border-bottom: 1.5px solid var(--gold-dim); border-right: 1.5px solid var(--gold-dim); pointer-events: none; }
+.shop-header { text-align: center; padding: 80px 20px 40px; }
+.shop-header h1 { font-family: var(--ff); font-size: 3.5rem; color: var(--cream); margin-bottom: 16px; }
+.shop-header p { color: var(--sand); max-width: 500px; margin: 0 auto; line-height: 1.8; }
 
-/* PAGE */
-.shop-page { padding: 108px 48px 80px; max-width: 1200px; margin: 0 auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; padding: 40px 48px 100px; max-width: 1200px; margin: 0 auto; }
+.product-card { background: var(--charcoal); padding: 24px; border: 1px solid rgba(212,197,181,0.1); text-align: center; transition: 0.3s; }
+.product-card:hover { transform: translateY(-5px); border-color: var(--antler-tan); }
+.product-img { width: 100%; height: 260px; object-fit: cover; margin-bottom: 24px; filter: brightness(0.9); }
+.product-card h3 { font-family: var(--ff); font-size: 1.5rem; color: var(--cream); margin-bottom: 8px; }
+.product-card .price { color: var(--antler-tan); font-size: 1.1rem; margin-bottom: 16px; }
+.product-card p { font-size: 0.85rem; color: var(--sand); margin-bottom: 24px; line-height: 1.6; }
 
-.breadcrumb { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); margin-bottom: 28px; display: flex; align-items: center; gap: 8px; }
-.breadcrumb a { color: var(--dim); transition: color 0.3s; }
-.breadcrumb a:hover { color: var(--gold); }
-
-/* MAIN GRID */
-.shop-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-
-/* GALLERY */
-.gallery-panel { padding: 20px; }
-.gallery-wrap { position: relative; }
-.gallery-main { overflow: hidden; border: 1px solid var(--bdr); background: rgba(0,0,0,0.3); margin-bottom: 14px; }
-.gallery-main img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; transition: opacity 0.25s; }
-.gallery-arrows { position: absolute; top: 0; left: 0; right: 0; bottom: 14px; display: flex; justify-content: space-between; align-items: center; padding: 0 10px; pointer-events: none; }
-.garrow { width: 38px; height: 38px; border: 1px solid var(--bdr-strong); background: rgba(15,10,5,0.8); color: var(--cream); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; pointer-events: all; transition: all 0.25s; backdrop-filter: blur(10px); }
-.garrow:hover { background: rgba(212,168,75,0.18); border-color: var(--gold); color: var(--gold); }
-.gallery-thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
-.thumb { aspect-ratio: 1; overflow: hidden; cursor: pointer; opacity: 0.38; border: 1px solid transparent; transition: all 0.25s; }
-.thumb:hover { opacity: 0.65; }
-.thumb.active { opacity: 1; border-color: var(--gold); }
-.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-/* PRODUCT PANEL */
-.product-panel { padding: 42px 44px 38px; display: flex; flex-direction: column; }
-.product-eyebrow { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-.product-name { font-family: var(--ff); font-size: clamp(1.9rem, 3vw, 2.7rem); font-weight: 500; color: var(--cream); line-height: 1.1; margin-bottom: 6px; }
-.product-sub { font-size: 0.74rem; color: var(--dim); margin-bottom: 24px; letter-spacing: 0.04em; }
-.price-row { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
-.product-price { font-family: var(--ff); font-size: 2.1rem; color: var(--gold); font-weight: 500; line-height: 1; }
-.badge { font-size: 0.56rem; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--bdr-strong); color: var(--cream2); padding: 4px 10px; white-space: nowrap; }
-.divider { width: 36px; height: 1px; background: var(--gold-dim); margin-bottom: 22px; }
-.product-desc { font-size: 0.82rem; font-weight: 300; line-height: 2; color: var(--cream2); margin-bottom: 30px; }
-.product-desc p + p { margin-top: 14px; }
-
-/* BUTTON */
 .add-btn {
-  display: inline-flex; align-items: center; gap: 12px; align-self: flex-start;
-  padding: 17px 50px; background: var(--gold); border: none;
-  color: var(--dark); font-family: var(--fb); font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
-  transition: all 0.3s; box-shadow: 0 4px 20px rgba(212,168,75,0.3);
-  margin-bottom: 32px;
+  width: 100%; padding: 14px; background: var(--antler-tan); border: none;
+  color: var(--cream); font-family: var(--fb); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: 0.3s;
 }
-.add-btn:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,168,75,0.4); }
-.add-btn .arrow { font-size: 1rem; display: inline-block; transition: transform 0.3s; }
-.add-btn:hover .arrow { transform: translateX(4px); }
+.add-btn:hover { background: var(--sand); color: var(--dark-walnut); }
 
-/* SPECS */
-.specs-block { margin-bottom: 24px; }
-.spec-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid rgba(212,168,75,0.1); }
-.spec-row:first-child { border-top: 1px solid rgba(212,168,75,0.1); }
-.spec-row .lab { font-size: 0.59rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
-.spec-row .val { font-size: 0.78rem; color: var(--cream); text-align: right; }
-
-.shipping-note { padding: 18px 20px; background: rgba(0,0,0,0.25); border: 1px solid rgba(212,168,75,0.1); border-left: 2px solid var(--gold-dim); }
-.shipping-note p { font-size: 0.73rem; font-weight: 300; line-height: 1.8; color: var(--cream2); }
-.shipping-note p strong { color: var(--cream); font-weight: 400; }
-
-/* THREE-CARD SECTION */
-.card-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-bottom: 24px; }
-.about-card { background: var(--panel); border: 1px solid var(--bdr); backdrop-filter: blur(20px); box-shadow: 0 8px 32px var(--shadow); padding: 36px 32px; }
-.about-card .icon { font-size: 1.3rem; margin-bottom: 14px; }
-.about-card .tag { font-size: 0.57rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
-.about-card h3 { font-family: var(--ff); font-size: 1.05rem; font-weight: 500; color: var(--cream); margin-bottom: 12px; line-height: 1.25; }
-.about-card p { font-size: 0.77rem; font-weight: 300; line-height: 1.9; color: var(--cream2); }
-
-/* STORY PANEL */
-.story-panel {
-  background: var(--panel); border: 1px solid var(--bdr);
-  backdrop-filter: blur(20px); box-shadow: 0 8px 40px var(--shadow);
-  padding: 52px 56px; display: grid; grid-template-columns: 1fr 1fr;
-  gap: 56px; align-items: center; position: relative;
-}
-.story-panel::before { content: ''; position: absolute; top: 12px; left: 12px; width: 16px; height: 16px; border-top: 1.5px solid var(--gold-dim); border-left: 1.5px solid var(--gold-dim); pointer-events: none; }
-.story-panel::after { content: ''; position: absolute; bottom: 12px; right: 12px; width: 16px; height: 16px; border-bottom: 1.5px solid var(--gold-dim); border-right: 1.5px solid var(--gold-dim); pointer-events: none; }
-.story-label { font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-.story-title { font-family: var(--ff); font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 500; color: var(--cream); line-height: 1.25; margin-bottom: 22px; }
-.story-body { font-size: 0.81rem; font-weight: 300; line-height: 2.05; color: var(--cream2); }
-.story-body p + p { margin-top: 16px; }
-.story-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border: 1px solid var(--bdr); }
-.story-img .caption { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--dim); margin-top: 10px; text-align: center; }
-
-/* FOOTER */
-footer { margin: 24px 0 0; padding: 48px 48px 40px; background: var(--panel); border: 1px solid var(--bdr); box-shadow: 0 -4px 32px rgba(10,6,2,0.3); }
-.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-.foot-brand p { font-size: 0.74rem; font-weight: 300; line-height: 1.8; color: var(--cream2); max-width: 250px; margin-top: 12px; }
-.foot-col h5 { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-.foot-col a { display: block; font-size: 0.74rem; font-weight: 300; color: var(--cream2); margin-bottom: 10px; transition: color 0.3s; }
-.foot-col a:hover { color: var(--cream); }
-.foot-btm { display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid rgba(212,168,75,0.1); }
-.foot-btm p { font-size: 0.6rem; color: var(--dim); }
-
-@media (max-width: 960px) {
-  nav { padding: 16px 24px; }
-  .nav-links { display: none; }
-  .mob-btn { display: block; }
-  .shop-page { padding: 90px 20px 60px; }
-  .shop-layout { grid-template-columns: 1fr; }
-  .product-panel { padding: 30px 26px; }
-  .card-row { grid-template-columns: 1fr; }
-  .story-panel { grid-template-columns: 1fr; gap: 32px; padding: 36px 28px; }
-  footer { padding: 40px 24px; }
-  .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-}
-@media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr; } }
+footer { background: var(--dark-walnut); padding: 60px 48px; border-top: 1px solid rgba(212,197,181,0.1); text-align: center; }
+footer .logo { margin-bottom: 24px; display: inline-block; }
+footer p { color: var(--sand); font-size: 0.85rem; }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="logo">Stag <span>&</span> Steel</a>
+  <a href="/" class="logo">Stag <span>&</span> Steel</a>
   <ul class="nav-links">
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#specs">Details</a></li>
-    <li><a href="shop.html" class="active">Shop</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.html#about">The Brand</a></li>
+    <li><a href="index.html#farm">The Source</a></li>
+    <li><a href="shop.html" style="color: var(--cream);">Shop Range</a></li>
   </ul>
-  <button class="mob-btn" id="mobBtn"><span></span><span></span><span></span></button>
+  <button class="cart-nav-btn snipcart-checkout">
+    Cart (<span class="snipcart-items-count">0</span>)
+  </button>
 </nav>
 
-<div class="shop-page">
+<div class="shop-header">
+  <h1>The Range</h1>
+  <p>Four products. One universal premium gift box. Sourced from our farm, fitted with brushed stainless steel, and packaged with care.</p>
+</div>
 
-  <div class="breadcrumb">
-    <a href="index.html">Home</a>
-    <span style="color:var(--gold-dim)">›</span>
-    <span style="color:var(--cream2)">Shop</span>
+<div class="grid">
+  <!-- TINE OPENER -->
+  <div class="product-card">
+    <img src="assets/hero-opener.jpg" alt="Tine Bottle Opener" class="product-img">
+    <h3>Tine Bottle Opener</h3>
+    <div class="price">£45</div>
+    <p>The signature piece — antler section with subtle fork, steel cap-lifter attached. 7-8" × 4-5".</p>
+    <button class="add-btn snipcart-add-item"
+      data-item-id="tine-opener"
+      data-item-price="45.00"
+      data-item-url="/shop.html"
+      data-item-description="The signature piece — antler section with subtle fork."
+      data-item-image="assets/hero-opener.jpg"
+      data-item-name="Tine Bottle Opener">
+      Add to Cart
+    </button>
   </div>
 
-  <div class="shop-layout">
-
-    <!-- GALLERY -->
-    <div class="panel gallery-panel">
-      <div class="gallery-wrap">
-        <div class="gallery-main">
-          <img id="mainImg" src="assets/photo_5933886817583173058_y.jpg" alt="Stag & Steel Opener">
-        </div>
-        <div class="gallery-arrows">
-          <button class="garrow" id="prev">‹</button>
-          <button class="garrow" id="next">›</button>
-        </div>
-      </div>
-      <div class="gallery-thumbs" id="thumbs">
-        <div class="thumb active" data-i="0"><img src="assets/photo_5933886817583173058_y.jpg" alt="1"></div>
-        <div class="thumb" data-i="1"><img src="assets/photo_5933886817583173052_y.jpg" alt="2"></div>
-        <div class="thumb" data-i="2"><img src="assets/photo_5933886817583173056_y.jpg" alt="3"></div>
-        <div class="thumb" data-i="3"><img src="assets/photo_5933886817583173059_y.jpg" alt="4"></div>
-        <div class="thumb" data-i="4"><img src="assets/photo_5933886817583173054_y.jpg" alt="5"></div>
-        <div class="thumb" data-i="5"><img src="assets/photo_5933886817583173060_y.jpg" alt="6"></div>
-      </div>
-    </div>
-
-    <!-- PRODUCT INFO -->
-    <div class="panel product-panel">
-      <p class="product-eyebrow">Handcrafted in Scotland</p>
-      <h1 class="product-name">The Stag &amp; Steel</h1>
-      <p class="product-sub">Antler Bottle Opener — Limited Pieces</p>
-
-      <div class="price-row">
-        <p class="product-price">£25</p>
-        <span class="badge">One of a Kind</span>
-        <span class="badge">In Stock</span>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="product-desc">
-        <p>Made from naturally shed antler collected at Mauldslie Farm in Scotland, each opener is shaped by hand and paired with a polished stainless steel bottle-opening head. Because every piece of antler is different, no two openers are ever alike — yours will be completely unique.</p>
-        <p>The antler is cleaned, shaped, and finished entirely by hand before the steel head is carefully fitted. No shortcuts, no moulds. Just material and craft.</p>
-      </div>
-
-      <!-- ⚠️ Replace YOUR_PUBLIC_API_KEY with your real Snipcart public key & deploy to HTTPS first -->
-      <button class="add-btn snipcart-add-item"
-        data-item-id="stag-and-steel-opener"
-        data-item-name="Stag & Steel Opener"
-        data-item-price="25.00"
-        data-item-url="https://stagandsteel.vercel.app/shop.html"
-        data-item-description="Handcrafted antler bottle opener — each one unique"
-        data-item-image="https://stagandsteel.vercel.app/assets/photo_5933886817583173058_y.jpg"
-        data-item-weight="180"
-        data-item-max-quantity="100">
-        Add to Cart <span class="arrow">→</span>
-      </button>
-
-      <div class="specs-block">
-        <div class="spec-row"><span class="lab">Handle</span><span class="val">Naturally Shed Antler</span></div>
-        <div class="spec-row"><span class="lab">Opener Head</span><span class="val">Polished Stainless Steel</span></div>
-        <div class="spec-row"><span class="lab">Construction</span><span class="val">Entirely By Hand</span></div>
-        <div class="spec-row"><span class="lab">Origin</span><span class="val">Mauldslie Farm, Scotland</span></div>
-        <div class="spec-row"><span class="lab">Uniqueness</span><span class="val">No Two Are the Same</span></div>
-        <div class="spec-row"><span class="lab">Approx. Weight</span><span class="val">180g</span></div>
-      </div>
-
-      <div class="shipping-note">
-        <p><strong>UK delivery</strong> 3–5 working days, carefully wrapped and boxed. <strong>International shipping</strong> available at checkout. Each order ships with a card about the antler origin.</p>
-      </div>
-    </div>
+  <!-- STEM OPENER -->
+  <div class="product-card">
+    <img src="assets/photo_5933886817583173059_y.jpg" alt="Stem Bottle Opener" class="product-img">
+    <h3>Stem Bottle Opener</h3>
+    <div class="price">£30</div>
+    <p>The everyday piece — straight cylindrical antler beam, steel cap-lifter permanently attached. 5-6" × 2".</p>
+    <button class="add-btn snipcart-add-item"
+      data-item-id="stem-opener"
+      data-item-price="30.00"
+      data-item-url="/shop.html"
+      data-item-description="The everyday piece — straight cylindrical antler beam."
+      data-item-image="assets/photo_5933886817583173059_y.jpg"
+      data-item-name="Stem Bottle Opener">
+      Add to Cart
+    </button>
   </div>
 
-  <!-- 3 FEATURE CARDS -->
-  <div class="card-row">
-    <div class="about-card">
-      <div class="icon">🦌</div>
-      <span class="tag">Ethically Sourced</span>
-      <h3>Naturally Shed Antler</h3>
-      <p>Antler is shed and regrown every year — no animal is harmed. We collect cast antler directly from Mauldslie Farm in Scotland, so every piece has a known, traceable origin and a story behind it.</p>
-    </div>
-    <div class="about-card">
-      <div class="icon">🔩</div>
-      <span class="tag">Built to Last</span>
-      <h3>Stainless Steel Head</h3>
-      <p>The bottle-opening mechanism is precision-cut from polished stainless steel — rust-resistant, food-safe, and built to open tens of thousands of bottles without wear. Strength paired with craft.</p>
-    </div>
-    <div class="about-card">
-      <div class="icon">✦</div>
-      <span class="tag">Truly Unique</span>
-      <h3>No Two Are the Same</h3>
-      <p>Every piece of antler has its own grain, colour, and form. When you order, you receive an opener that exists nowhere else in the world. We photograph each one before it ships so you know what's coming.</p>
-    </div>
+  <!-- CORKSCREW -->
+  <div class="product-card">
+    <img src="assets/photo_5933886817583173054_y.jpg" alt="T-Handle Corkscrew" class="product-img">
+    <h3>T-Handle Corkscrew</h3>
+    <div class="price">£35</div>
+    <p>Chunky antler crossbar handle with steel helix hanging from the centre. 4" × 4".</p>
+    <button class="add-btn snipcart-add-item"
+      data-item-id="corkscrew"
+      data-item-price="35.00"
+      data-item-url="/shop.html"
+      data-item-description="Chunky antler crossbar handle with steel helix."
+      data-item-image="assets/photo_5933886817583173054_y.jpg"
+      data-item-name="T-Handle Corkscrew">
+      Add to Cart
+    </button>
   </div>
 
-  <!-- STORY / PROCESS -->
-  <div class="story-panel">
-    <div class="story-text">
-      <p class="story-label">The Making Of</p>
-      <h2 class="story-title">From the Highland Hills to Your Kitchen Drawer</h2>
-      <div class="story-body">
-        <p>Every opener starts as a cast antler found at Mauldslie Farm — a working estate in the Clyde Valley. Deer shed their antlers naturally each spring, and we gather only what's been left on the ground.</p>
-        <p>Back in the workshop, each piece is assessed for character — the bends, the colour, the weight. It's then cut to length, shaped with files and sandpaper, and fitted with a stainless steel head polished by hand.</p>
-        <p>There's no production line. Each opener takes time, and we make them in small batches. If you're buying one, you're getting something with real hands on it from start to finish.</p>
-      </div>
-    </div>
-    <div class="story-img">
-      <img src="assets/photo_5933886817583173053_y.jpg" alt="Handcrafting the opener">
-      <p class="caption">Workshop, Scotland — each piece shaped by hand</p>
-    </div>
+  <!-- THE SET -->
+  <div class="product-card">
+    <img src="assets/box-set.jpg" alt="The Set" class="product-img">
+    <h3>The Set</h3>
+    <div class="price">£55</div>
+    <p>Stem opener + corkscrew paired in a dedicated gift box with central divider. The ultimate gift.</p>
+    <button class="add-btn snipcart-add-item"
+      data-item-id="the-set"
+      data-item-price="55.00"
+      data-item-url="/shop.html"
+      data-item-description="Stem opener + corkscrew paired in a dedicated gift box."
+      data-item-image="assets/box-set.jpg"
+      data-item-name="The Set">
+      Add to Cart
+    </button>
   </div>
-
 </div>
 
 <footer>
-  <div class="foot-grid">
-    <div class="foot-brand">
-      <div class="logo">Stag <span style="color:var(--gold)">&</span> Steel</div>
-      <p>Handcrafted antler bottle openers. Naturally shed. Made by hand. Every one different.</p>
-    </div>
-    <div class="foot-col"><h5>Shop</h5><a href="shop.html">The Opener</a><a href="index.html#contact">Gift Enquiries</a></div>
-    <div class="foot-col"><h5>Info</h5><a href="index.html#about">About</a><a href="#">Shipping</a></div>
-    <div class="foot-col"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Email Us</a></div>
-  </div>
-  <div class="foot-btm"><p>&copy; 2026 Stag &amp; Steel</p><p>Handmade in Scotland</p></div>
+  <a href="/" class="logo">Stag <span>&</span> Steel</a>
+  <p>&copy; 2026 Stag & Steel. Handcrafted in Scotland.</p>
 </footer>
 
-<!-- SNIPCART v3 — correct modern setup -->
-<!-- ⚠️  data-api-key: replace with your real PUBLIC key from app.snipcart.com → Account → API Keys -->
-<!-- ⚠️  data-item-url must be a live HTTPS URL — Snipcart crawls it to verify prices -->
-
-  <script>
-  window.SnipcartSettings = {
-    publicApiKey: "YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2",
-    loadStrategy: "on-user-interaction"
-  };
-</script>
-<div hidden id="snipcart"
-  data-currency="gbp">
-</div>
-
-<script src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
-
+<!-- SNIPCART KEEP -->
+<div hidden id="snipcart" data-api-key="YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2" data-currency="gbp"></div>
+<script async src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.css" />
-  
-const imgs = [
-  'assets/photo_5933886817583173058_y.jpg',
-  'assets/photo_5933886817583173052_y.jpg',
-  'assets/photo_5933886817583173056_y.jpg',
-  'assets/photo_5933886817583173059_y.jpg',
-  'assets/photo_5933886817583173054_y.jpg',
-  'assets/photo_5933886817583173060_y.jpg',
-];
-let cur = 0;
-const mainImg = document.getElementById('mainImg');
-const thumbEls = document.querySelectorAll('.thumb');
-function go(i) {
-  cur = i;
-  mainImg.style.opacity = '0.4';
-  setTimeout(() => { mainImg.src = imgs[i]; mainImg.style.opacity = '1'; }, 200);
-  thumbEls.forEach((t,j) => t.classList.toggle('active', j===i));
-}
-thumbEls.forEach(t => t.addEventListener('click', () => go(+t.dataset.i)));
-document.getElementById('prev').addEventListener('click', () => go((cur-1+imgs.length)%imgs.length));
-document.getElementById('next').addEventListener('click', () => go((cur+1)%imgs.length));
-document.addEventListener('keydown', e => {
-  if (e.key==='ArrowLeft') go((cur-1+imgs.length)%imgs.length);
-  if (e.key==='ArrowRight') go((cur+1)%imgs.length);
-});
-</script>
+
 </body>
 </html>

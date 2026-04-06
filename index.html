@@ -3,24 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stag & Steel — Handcrafted Antler Bottle Openers</title>
+<title>Stag & Steel — Handcrafted Antler Barware</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --dark: #1a1209;
-  --panel: rgba(20,14,8,0.90);
-  --panel2: rgba(20,14,8,0.75);
-  --cream: #f0e6d8;
-  --cream2: #c4b49e;
-  --gold: #d4a84b;
-  --gold2: #e8c06a;
-  --gold-dim: rgba(212,168,75,0.3);
-  --dim: #8a7d6d;
-  --bdr: rgba(212,168,75,0.2);
-  --bdr-strong: rgba(212,168,75,0.38);
-  --shadow: rgba(10,6,2,0.55);
+  --dark-walnut: #3E352D;
+  --charcoal: #4A3F36;
+  --antler-tan: #A08060;
+  --sand: #D4C5B5;
+  --cream: #F5EDE4;
   --ff: 'Playfair Display', Georgia, serif;
   --fb: 'DM Sans', sans-serif;
 }
@@ -28,218 +21,70 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--fb); font-weight: 300; color: var(--cream);
   overflow-x: hidden; -webkit-font-smoothing: antialiased;
-  background-color: #5a3418;
-  background-image: url('assets/wood-bg.jpg');
-  background-repeat: repeat;
-  background-size: 560px auto;
-  background-blend-mode: multiply;
+  background-color: var(--dark-walnut);
 }
 a { color: inherit; text-decoration: none; }
-body::before {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9998;
-  box-shadow: inset 0 0 160px 70px rgba(10,6,2,0.6);
-}
 
 /* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 20px 48px; display: flex; justify-content: space-between; align-items: center;
-  background: var(--panel); backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--bdr); box-shadow: 0 4px 24px var(--shadow);
+  padding: 24px 48px; display: flex; justify-content: space-between; align-items: center;
+  background: rgba(62, 53, 45, 0.95); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(212, 197, 181, 0.1);
 }
-.logo { font-family: var(--ff); font-size: 1.3rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); }
-.logo span { color: var(--gold); }
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream2); transition: color 0.3s; }
-.nav-links a:hover { color: var(--gold); }
-.mob-btn { display: none; background: none; border: none; cursor: pointer; width: 28px; height: 20px; position: relative; }
-.mob-btn span { display: block; width: 100%; height: 1.5px; background: var(--cream); position: absolute; left: 0; }
-.mob-btn span:nth-child(1) { top: 0; } .mob-btn span:nth-child(2) { top: 50%; } .mob-btn span:nth-child(3) { bottom: 0; }
-.mob-menu {
-  position: fixed; inset: 0; z-index: 999; background: var(--panel); backdrop-filter: blur(20px);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
-  opacity: 0; pointer-events: none; transition: opacity 0.4s;
-}
-.mob-menu.open { opacity: 1; pointer-events: all; }
-.mob-menu a { font-family: var(--ff); font-size: 1.6rem; color: var(--cream); }
-.mob-menu a:hover { color: var(--gold); }
-
-/* PANEL */
-.panel {
-  background: var(--panel); border: 1px solid var(--bdr);
-  box-shadow: 0 8px 40px var(--shadow), inset 0 1px 0 rgba(212,168,75,0.06);
-  backdrop-filter: blur(12px); position: relative;
-}
-.panel::before { content: ''; position: absolute; top: 10px; left: 10px; width: 14px; height: 14px; border-top: 1.5px solid var(--gold-dim); border-left: 1.5px solid var(--gold-dim); pointer-events: none; }
-.panel::after { content: ''; position: absolute; bottom: 10px; right: 10px; width: 14px; height: 14px; border-bottom: 1.5px solid var(--gold-dim); border-right: 1.5px solid var(--gold-dim); pointer-events: none; }
+.logo { font-family: var(--ff); font-size: 1.4rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); }
+.logo span { color: var(--antler-tan); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); transition: color 0.3s; }
+.nav-links a:hover { color: var(--cream); }
+.cart-nav-btn { display: flex; align-items: center; gap: 8px; color: var(--sand); cursor: pointer; background: none; border: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* HERO */
 .hero { min-height: 100vh; padding: 140px 48px 80px; display: flex; align-items: center; justify-content: center; }
 .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; width: 100%; align-items: center; }
-.hero-image { position: relative; }
-.hero-image img { width: 100%; border: 2px solid var(--bdr); box-shadow: 0 16px 56px var(--shadow); transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
-.hero-image:hover img { transform: scale(1.02); }
-.hero-image::before { content: ''; position: absolute; inset: 6px; z-index: -1; background: rgba(0,0,0,0.4); filter: blur(18px); }
-.hero-text {
-  display: flex; flex-direction: column; gap: 22px;
-  background: rgba(14,9,4,0.82);
-  border: 1px solid var(--bdr);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 12px 48px rgba(10,6,2,0.6), inset 0 1px 0 rgba(212,168,75,0.07);
-  padding: 44px 48px;
-  position: relative;
-}
-.hero-text::before { content: ''; position: absolute; top: 12px; left: 12px; width: 14px; height: 14px; border-top: 1.5px solid var(--gold-dim); border-left: 1.5px solid var(--gold-dim); pointer-events: none; }
-.hero-text::after { content: ''; position: absolute; bottom: 12px; right: 12px; width: 14px; height: 14px; border-bottom: 1.5px solid var(--gold-dim); border-right: 1.5px solid var(--gold-dim); pointer-events: none; }
-.hero-tag { font-size: 0.6rem; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
-.hero-title { font-family: var(--ff); font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 500; line-height: 1.05; color: var(--cream); }
-.hero-title em { font-style: italic; color: var(--gold); }
-.hero-desc { font-size: 0.86rem; font-weight: 300; line-height: 1.9; color: var(--cream2); max-width: 420px; }
-.hero-price { font-family: var(--ff); font-size: 2rem; color: var(--gold); font-weight: 500; }
+.hero-image img { width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.4); border-radius: 2px; }
+.hero-text { display: flex; flex-direction: column; gap: 24px; }
+.hero-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--antler-tan); }
+.hero-title { font-family: var(--ff); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 500; line-height: 1.1; color: var(--cream); }
+.hero-title em { font-style: italic; color: var(--antler-tan); }
+.hero-desc { font-size: 0.95rem; font-weight: 300; line-height: 1.9; color: var(--sand); max-width: 480px; }
 .hero-btn {
   display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
-  padding: 16px 44px; background: var(--gold); border: none;
-  color: var(--dark); font-family: var(--fb); font-size: 0.7rem; font-weight: 500;
+  padding: 18px 48px; background: var(--antler-tan); border: none;
+  color: var(--cream); font-family: var(--fb); font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;
-  transition: all 0.35s; box-shadow: 0 4px 18px rgba(212,168,75,0.28);
+  transition: all 0.3s;
 }
-.hero-btn:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 26px rgba(212,168,75,0.35); }
+.hero-btn:hover { background: var(--sand); color: var(--dark-walnut); }
 
-/* INFO ROW */
-.info-row { padding: 80px 48px; display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
-.info-panel { padding: 36px 28px; text-align: center; }
-.info-panel .icon { width: 32px; height: 32px; margin: 0 auto 18px; }
-.info-panel .icon svg { width: 100%; height: 100%; stroke: var(--gold); fill: none; stroke-width: 1.2; }
-.info-panel h3 { font-family: var(--ff); font-size: 1.15rem; font-weight: 500; color: var(--cream); margin-bottom: 10px; }
-.info-panel p { font-size: 0.76rem; font-weight: 300; line-height: 1.85; color: var(--cream2); }
+/* TWO-COL SECTIONS */
+.section-pad { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+.split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.split-text h2 { font-family: var(--ff); font-size: 2.8rem; font-weight: 500; color: var(--cream); margin-bottom: 24px; line-height: 1.2; }
+.split-text p { font-size: 0.95rem; line-height: 1.9; color: var(--sand); margin-bottom: 20px; }
+.split-image img { width: 100%; display: block; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
 
-/* ABOUT QUOTE PANEL */
-.about-section { padding: 0 48px 70px; max-width: 900px; margin: 0 auto; }
-.about-panel { padding: 52px 60px; text-align: center; }
-.about-panel .lbl { font-size: 0.58rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: block; }
-.about-panel p { font-family: var(--ff); font-size: clamp(1.15rem, 2.1vw, 1.7rem); font-weight: 400; line-height: 1.7; color: var(--cream); }
-.about-panel em { font-style: italic; color: var(--gold); }
-
-/* IMAGE STRIP */
-.img-strip { padding: 0 48px 24px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; max-width: 1200px; margin: 0 auto; }
-.img-frame { overflow: hidden; position: relative; border: 1px solid var(--bdr); box-shadow: 0 6px 24px var(--shadow); }
-.img-frame img { width: 100%; aspect-ratio: 1; object-fit: cover; filter: brightness(0.88) saturate(1.1); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); display: block; }
-.img-frame:hover img { transform: scale(1.06); filter: brightness(0.96) saturate(1.18); }
-
-/* ═══ FARM & ETHICS SECTION ═══ */
-.farm-section { padding: 60px 48px; max-width: 1200px; margin: 0 auto; }
-.farm-section-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-.farm-section-title { font-family: var(--ff); font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 500; color: var(--cream); margin-bottom: 48px; line-height: 1.2; }
-
-/* Full-width hero image for farm */
-.farm-hero-img {
-  width: 100%; max-width: 1200px; margin: 0 auto 4px;
-  display: block; padding: 0 48px;
-}
-.farm-hero-img img {
-  width: 100%; max-height: 460px; object-fit: cover; object-position: center 35%;
-  border: 1px solid var(--bdr); display: block;
-  filter: brightness(0.82) saturate(1.1);
-}
-
-/* Two-col story layout */
-.farm-story { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 4px; }
-.farm-story-img { overflow: hidden; border: 1px solid var(--bdr); }
-.farm-story-img img { width: 100%; height: 100%; min-height: 340px; object-fit: cover; object-position: center; filter: brightness(0.85) saturate(1.1); display: block; transition: transform 0.7s ease; }
-.farm-story-img:hover img { transform: scale(1.04); }
-.farm-story-text {
-  background: var(--panel); border: 1px solid var(--bdr);
-  backdrop-filter: blur(14px); box-shadow: 0 8px 36px var(--shadow);
-  padding: 48px 44px; display: flex; flex-direction: column; justify-content: center;
-  position: relative;
-}
-.farm-story-text::before { content: ''; position: absolute; top: 12px; left: 12px; width: 14px; height: 14px; border-top: 1.5px solid var(--gold-dim); border-left: 1.5px solid var(--gold-dim); }
-.farm-story-text::after { content: ''; position: absolute; bottom: 12px; right: 12px; width: 14px; height: 14px; border-bottom: 1.5px solid var(--gold-dim); border-right: 1.5px solid var(--gold-dim); }
-.farm-story-text .tag { font-size: 0.57rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-.farm-story-text h3 { font-family: var(--ff); font-size: clamp(1.3rem, 2.2vw, 1.9rem); font-weight: 500; color: var(--cream); line-height: 1.25; margin-bottom: 20px; }
-.farm-story-text p { font-size: 0.81rem; font-weight: 300; line-height: 2; color: var(--cream2); }
-.farm-story-text p + p { margin-top: 14px; }
-
-/* Three ethics cards */
-.ethics-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
-.ethics-card {
-  background: var(--panel); border: 1px solid var(--bdr);
-  backdrop-filter: blur(14px); box-shadow: 0 6px 28px var(--shadow);
-  padding: 36px 30px;
-}
-.ethics-card .num { font-family: var(--ff); font-size: 2.5rem; color: var(--gold-dim); font-weight: 500; line-height: 1; margin-bottom: 12px; }
-.ethics-card .tag { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
-.ethics-card h4 { font-family: var(--ff); font-size: 1.05rem; font-weight: 500; color: var(--cream); margin-bottom: 12px; }
-.ethics-card p { font-size: 0.76rem; font-weight: 300; line-height: 1.9; color: var(--cream2); }
-
-/* Highland landscape strip */
-.highland-strip { padding: 4px 48px 60px; max-width: 1200px; margin: 0 auto; }
-.highland-strip img { width: 100%; max-height: 320px; object-fit: cover; object-position: center 40%; border: 1px solid var(--bdr); display: block; filter: brightness(0.78) saturate(1.05); }
-.highland-caption { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--dim); margin-top: 8px; text-align: center; }
-
-/* SPECS */
-.specs-section { padding: 0 48px 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
-.spec-panel { padding: 40px 40px; }
-.spec-panel h3 { font-family: var(--ff); font-size: 1.4rem; font-weight: 500; color: var(--cream); margin-bottom: 24px; }
-.spec-row { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid rgba(212,168,75,0.1); }
-.spec-row .lab { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); }
-.spec-row .val { font-size: 0.8rem; color: var(--cream); text-align: right; }
-.care-panel { padding: 40px 40px; }
-.care-panel h3 { font-family: var(--ff); font-size: 1.4rem; font-weight: 500; color: var(--cream); margin-bottom: 16px; }
-.care-panel p { font-size: 0.81rem; font-weight: 300; line-height: 1.9; color: var(--cream2); }
-.care-panel p + p { margin-top: 14px; }
-
-/* CTA */
-.cta-section { padding: 0 48px 80px; max-width: 700px; margin: 0 auto; }
-.cta-panel { padding: 52px 48px; text-align: center; }
-.cta-panel h2 { font-family: var(--ff); font-size: clamp(1.5rem, 2.8vw, 2.3rem); font-weight: 500; color: var(--cream); margin-bottom: 10px; }
-.cta-panel p { font-size: 0.79rem; color: var(--cream2); margin-bottom: 32px; line-height: 1.7; }
-.email-row { display: flex; max-width: 420px; margin: 0 auto; border: 1px solid var(--bdr); background: rgba(0,0,0,0.3); }
-.email-row:focus-within { border-color: var(--gold); }
-.email-row input { flex: 1; padding: 14px 18px; background: transparent; border: none; outline: none; color: var(--cream); font-family: var(--fb); font-size: 0.78rem; }
-.email-row input::placeholder { color: var(--dim); }
-.email-row button { padding: 14px 22px; background: var(--gold); border: none; color: var(--dark); font-family: var(--fb); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; white-space: nowrap; }
-.email-row button:hover { background: var(--gold2); }
+/* EMAIL CAPTURE */
+.email-capture { background: var(--charcoal); padding: 80px 48px; text-align: center; }
+.email-wrap { max-width: 600px; margin: 0 auto; }
+.email-wrap h2 { font-family: var(--ff); font-size: 2.5rem; color: var(--cream); margin-bottom: 16px; }
+.email-wrap p { color: var(--sand); margin-bottom: 32px; font-size: 0.95rem; }
+.email-form { display: flex; border: 1px solid var(--antler-tan); }
+.email-form input { flex: 1; padding: 16px 24px; background: transparent; border: none; color: var(--cream); outline: none; font-size: 0.9rem; }
+.email-form button { padding: 16px 32px; background: var(--antler-tan); color: var(--cream); border: none; font-family: var(--fb); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; cursor: pointer; transition: 0.3s; }
+.email-form button:hover { background: var(--sand); color: var(--dark-walnut); }
 
 /* FOOTER */
-footer { margin: 0 48px 48px; padding: 40px 48px; background: var(--panel); border: 1px solid var(--bdr); box-shadow: 0 8px 32px var(--shadow); }
-.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-.foot-brand p { font-size: 0.74rem; font-weight: 300; line-height: 1.8; color: var(--cream2); max-width: 250px; margin-top: 12px; }
-.foot-col h5 { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-.foot-col a { display: block; font-size: 0.74rem; font-weight: 300; color: var(--cream2); margin-bottom: 10px; transition: color 0.3s; }
-.foot-col a:hover { color: var(--cream); }
-.foot-btm { display: flex; justify-content: space-between; padding-top: 28px; border-top: 1px solid rgba(212,168,75,0.1); }
-.foot-btm p { font-size: 0.6rem; color: var(--dim); }
+footer { background: var(--dark-walnut); padding: 60px 48px; border-top: 1px solid rgba(212,197,181,0.1); text-align: center; }
+footer .logo { margin-bottom: 24px; display: inline-block; }
+footer p { color: var(--sand); font-size: 0.85rem; }
 
-/* REVEAL */
-.r { opacity: 0; transform: translateY(22px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
-.r.v { opacity: 1; transform: translateY(0); }
-.rd1 { transition-delay: 0.1s; } .rd2 { transition-delay: 0.2s; } .rd3 { transition-delay: 0.3s; }
-
-/* RESPONSIVE */
-@media (max-width: 960px) {
-  nav { padding: 16px 24px; }
+@media (max-width: 900px) {
+  .hero-inner, .split-layout { grid-template-columns: 1fr; }
+  .hero { padding-top: 120px; text-align: center; }
+  .hero-btn { align-self: center; }
   .nav-links { display: none; }
-  .mob-btn { display: block; }
-  .hero { padding: 110px 24px 60px; }
-  .hero-inner { grid-template-columns: 1fr; gap: 36px; }
-  .info-row { grid-template-columns: 1fr; padding: 56px 24px; gap: 14px; }
-  .about-section { padding: 0 24px 56px; }
-  .about-panel { padding: 36px 28px; }
-  .img-strip { grid-template-columns: 1fr; padding: 0 24px 20px; }
-  .farm-section { padding: 48px 24px; }
-  .farm-hero-img { padding: 0 24px; }
-  .farm-story { grid-template-columns: 1fr; }
-  .farm-story-img { min-height: 280px; }
-  .ethics-row { grid-template-columns: 1fr; }
-  .highland-strip { padding: 4px 24px 48px; }
-  .specs-section { grid-template-columns: 1fr; padding: 0 24px 56px; }
-  .cta-section { padding: 0 24px 60px; }
-  .cta-panel { padding: 36px 24px; }
-  footer { margin: 0 24px 24px; padding: 32px 24px; }
-  .foot-grid { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr; } .email-row { flex-direction: column; } }
 </style>
 </head>
 <body>
@@ -247,279 +92,80 @@ footer { margin: 0 48px 48px; padding: 40px 48px; background: var(--panel); bord
 <nav>
   <a href="/" class="logo">Stag <span>&</span> Steel</a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#farm">The Farm</a></li>
-    <li><a href="#specs">Details</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">The Brand</a></li>
+    <li><a href="#farm">The Source</a></li>
+    <li><a href="shop.html">Shop Range</a></li>
   </ul>
-  <button class="mob-btn" id="mobBtn"><span></span><span></span><span></span></button>
+  <button class="cart-nav-btn snipcart-checkout">
+    Cart (<span class="snipcart-items-count">0</span>)
+  </button>
 </nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="#about" onclick="closeMob()">About</a>
-  <a href="#farm" onclick="closeMob()">The Farm</a>
-  <a href="#specs" onclick="closeMob()">Details</a>
-  <a href="shop.html">Shop</a>
-  <a href="#contact" onclick="closeMob()">Contact</a>
-</div>
 
-<!-- HERO -->
-<section class="hero" id="hero">
+<section class="hero">
   <div class="hero-inner">
-    <div class="hero-image r">
-      <img src="assets/photo_5933886817583173058_y.jpg" alt="Stag & Steel Antler Bottle Opener">
-    </div>
     <div class="hero-text">
-      <p class="hero-tag r">Handcrafted · One of a Kind · Scotland</p>
-      <h1 class="hero-title r rd1">Stag <em>&</em><br>Steel</h1>
-      <p class="hero-desc r rd2">
-        Handmade antler bottle openers. Naturally shed from Mauldslie Farm in the 
-        Clyde Valley, shaped by hand, finished in stainless steel. 
-        Every single one is different.
+      <p class="hero-tag">Premium Gifting</p>
+      <h1 class="hero-title">Masculine.<br>Handmade.<br><em>Unique.</em></h1>
+      <p class="hero-desc">
+        Handcrafted antler barware, sourced from naturally shed red deer antler. 
+        Fitted with brushed stainless steel, and packaged with care. No two are alike.
       </p>
-      <p class="hero-price r rd2">£25</p>
-      <a href="shop.html" class="hero-btn r rd3">Shop Now →</a>
+      <a href="shop.html" class="hero-btn">Explore The Range</a>
+    </div>
+    <div class="hero-image">
+      <img src="assets/hero-opener.jpg" alt="Stag & Steel Signature Bottle Opener">
     </div>
   </div>
 </section>
 
-<!-- INFO PANELS -->
-<div class="info-row">
-  <div class="panel info-panel r">
-    <div class="icon"><svg viewBox="0 0 48 48"><path d="M24 4c-6 8-16 14-16 26a16 16 0 0032 0C40 18 30 12 24 4z"/></svg></div>
-    <h3>Naturally Shed</h3>
-    <p>Deer shed and regrow their antlers every year. We collect only what's been left on the ground — no animal is ever harmed.</p>
-  </div>
-  <div class="panel info-panel r rd1">
-    <div class="icon"><svg viewBox="0 0 48 48"><path d="M14 34l10-26 10 26"/><path d="M18 24h12"/></svg></div>
-    <h3>Handmade</h3>
-    <p>Shaped, sanded, and assembled entirely by hand in small batches. No moulds, no shortcuts — just time and craft.</p>
-  </div>
-  <div class="panel info-panel r rd2">
-    <div class="icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M16 24c0-6 8-14 8-14s8 8 8 14a8 8 0 01-16 0z"/></svg></div>
-    <h3>One of a Kind</h3>
-    <p>Nature doesn't repeat itself. Every Stag & Steel has its own unique grain, colour, and character — yours exists nowhere else.</p>
-  </div>
-</div>
-
-<!-- ABOUT QUOTE -->
-<div class="about-section" id="about">
-  <div class="panel about-panel r">
-    <span class="lbl">About</span>
-    <p>
-      Every Stag &amp; Steel opener is <em>handmade</em> using naturally shed antler 
-      sourced from Mauldslie Farm. No two are the same — each carries its own 
-      grain, shape, and <em>story</em>.
-    </p>
-  </div>
-</div>
-
-<!-- PRODUCT PHOTO STRIP -->
-<div class="img-strip">
-  <div class="img-frame r"><img src="assets/photo_5933886817583173052_y.jpg" alt="Opener detail" loading="lazy"></div>
-  <div class="img-frame r rd1"><img src="assets/photo_5933886817583173056_y.jpg" alt="Opener in use" loading="lazy"></div>
-  <div class="img-frame r rd2"><img src="assets/photo_5933886817583173059_y.jpg" alt="Opener close-up" loading="lazy"></div>
-</div>
-
-<!-- ═══ FARM SECTION ═══ -->
-<div id="farm">
-
-  <!-- Wide landscape photo -->
-  <div class="farm-hero-img r">
-    <img 
-      src="https://www.inspiringtravelscotland.com/wp-content/uploads/2019/05/Quiraing-Skye-Scottish-Highlands.jpg" 
-      alt="Scottish Highlands landscape"
-    >
-  </div>
-
-  <div class="farm-section">
-    <p class="farm-section-label r">Where It Begins</p>
-    <h2 class="farm-section-title r">Mauldslie Farm, Clyde Valley</h2>
-
-    <!-- Story: text left, image right -->
-    <div class="farm-story r">
-      <div class="farm-story-text">
-        <span class="tag">The Farm</span>
-        <h3>A Working Scottish Estate With Deep Roots</h3>
-        <p>
-          Mauldslie Farm sits in the Clyde Valley in Lanarkshire — a working 
-          estate with a long history of farming, land stewardship, and connection 
-          to the natural rhythms of the Scottish countryside. The land has been 
-          managed with care for generations, and the red deer that roam it are 
-          part of that story.
-        </p>
-        <p>
-          The farm's herd of red deer — Scotland's largest native land mammal — 
-          are free to roam across the estate's fields and woodland. They are 
-          not farmed for antler. They live as they would in the wild, shedding 
-          naturally each spring as new growth begins.
-        </p>
-      </div>
-      <div class="farm-story-img">
-        <img 
-          src="https://www.elderburnlodges.co.uk/wp-content/uploads/2023/02/Red-stag-Scottish-countryside.jpg" 
-          alt="Red stag in the Scottish countryside"
-        >
-      </div>
+<section id="about" class="section-pad">
+  <div class="split-layout">
+    <div class="split-image">
+      <img src="assets/box-set.jpg" alt="Premium Gifting Box Set">
     </div>
-
-    <!-- Ethics cards -->
-    <div class="ethics-row r">
-      <div class="ethics-card">
-        <div class="num">01</div>
-        <span class="tag">No Harm</span>
-        <h4>The Shed, Not the Stag</h4>
-        <p>
-          Red deer naturally cast their antlers every spring as part of their 
-          annual cycle. The old antler simply falls off, and new growth begins 
-          almost immediately. We collect only what's been shed — the deer 
-          don't feel a thing, and no animal is ever disturbed or interfered with.
-        </p>
-      </div>
-      <div class="ethics-card">
-        <div class="num">02</div>
-        <span class="tag">Traced to Source</span>
-        <h4>Every Piece Has a Known Origin</h4>
-        <p>
-          Because we work directly with Mauldslie Farm, we know exactly where 
-          every piece of antler comes from. There's no supply chain, no 
-          middlemen, no uncertainty. The antler in your opener was shed on 
-          Scottish soil and collected by hand from the same fields.
-        </p>
-      </div>
-      <div class="ethics-card">
-        <div class="num">03</div>
-        <span class="tag">Nothing Wasted</span>
-        <h4>A Material That Would Otherwise Return to the Earth</h4>
-        <p>
-          Cast antler that isn't collected slowly decomposes on the ground — 
-          it's calcium-rich and good for the soil, but often goes unnoticed. 
-          We give it a second life, turning something fleeting and natural 
-          into something you'll keep and use for years.
-        </p>
-      </div>
+    <div class="split-text">
+      <h2>Gift-Worthy Presentation</h2>
+      <p>Every piece is unique. No two antlers are the same — each bottle opener and corkscrew carries the natural texture, colour, and imperfection of the material it came from.</p>
+      <p>Our products are zero plastic, 100% recyclable, and arrive in a matte soft-touch charcoal brown gift box with our signature blind debossed branding. It is the perfect gift for the man who has everything.</p>
+      <br>
+      <a href="shop.html" class="hero-btn">Shop The Set</a>
     </div>
   </div>
+</section>
 
-
-
-  <!-- Reverse: image left, more story right -->
-  <div class="farm-section" style="padding-top:0; padding-bottom: 80px;">
-    <div class="farm-story r">
-      <div class="farm-story-img">
-        <img 
-          src="https://c02.purpledshub.com/uploads/sites/62/2012/08/GettyImages-469091978-754b763.jpg" 
-          alt="Red deer antler close up"
-        >
-      </div>
-      <div class="farm-story-text">
-        <span class="tag">The Material</span>
-        <h3>Why Antler Is Unlike Anything Else</h3>
-        <p>
-          Antler is the fastest-growing tissue in the animal kingdom. A full 
-          rack can grow at up to an inch a day, hardening over the summer and 
-          eventually being shed in late winter or early spring. The result is 
-          a material that is dense, warm, and full of character — with a grain 
-          as individual as a fingerprint.
-        </p>
-        <p>
-          No two pieces look the same. The curve, the colour, the texture — 
-          all determined by the particular deer, the particular year, and the 
-          conditions on the hill. When we shape an opener from a piece of shed 
-          antler, we work with what the material gives us, not against it.
-        </p>
-      </div>
+<section id="farm" class="section-pad" style="background: var(--charcoal);">
+  <div class="split-layout">
+    <div class="split-text">
+      <h2>Mauldslie Farm, Midlothian</h2>
+      <p>The farm is home to a herd of red deer. Each year, the stags naturally shed their antlers — no animal is harmed, no antler is cut. The shed antlers are collected from the hillside, cleaned, and sorted by size and character.</p>
+      <p>This is not industrial sourcing. Every antler that becomes a Stag & Steel product walked the same hills, grazed the same ground, and was shed in the same ancient cycle that red deer have followed for thousands of years.</p>
+    </div>
+    <div class="split-image">
+      <img src="assets/hero-stag.jpg" alt="Red Deer Stag on Scottish Moorland">
     </div>
   </div>
+</section>
 
-</div>
-<!-- ═══ END FARM SECTION ═══ -->
-
-<!-- SPECS & CARE -->
-<div class="specs-section" id="specs">
-  <div class="panel spec-panel r">
-    <h3>Details</h3>
-    <div class="spec-row"><span class="lab">Handle</span><span class="val">Naturally Shed Antler</span></div>
-    <div class="spec-row"><span class="lab">Head</span><span class="val">Polished Stainless Steel</span></div>
-    <div class="spec-row"><span class="lab">Made</span><span class="val">By Hand, Scotland</span></div>
-    <div class="spec-row"><span class="lab">Source</span><span class="val">Mauldslie Farm, Clyde Valley</span></div>
-    <div class="spec-row"><span class="lab">Each One</span><span class="val">Completely Unique</span></div>
-    <div class="spec-row"><span class="lab">Approx. Weight</span><span class="val">180g</span></div>
-    <div class="spec-row"><span class="lab">Price</span><span class="val">£25</span></div>
-  </div>
-  <div class="panel care-panel r rd1">
-    <h3>Care &amp; Shipping</h3>
-    <p>
-      Wipe with a damp cloth after use. Avoid prolonged soaking — antler is a 
-      natural material and will thank you for a bit of care. Over time it 
-      develops a richer patina, which only adds to its character.
-    </p>
-    <p>
-      UK delivery within 3–5 working days. Each opener is carefully wrapped 
-      and sent in a box with a card describing the antler's origin. 
-      International shipping is available at checkout.
-    </p>
-  </div>
-</div>
-
-<!-- PRODUCT PHOTOS — second row -->
-<div class="img-strip" style="padding-bottom: 70px;">
-  <div class="img-frame r"><img src="assets/photo_5933886817583173054_y.jpg" alt="Opener lifestyle" loading="lazy"></div>
-  <div class="img-frame r rd1"><img src="assets/photo_5933886817583173055_y.jpg" alt="Opener warm light" loading="lazy"></div>
-  <div class="img-frame r rd2"><img src="assets/photo_5933886817583173060_y.jpg" alt="Opener detail" loading="lazy"></div>
-</div>
-
-<!-- CTA -->
-<div class="cta-section" id="contact">
-  <div class="panel cta-panel r">
-    <h2>Stay in the Loop</h2>
-    <p>We make these in small batches and they sell out. Drop your email for restock updates and new releases.</p>
-    <div class="email-row">
-      <input type="email" placeholder="Your email address">
-      <button type="button">Notify Me</button>
+<section class="email-capture">
+  <div class="email-wrap">
+    <h2>10% Off Your First Gift</h2>
+    <p>Join our list for exclusive releases, farm updates, and 10% off your first order.</p>
+    <div class="email-form">
+      <input type="email" placeholder="Enter your email">
+      <button>Subscribe</button>
     </div>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="foot-grid">
-    <div class="foot-brand">
-      <div class="logo">Stag <span>&</span> Steel</div>
-      <p>Handcrafted antler bottle openers. Naturally shed. Made by hand. Every one different.</p>
-    </div>
-    <div class="foot-col"><h5>Shop</h5><a href="shop.html">The Opener</a><a href="#contact">Gift Enquiries</a></div>
-    <div class="foot-col"><h5>Info</h5><a href="#about">About</a><a href="#farm">The Farm</a><a href="#specs">Details</a></div>
-    <div class="foot-col"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Email Us</a></div>
-  </div>
-  <div class="foot-btm"><p>&copy; 2026 Stag &amp; Steel</p><p>Handmade in Scotland</p></div>
+  <a href="/" class="logo">Stag <span>&</span> Steel</a>
+  <p>&copy; 2026 Stag & Steel. Handcrafted in Scotland.</p>
 </footer>
 
-<!-- Snipcart — update key when deploying -->
+<!-- SNIPCART KEEP -->
 <div hidden id="snipcart" data-api-key="YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2" data-currency="gbp"></div>
 <script async src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.css" />
 
-<script>
-// Scroll reveal
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
-}, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
-document.querySelectorAll('.r').forEach(el => obs.observe(el));
-
-// Mobile menu
-const mobBtn = document.getElementById('mobBtn');
-const mobMenu = document.getElementById('mobMenu');
-mobBtn.addEventListener('click', () => mobMenu.classList.toggle('open'));
-function closeMob() { mobMenu.classList.remove('open'); }
-
-// Smooth anchors
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); closeMob(); }
-  });
-});
-</script>
 </body>
 </html>
