@@ -81,10 +81,12 @@ footer p { color: var(--sand); font-size: 0.85rem; }
 
 <div class="product-container">
   <div class="gallery">
-    <img src="assets/tine_white.jpg" alt="Tine Bottle Opener" class="main-img" id="mainImage">
+    <img src="assets/tine_opener_white.jpg" alt="Tine Bottle Opener" class="main-img" id="mainImage">
     <div class="thumbnails">
-      <img src="assets/tine_white.jpg" onclick="document.getElementById('mainImage').src=this.src">
-      <img src="assets/tine_opener_real.jpg" onclick="document.getElementById('mainImage').src=this.src"><img src="assets/packaging_1.jpg" onclick="document.getElementById('mainImage').src=this.src"><img src="assets/packaging_2.jpg" onclick="document.getElementById('mainImage').src=this.src">
+      <img src="assets/tine_opener_white.jpg" onclick="document.getElementById('mainImage').src=this.src">
+      <img src="assets/tine_opener_real.jpg" onclick="document.getElementById('mainImage').src=this.src">
+      <img src="assets/packaging_1.jpg" onclick="document.getElementById('mainImage').src=this.src">
+      <img src="assets/packaging_4.jpg" onclick="document.getElementById('mainImage').src=this.src">
     </div>
   </div>
   
@@ -98,9 +100,9 @@ footer p { color: var(--sand); font-size: 0.85rem; }
       <button class="add-btn snipcart-add-item"
         data-item-id="tine-opener"
         data-item-price="45.00"
-        data-item-url="/tine-opener.html"
+        data-item-url="https://stag-steel.vercel.app/tine-opener.html"
         data-item-description="The signature piece. Crafted from a tine section o..."
-        data-item-image="assets/tine_white.jpg"
+        data-item-image="https://stag-steel.vercel.app/assets/tine_opener_white.jpg"
         data-item-name="Tine Bottle Opener"
         onclick="this.setAttribute('data-item-quantity', document.getElementById('qty').value)">
         Add to Cart
