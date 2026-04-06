@@ -9,8 +9,8 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --dark-walnut: #3E352D;
-  --charcoal: #4A3F36;
+  --dark-walnut: #2C2416;
+  --charcoal: #3D3427;
   --antler-tan: #A08060;
   --sand: #D4C5B5;
   --cream: #F5EDE4;
@@ -62,6 +62,9 @@ footer p { color: var(--sand); font-size: 0.85rem; }
 
 @media (max-width: 900px) {
   .product-container { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; margin: 40px auto; }
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .thumbnails { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -90,14 +93,14 @@ footer p { color: var(--sand); font-size: 0.85rem; }
   
   <div class="product-info">
     <h1>T-Handle Corkscrew</h1>
-    <div class="price">£35.00</div>
+    <div class="price">$15.00</div>
     <div class="desc">A chunky antler crossbar handle paired with a premium steel helix hanging from the centre. The natural grip of the antler makes opening wine effortless, turning a routine action into a tactile experience.</div>
     
     <div class="cart-controls">
       <input type="number" id="qty" class="qty-input" value="1" min="1">
       <button class="add-btn snipcart-add-item"
         data-item-id="corkscrew"
-        data-item-price="35.00"
+        data-item-price="15.00"
         data-item-url="https://stag-steel.vercel.app/corkscrew.html"
         data-item-description="A chunky antler crossbar handle paired with a prem..."
         data-item-image="https://stag-steel.vercel.app/assets/corkscrew_main_white.jpg"

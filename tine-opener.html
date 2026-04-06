@@ -9,8 +9,8 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --dark-walnut: #3E352D;
-  --charcoal: #4A3F36;
+  --dark-walnut: #2C2416;
+  --charcoal: #3D3427;
   --antler-tan: #A08060;
   --sand: #D4C5B5;
   --cream: #F5EDE4;
@@ -62,6 +62,9 @@ footer p { color: var(--sand); font-size: 0.85rem; }
 
 @media (max-width: 900px) {
   .product-container { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; margin: 40px auto; }
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .thumbnails { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -90,14 +93,14 @@ footer p { color: var(--sand); font-size: 0.85rem; }
   
   <div class="product-info">
     <h1>Tine Bottle Opener</h1>
-    <div class="price">£45.00</div>
+    <div class="price">$25.00</div>
     <div class="desc">The signature piece. Crafted from a tine section of naturally shed antler with a subtle fork, fitted with a heavy-duty stainless steel cap-lifter. Measuring 7-8 inches in length, it provides excellent leverage and a commanding presence on any home bar.</div>
     
     <div class="cart-controls">
       <input type="number" id="qty" class="qty-input" value="1" min="1">
       <button class="add-btn snipcart-add-item"
         data-item-id="tine-opener"
-        data-item-price="45.00"
+        data-item-price="25.00"
         data-item-url="https://stag-steel.vercel.app/tine-opener.html"
         data-item-description="The signature piece. Crafted from a tine section o..."
         data-item-image="https://stag-steel.vercel.app/assets/tine_main_white.jpg"
