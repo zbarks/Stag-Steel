@@ -3,169 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stag & Steel — Handcrafted Antler Barware</title>
+<title>Stag & Steel — Handcrafted Estate Gifts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --dark-walnut: #2C2416;
-  --charcoal: #3D3427;
-  --antler-tan: #A08060;
-  --sand: #D4C5B5;
-  --cream: #F5EDE4;
-  --ff: 'Playfair Display', Georgia, serif;
-  --fb: 'DM Sans', sans-serif;
-}
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--fb); font-weight: 300; color: var(--cream);
-  overflow-x: hidden; -webkit-font-smoothing: antialiased;
-  background-color: var(--dark-walnut);
-}
-a { color: inherit; text-decoration: none; }
-
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 24px 48px; display: flex; justify-content: space-between; align-items: center;
-  background: rgba(62, 53, 45, 0.95); backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(212, 197, 181, 0.1);
-}
-.logo { font-family: var(--ff); font-size: 1.4rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); }
-.logo span { color: var(--antler-tan); }
-.nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); transition: color 0.3s; }
-.nav-links a:hover { color: var(--cream); }
-.cart-nav-btn { display: flex; align-items: center; gap: 8px; color: var(--sand); cursor: pointer; background: none; border: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-
-/* HERO */
-.hero { min-height: 100vh; padding: 140px 48px 80px; display: flex; align-items: center; justify-content: center; }
-.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; width: 100%; align-items: center; }
-.hero-image img { width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.4); border-radius: 2px; }
-.hero-text { display: flex; flex-direction: column; gap: 24px; }
-.hero-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--antler-tan); }
-.hero-title { font-family: var(--ff); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 500; line-height: 1.1; color: var(--cream); }
-.hero-title em { font-style: italic; color: var(--antler-tan); }
-.hero-desc { font-size: 0.95rem; font-weight: 300; line-height: 1.9; color: var(--sand); max-width: 480px; }
-.hero-btn {
-  display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
-  padding: 18px 48px; background: var(--antler-tan); border: none;
-  color: var(--cream); font-family: var(--fb); font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;
-  transition: all 0.3s;
-}
-.hero-btn:hover { background: var(--sand); color: var(--dark-walnut); }
-
-/* TWO-COL SECTIONS */
-.section-pad { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
-.split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.split-text h2 { font-family: var(--ff); font-size: 2.8rem; font-weight: 500; color: var(--cream); margin-bottom: 24px; line-height: 1.2; }
-.split-text p { font-size: 0.95rem; line-height: 1.9; color: var(--sand); margin-bottom: 20px; }
-.split-image img { width: 100%; display: block; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
-
-/* EMAIL CAPTURE */
-.email-capture { background: var(--charcoal); padding: 80px 48px; text-align: center; }
-.email-wrap { max-width: 600px; margin: 0 auto; }
-.email-wrap h2 { font-family: var(--ff); font-size: 2.5rem; color: var(--cream); margin-bottom: 16px; }
-.email-wrap p { color: var(--sand); margin-bottom: 32px; font-size: 0.95rem; }
-.email-form { display: flex; border: 1px solid var(--antler-tan); }
-.email-form input { flex: 1; padding: 16px 24px; background: transparent; border: none; color: var(--cream); outline: none; font-size: 0.9rem; }
-.email-form button { padding: 16px 32px; background: var(--antler-tan); color: var(--cream); border: none; font-family: var(--fb); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; cursor: pointer; transition: 0.3s; }
-.email-form button:hover { background: var(--sand); color: var(--dark-walnut); }
-
-/* FOOTER */
-footer { background: var(--dark-walnut); padding: 60px 48px; border-top: 1px solid rgba(212,197,181,0.1); text-align: center; }
-footer .logo { margin-bottom: 24px; display: inline-block; }
-footer p { color: var(--sand); font-size: 0.85rem; }
-
-@media (max-width: 900px) {
-  .hero-inner, .split-layout { grid-template-columns: 1fr; }
-  .hero { padding-top: 120px; text-align: center; }
-  .hero-btn { align-self: center; }
-  .nav-links { display: none; }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav>
-  <a href="/" class="logo">Stag <span>&</span> Steel</a>
+  <a href="index.html" class="logo">Stag & Steel</a>
   <ul class="nav-links">
-    <li><a href="#about">The Brand</a></li>
-    <li><a href="#farm">The Source</a></li>
-    <li><a href="shop.html">Shop Range</a></li>
+    <li><a href="index.html#the-idea">Story</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="the-set.html">The Set</a></li>
   </ul>
-  <button class="cart-nav-btn snipcart-checkout">
-    Cart (<span class="snipcart-items-count">0</span>)
-  </button>
+  <button class="btn snipcart-checkout" style="padding: 10px 20px; font-size: 0.7rem;">Cart (<span class="snipcart-items-count">0</span>)</button>
 </nav>
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <p class="hero-tag">Premium Gifting</p>
-      <h1 class="hero-title">Masculine.<br>Handmade.<br><em>Unique.</em></h1>
-      <p class="hero-desc">
-        Handcrafted antler barware, sourced from naturally shed red deer antler. 
-        Fitted with brushed stainless steel, and packaged with care. No two are alike.
-      </p>
-      <a href="shop.html" class="hero-btn">Explore The Range</a>
-    </div>
-    <div class="hero-image">
-      <img src="assets/tine_main_white.jpg" alt="Stag & Steel Signature Bottle Opener">
-    </div>
+<header style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: url('set_lifestyle.jpg') center/cover no-repeat; position: relative;">
+  <div style="position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(250,249,246,0.3);"></div>
+  <div style="position: relative; z-index: 10; text-align: center; padding: 0 20px;">
+    <h1 style="font-family: var(--ff); font-size: 4rem; color: #2C2A28; margin-bottom: 24px; font-weight: 400; letter-spacing: 0.05em;">Stag & Steel</h1>
+    <p style="font-size: 1.1rem; color: #2C2A28; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 48px;">Objects shaped by nature, finished by hand.</p>
+    <a href="shop.html" class="btn" style="background: #2C2A28; color: #FAF9F6; border-color: #2C2A28;">Explore the Collection</a>
   </div>
+</header>
+
+<section id="the-idea" style="background: var(--bg);">
+  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Idea</span>
+  <h2 class="section-title">A Meaningful Connection</h2>
+  <p class="section-desc">Stag & Steel creates handcrafted gifting objects made from naturally shed red deer antler collected on a family estate in Scotland. Each year the deer shed their antlers as part of a natural cycle. These antlers are gathered and transformed into functional objects designed to last a lifetime. No two pieces are the same. The material itself carries the landscape it came from.</p>
 </section>
 
-<section id="about" class="section-pad">
-  <div class="split-layout">
-    <div class="split-image">
-      <img src="assets/set_packaging.jpg" alt="Premium Gifting Box Set">
-    </div>
-    <div class="split-text">
-      <h2>Gift-Worthy Presentation</h2>
-      <p>Every piece is unique. No two antlers are the same — each bottle opener and corkscrew carries the natural texture, colour, and imperfection of the material it came from.</p>
-      <p>Our products are zero plastic, 100% recyclable, and arrive in a matte soft-touch charcoal brown gift box with our signature blind debossed branding. It is the perfect gift for the man who has everything.</p>
-      <br>
-      <a href="shop.html" class="hero-btn">Shop The Set</a>
-    </div>
-  </div>
+<section id="the-material" style="background: var(--surface);">
+  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Material</span>
+  <h2 class="section-title">Naturally Shed, Never Manufactured</h2>
+  <p class="section-desc">Every Stag & Steel piece begins with a naturally shed antler. Red deer shed their antlers each year as part of a biological cycle. The antlers fall naturally from the animal and are collected from the hillside. No animals are harmed and no antlers are cut. It is an estate-sourced natural material, offering quiet luxury and absolute provenance.</p>
 </section>
 
-<section id="farm" class="section-pad" style="background: var(--charcoal);">
-  <div class="split-layout">
-    <div class="split-text">
-      <h2>Mauldslie Farm, Midlothian</h2>
-      <p>The farm is home to a herd of red deer. Each year, the stags naturally shed their antlers — no animal is harmed, no antler is cut. The shed antlers are collected from the hillside, cleaned, and sorted by size and character.</p>
-      <p>This is not industrial sourcing. Every antler that becomes a Stag & Steel product walked the same hills, grazed the same ground, and was shed in the same ancient cycle that red deer have followed for thousands of years.</p>
-    </div>
-    <div class="split-image">
-      <img src="assets/hero-stag.jpg" alt="Red Deer Stag on Scottish Moorland">
-    </div>
-  </div>
+<section id="the-place" style="background: var(--bg);">
+  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Place</span>
+  <h2 class="section-title">Mauldslie Farm, Scotland</h2>
+  <p class="section-desc">Mauldslie Farm sits in the Moorfoot Hills of Midlothian, Scotland overlooking Gladhouse Reservoir. The surrounding landscape is home to a herd of native red deer whose antlers become the raw material for Stag & Steel objects. Each piece is a small part of this landscape made tangible.</p>
 </section>
 
-<section class="email-capture">
-  <div class="email-wrap">
-    <h2>10% Off Your First Gift</h2>
-    <p>Join our list for exclusive releases, farm updates, and 10% off your first order.</p>
-    <div class="email-form">
-      <input type="email" placeholder="Enter your email">
-      <button>Subscribe</button>
+<section id="the-craft" style="background: var(--surface);">
+  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Craft</span>
+  <h2 class="section-title">Finished By Hand</h2>
+  <p class="section-desc">We embrace Scandinavian restraint and Japanese respect for materials. Handcrafted production means each piece is individually finished. We do not manufacture tools; we create sculptural, timeless, collectible objects that connect you to the wild.</p>
+</section>
+
+<section id="products" style="background: var(--bg);">
+  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Object</span>
+  <h2 class="section-title">The Collection</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; max-width: 1000px; width: 100%; margin-top: 48px;">
+    
+    <div style="text-align: center;">
+      <a href="corkscrew.html">
+        <div style="background: var(--surface); padding: 48px; margin-bottom: 24px; transition: transform 0.4s ease;">
+          <img src="corkscrew_main_white.jpg" alt="The Antler Corkscrew" style="max-width: 100%; height: auto; mix-blend-mode: multiply;">
+        </div>
+        <h3 style="font-family: var(--ff); font-size: 1.5rem; font-weight: 400; margin-bottom: 8px;">The Antler Corkscrew</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">£38.00</p>
+      </a>
     </div>
+
+    <div style="text-align: center;">
+      <a href="stem-opener.html">
+        <div style="background: var(--surface); padding: 48px; margin-bottom: 24px; transition: transform 0.4s ease;">
+          <img src="stem_white.png" alt="The Stem Opener" style="max-width: 100%; height: auto; mix-blend-mode: multiply;">
+        </div>
+        <h3 style="font-family: var(--ff); font-size: 1.5rem; font-weight: 400; margin-bottom: 8px;">The Stem Opener</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">£28.00</p>
+      </a>
+    </div>
+
+  </div>
+  <div style="margin-top: 64px;">
+    <a href="shop.html" class="btn">View All Products</a>
   </div>
 </section>
 
 <footer>
-  <a href="/" class="logo">Stag <span>&</span> Steel</a>
-  <p>&copy; 2026 Stag & Steel. Handcrafted in Scotland.</p>
+  <p>&copy; 2026 Stag & Steel. Handcrafted Estate Gifts from Scotland.</p>
 </footer>
 
-<!-- SNIPCART KEEP -->
-<div hidden id="snipcart" data-api-key="YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2" data-currency="gbp"></div>
-<script async src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.css" />
-
+<script>
+  window.SnipcartSettings = {
+    publicApiKey: "MDIyNWZhMDYtOTY5MS00MmU0LWE0MTgtMDFhMjgwZDdiODg4NjM4NDYzMzQwODQyMjM0ODYz",
+    loadStrategy: "on-user-interact",
+  };
+  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,n;(n=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m,g;(g=(m=window.SnipcartSettings).loadCSS)!=null||(m.loadCSS=!0);var y=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,f=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interact"&&(f.forEach(function(t){return document.addEventListener(t,o)}),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],i=document.querySelector("#snipcart"),e=document.querySelector('src[src^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][src$="snipcart.js"]')),n=document.querySelector('link[href^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][href$="snipcart.css"]'));i||(i=document.createElement("div"),i.id="snipcart",i.setAttribute("hidden","true"),document.body.appendChild(i)),v(i),e||(e=document.createElement("script"),e.src="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.js"),e.async=!0,t.appendChild(e)),!n&&window.SnipcartSettings.loadCSS&&(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.css"),t.prepend(n)),f.forEach(function(h){return document.removeEventListener(h,o)})}function v(t){!y||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
+</script>
 </body>
 </html>
