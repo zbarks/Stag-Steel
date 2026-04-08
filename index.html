@@ -22,9 +22,7 @@
             line-height: 1.6;
         }
         .serif { font-family: 'Cormorant Garamond', serif; }
-        
         .text-display { font-size: clamp(2.5rem, 8vw, 6rem); line-height: 1.1; letter-spacing: -0.02em; }
-        
         .paper-grain {
             position: fixed;
             inset: 0;
@@ -33,7 +31,6 @@
             pointer-events: none;
             z-index: 100;
         }
-
         .img-zoom-container {
             overflow: hidden;
             background-color: var(--oak);
@@ -45,7 +42,6 @@
         .img-zoom-container:hover img {
             transform: scale(1.05);
         }
-
         .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -55,7 +51,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         .divider {
             height: 1px;
             background: var(--oak);
@@ -66,25 +61,15 @@
         .divider.active {
             width: 100%;
         }
-
         ::selection {
             background: var(--oak);
             color: var(--earth-stone);
-        }
-
-        .fade-in {
-            animation: fadeIn 2s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
     </style>
 </head>
 <body class="antialiased">
     <div class="paper-grain"></div>
 
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 p-8 flex justify-between items-center mix-blend-difference text-white">
         <a href="#" class="serif text-2xl tracking-tight uppercase font-medium">Stag & Steel</a>
         <div class="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.3em] font-light">
@@ -96,7 +81,7 @@
     </nav>
 
     <main>
-        <!-- Section: The Idea (Hero) -->
+        <!-- Section: The Idea -->
         <section class="min-h-screen flex flex-col justify-center items-center text-center px-8 relative">
             <div class="max-w-4xl scroll-reveal active">
                 <span class="text-[10px] uppercase tracking-[0.5em] text-mist mb-6 block">Handcrafted Estate Gifts</span>
@@ -124,7 +109,7 @@
             </div>
             <div class="col-span-12 lg:col-span-6 lg:offset-1 order-1 lg:order-2">
                 <div class="img-zoom-container aspect-[4/5] scroll-reveal">
-                    <img src="assets/tine_main_white.jpg" alt="Stag & Steel Signature Antler" class="w-full h-full object-cover">
+                    <img src="assets/tine_main_white.jpg" alt="Antler Texture" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
@@ -254,12 +239,9 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    const divider = entry.target.querySelector('.divider');
-                    if (divider) divider.classList.add('active');
                 }
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
     </script>
 </body>
