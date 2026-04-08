@@ -1,99 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stag & Steel — Handcrafted Estate Gifts</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAG & STEEL | Handcrafted Estate Objects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --earth-stone: #e8e2d9;
+            --oak: #3d342f;
+            --peat: #2a2421;
+            --moss-dark: #4a4d44;
+            --mist: #7c766f;
+        }
+        body {
+            background-color: var(--earth-stone);
+            color: var(--oak);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        .serif { font-family: 'Cormorant Garamond', serif; }
+        
+        .text-display { font-size: clamp(2.5rem, 8vw, 6rem); line-height: 1.1; letter-spacing: -0.02em; }
+        
+        .paper-grain {
+            position: fixed;
+            inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .img-zoom-container {
+            overflow: hidden;
+            background-color: var(--oak);
+        }
+        .img-zoom-container img {
+            transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+            filter: contrast(105%);
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--oak);
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0.3;
+        }
+        .divider.active {
+            width: 100%;
+        }
+
+        ::selection {
+            background: var(--oak);
+            color: var(--earth-stone);
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased">
+    <div class="paper-grain"></div>
 
-<nav>
-  <a href="index.html" class="logo">Stag & Steel</a>
-  <ul class="nav-links">
-    <li><a href="index.html#the-idea">Story</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="the-set.html">The Set</a></li>
-  </ul>
-  <button class="btn snipcart-checkout" style="padding: 10px 20px; font-size: 0.7rem;">Cart (<span class="snipcart-items-count">0</span>)</button>
-</nav>
-
-<header style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: url('set_lifestyle.jpg') center/cover no-repeat; position: relative;">
-  <div style="position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(250,249,246,0.3);"></div>
-  <div style="position: relative; z-index: 10; text-align: center; padding: 0 20px;">
-    <h1 style="font-family: var(--ff); font-size: 4rem; color: #2C2A28; margin-bottom: 24px; font-weight: 400; letter-spacing: 0.05em;">Stag & Steel</h1>
-    <p style="font-size: 1.1rem; color: #2C2A28; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 48px;">Objects shaped by nature, finished by hand.</p>
-    <a href="shop.html" class="btn" style="background: #2C2A28; color: #FAF9F6; border-color: #2C2A28;">Explore the Collection</a>
-  </div>
-</header>
-
-<section id="the-idea" style="background: var(--bg);">
-  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Idea</span>
-  <h2 class="section-title">A Meaningful Connection</h2>
-  <p class="section-desc">Stag & Steel creates handcrafted gifting objects made from naturally shed red deer antler collected on a family estate in Scotland. Each year the deer shed their antlers as part of a natural cycle. These antlers are gathered and transformed into functional objects designed to last a lifetime. No two pieces are the same. The material itself carries the landscape it came from.</p>
-</section>
-
-<section id="the-material" style="background: var(--surface);">
-  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Material</span>
-  <h2 class="section-title">Naturally Shed, Never Manufactured</h2>
-  <p class="section-desc">Every Stag & Steel piece begins with a naturally shed antler. Red deer shed their antlers each year as part of a biological cycle. The antlers fall naturally from the animal and are collected from the hillside. No animals are harmed and no antlers are cut. It is an estate-sourced natural material, offering quiet luxury and absolute provenance.</p>
-</section>
-
-<section id="the-place" style="background: var(--bg);">
-  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Place</span>
-  <h2 class="section-title">Mauldslie Farm, Scotland</h2>
-  <p class="section-desc">Mauldslie Farm sits in the Moorfoot Hills of Midlothian, Scotland overlooking Gladhouse Reservoir. The surrounding landscape is home to a herd of native red deer whose antlers become the raw material for Stag & Steel objects. Each piece is a small part of this landscape made tangible.</p>
-</section>
-
-<section id="the-craft" style="background: var(--surface);">
-  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Craft</span>
-  <h2 class="section-title">Finished By Hand</h2>
-  <p class="section-desc">We embrace Scandinavian restraint and Japanese respect for materials. Handcrafted production means each piece is individually finished. We do not manufacture tools; we create sculptural, timeless, collectible objects that connect you to the wild.</p>
-</section>
-
-<section id="products" style="background: var(--bg);">
-  <span style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block;">The Object</span>
-  <h2 class="section-title">The Collection</h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; max-width: 1000px; width: 100%; margin-top: 48px;">
-    
-    <div style="text-align: center;">
-      <a href="corkscrew.html">
-        <div style="background: var(--surface); padding: 48px; margin-bottom: 24px; transition: transform 0.4s ease;">
-          <img src="corkscrew_main_white.jpg" alt="The Antler Corkscrew" style="max-width: 100%; height: auto; mix-blend-mode: multiply;">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 p-8 flex justify-between items-center mix-blend-difference text-white">
+        <a href="#" class="serif text-2xl tracking-tight uppercase font-medium">Stag & Steel</a>
+        <div class="hidden md:flex gap-12 text-[10px] uppercase tracking-[0.3em] font-light">
+            <a href="#place" class="hover:opacity-50 transition-opacity">The Place</a>
+            <a href="#craft" class="hover:opacity-50 transition-opacity">The Craft</a>
+            <a href="#objects" class="hover:opacity-50 transition-opacity">The Objects</a>
         </div>
-        <h3 style="font-family: var(--ff); font-size: 1.5rem; font-weight: 400; margin-bottom: 8px;">The Antler Corkscrew</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">£38.00</p>
-      </a>
-    </div>
+        <a href="#contact" class="text-[10px] uppercase tracking-[0.3em] font-medium border-b border-white pb-1">Inquire</a>
+    </nav>
 
-    <div style="text-align: center;">
-      <a href="stem-opener.html">
-        <div style="background: var(--surface); padding: 48px; margin-bottom: 24px; transition: transform 0.4s ease;">
-          <img src="stem_white.png" alt="The Stem Opener" style="max-width: 100%; height: auto; mix-blend-mode: multiply;">
-        </div>
-        <h3 style="font-family: var(--ff); font-size: 1.5rem; font-weight: 400; margin-bottom: 8px;">The Stem Opener</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">£28.00</p>
-      </a>
-    </div>
+    <main>
+        <!-- Section: The Idea (Hero) -->
+        <section class="min-h-screen flex flex-col justify-center items-center text-center px-8 relative">
+            <div class="max-w-4xl scroll-reveal active">
+                <span class="text-[10px] uppercase tracking-[0.5em] text-mist mb-6 block">Handcrafted Estate Gifts</span>
+                <h1 class="text-display serif italic font-light mb-8">Shaped by nature,<br>finished by hand.</h1>
+                <p class="text-mist max-w-lg mx-auto font-light text-sm uppercase tracking-widest leading-relaxed">
+                    A sculptural dialogue between organic form and industrial precision.
+                </p>
+            </div>
+            <div class="absolute bottom-12 scroll-reveal active">
+                <div class="w-[1px] h-24 bg-oak/20 mx-auto"></div>
+            </div>
+        </section>
 
-  </div>
-  <div style="margin-top: 64px;">
-    <a href="shop.html" class="btn">View All Products</a>
-  </div>
-</section>
+        <!-- Section: The Material -->
+        <section class="py-40 px-8 max-w-7xl mx-auto grid grid-cols-12 gap-8 items-center">
+            <div class="col-span-12 lg:col-span-5 order-2 lg:order-1">
+                <div class="scroll-reveal">
+                    <span class="text-[10px] uppercase tracking-[0.5em] text-mist mb-4 block">01 — The Material</span>
+                    <h2 class="serif text-5xl italic mb-8">Estate-sourced natural material.</h2>
+                    <p class="text-lg font-light leading-relaxed mb-8">
+                        We work exclusively with naturally shed Red Deer antler, gathered from the grounds of ancient Scottish estates. Each piece is a geological record of the season—marked by the weather, the diet, and the life of the stag.
+                    </p>
+                    <div class="divider mb-8"></div>
+                </div>
+            </div>
+            <div class="col-span-12 lg:col-span-6 lg:offset-1 order-1 lg:order-2">
+                <div class="img-zoom-container aspect-[4/5] scroll-reveal">
+                    <img src="assets/tine_main_white.jpg" alt="Stag & Steel Signature Antler" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
 
-<footer>
-  <p>&copy; 2026 Stag & Steel. Handcrafted Estate Gifts from Scotland.</p>
-</footer>
+        <!-- Section: The Place -->
+        <section id="place" class="py-40 bg-[#f9f7f4]">
+            <div class="max-w-7xl mx-auto px-8 grid grid-cols-12 gap-8">
+                <div class="col-span-12 lg:col-span-8">
+                    <div class="img-zoom-container aspect-[16/9] mb-12 scroll-reveal">
+                        <img src="assets/hero-stag.jpg" alt="Scottish Highlands" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="col-span-12 lg:col-span-4 flex flex-col justify-end pb-12">
+                    <div class="scroll-reveal">
+                        <span class="text-[10px] uppercase tracking-[0.5em] text-mist mb-4 block">02 — The Place</span>
+                        <h2 class="serif text-5xl italic mb-6">Highland Provenance.</h2>
+                        <p class="text-sm font-light leading-relaxed opacity-70">
+                            Our workshop sits on the edge of the Cairngorms. The environment isn't just a backdrop; it is our primary collaborator. The cold, the silence, and the rugged terrain dictate the pace of our production.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<script>
-  window.SnipcartSettings = {
-    publicApiKey: "MDIyNWZhMDYtOTY5MS00MmU0LWE0MTgtMDFhMjgwZDdiODg4NjM4NDYzMzQwODQyMjM0ODYz",
-    loadStrategy: "on-user-interact",
-  };
-  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,n;(n=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m,g;(g=(m=window.SnipcartSettings).loadCSS)!=null||(m.loadCSS=!0);var y=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,f=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interact"&&(f.forEach(function(t){return document.addEventListener(t,o)}),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],i=document.querySelector("#snipcart"),e=document.querySelector('src[src^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][src$="snipcart.js"]')),n=document.querySelector('link[href^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][href$="snipcart.css"]'));i||(i=document.createElement("div"),i.id="snipcart",i.setAttribute("hidden","true"),document.body.appendChild(i)),v(i),e||(e=document.createElement("script"),e.src="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.js"),e.async=!0,t.appendChild(e)),!n&&window.SnipcartSettings.loadCSS&&(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.css"),t.prepend(n)),f.forEach(function(h){return document.removeEventListener(h,o)})}function v(t){!y||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
-</script>
+        <!-- Section: The Craft -->
+        <section id="craft" class="py-40 px-8 text-center bg-stone">
+            <div class="max-w-3xl mx-auto">
+                <div class="scroll-reveal">
+                    <span class="text-[10px] uppercase tracking-[0.5em] text-mist mb-6 block">03 — The Craft</span>
+                    <h2 class="serif text-6xl italic mb-12 leading-tight">Restrained design meets sculptural honesty.</h2>
+                    <p class="text-xl font-light mb-16 leading-relaxed">
+                        We avoid the novelty of the rustic. Instead, we look to Scandinavian restraint and Japanese material respect. Every antler is carved to expose its inner core, then paired with hand-polished steel.
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 max-w-7xl mx-auto">
+                <div class="aspect-square img-zoom-container scroll-reveal">
+                    <img src="assets/raw_001.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square img-zoom-container scroll-reveal" style="transition-delay: 0.2s;">
+                    <img src="assets/raw_003.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="aspect-square img-zoom-container scroll-reveal" style="transition-delay: 0.4s;">
+                    <img src="assets/raw_005.jpg" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: The Objects -->
+        <section id="objects" class="py-40 px-8 bg-[#f9f7f4]">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-24 border-b border-oak/10 pb-12 scroll-reveal">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-[0.5em] text-mist mb-4 block">04 — The Objects</span>
+                        <h2 class="serif text-6xl italic">The Inaugural Collection</h2>
+                    </div>
+                    <div class="text-right max-w-xs hidden lg:block">
+                        <p class="text-[10px] uppercase tracking-[0.2em] font-light">Limited release. Hand-numbered estate artifacts.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-32 items-start">
+                    <div class="scroll-reveal">
+                        <div class="img-zoom-container aspect-[3/4] mb-8">
+                             <img src="assets/tine_opener_white.jpg" alt="The Bottle Opener" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="serif text-3xl mb-2 italic font-light">The Bottle Opener</h3>
+                        <p class="text-[10px] uppercase tracking-[0.3em] text-mist mb-6">Antler & Forged Steel</p>
+                        <p class="font-light text-sm opacity-70 leading-relaxed mb-8 max-w-md">
+                            A weight-balanced object designed to sit as a sculpture on your desk or bar. Hand-polished steel tongue integrated seamlessly into the natural marrow.
+                        </p>
+                        <a href="#" class="inline-block border border-oak/20 px-8 py-3 text-[10px] uppercase tracking-[0.3em] hover:bg-oak hover:text-white transition-all">Request Acquisition</a>
+                    </div>
+                    
+                    <div class="scroll-reveal lg:mt-40">
+                        <div class="img-zoom-container aspect-[3/4] mb-8">
+                             <img src="assets/corkscrew_white.jpg" alt="The Corkscrew" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="serif text-3xl mb-2 italic font-light">The Corkscrew</h3>
+                        <p class="text-[10px] uppercase tracking-[0.3em] text-mist mb-6">Antler & Blackened Steel</p>
+                        <p class="font-light text-sm opacity-70 leading-relaxed mb-8 max-w-md">
+                            A timeless tool for the evening ritual. The ergonomic curve of the antler provides a natural grip, making every opening an effortless experience.
+                        </p>
+                        <a href="#" class="inline-block border border-oak/20 px-8 py-3 text-[10px] uppercase tracking-[0.3em] hover:bg-oak hover:text-white transition-all">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="py-32 px-8 bg-stone border-t border-oak/5">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
+                    <div class="md:col-span-2">
+                        <h4 class="serif text-5xl italic mb-8">Estate Inquiries</h4>
+                        <p class="text-mist font-light max-w-md mb-8">
+                            Our objects are produced in small batches to honor the material's rarity. Join our private list for release notifications.
+                        </p>
+                        <form class="flex border-b border-oak/20 pb-2 max-w-sm">
+                            <input type="email" placeholder="Email Address" class="bg-transparent w-full text-[10px] uppercase tracking-widest focus:outline-none py-2">
+                            <button class="text-[10px] uppercase font-bold tracking-[0.2em] hover:opacity-50 transition-opacity">Subscribe</button>
+                        </form>
+                    </div>
+                    <div class="flex flex-col gap-4 text-[10px] uppercase tracking-[0.3em] font-medium">
+                        <a href="#" class="hover:opacity-50 transition-opacity">Instagram</a>
+                        <a href="#" class="hover:opacity-50 transition-opacity">The Journal</a>
+                        <a href="#" class="hover:opacity-50 transition-opacity">Ethical Sourcing</a>
+                    </div>
+                    <div class="text-right">
+                        <h4 class="serif text-2xl italic mb-4 uppercase tracking-tighter">Barker Digital</h4>
+                        <p class="text-mist text-[10px] uppercase tracking-widest leading-loose">
+                            Designed by <a href="https://barkerdigital.co.uk" target="_blank" class="hover:underline">Barker Digital</a><br>
+                            Highland Region, Scotland
+                        </p>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center opacity-20 text-[8px] uppercase tracking-[0.6em]">
+                    <span>© 2026 Stag & Steel</span>
+                    <span>Objects of Provenance</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    const divider = entry.target.querySelector('.divider');
+                    if (divider) divider.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
