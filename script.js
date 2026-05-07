@@ -117,6 +117,7 @@
         drawer.id = 'cart-drawer';
         drawer.className = 'cart-drawer';
         drawer.setAttribute('aria-hidden', 'true');
+        drawer.setAttribute('inert', '');
         drawer.innerHTML = ''
             + '<div class="cart-drawer-overlay" data-close></div>'
             + '<div class="cart-drawer-panel" role="dialog" aria-label="Cart">'
@@ -140,15 +141,21 @@
         const d = ensureDrawer();
         renderDrawer();
         d.classList.add('open');
-        d.setAttribute('aria-hidden', 'false');
+        d.removeAttribute('aria-hidden');
+        d.removeAttribute('inert');
         document.body.classList.add('no-scroll');
     }
 
     function closeDrawer() {
         const d = document.getElementById('cart-drawer');
         if (!d) return;
+        // Move focus out of the drawer BEFORE hiding it (avoids aria-hidden focus warning)
+        if (d.contains(document.activeElement) && document.activeElement.blur) {
+            document.activeElement.blur();
+        }
         d.classList.remove('open');
         d.setAttribute('aria-hidden', 'true');
+        d.setAttribute('inert', '');
         document.body.classList.remove('no-scroll');
     }
 
