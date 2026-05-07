@@ -10,7 +10,6 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                // animate child dividers if present
                 entry.target.querySelectorAll('.divider').forEach(d => d.classList.add('active'));
             }
         });
@@ -45,30 +44,103 @@
         });
     }
 
-    // --- Cart dot indicator -------------------------------------
-    // Listen to Snipcart count changes to highlight cart
+    // --- Cart count + dot indicator + nudge animation -----------
     const cartBtn = document.querySelector('.cart-btn');
-    const updateCartDot = () => {
+    const updateCartUI = () => {
         const countEl = document.querySelector('.snipcart-items-count');
         if (!cartBtn || !countEl) return;
         const count = parseInt(countEl.textContent, 10) || 0;
         cartBtn.dataset.hasItems = count > 0 ? 'true' : 'false';
     };
-    // Watch for changes to count element
-    const countEl = document.querySelector('.snipcart-items-count');
-    if (countEl && cartBtn) {
-        const mo = new MutationObserver(updateCartDot);
-        mo.observe(countEl, { childList: true, characterData: true, subtree: true });
-        updateCartDot();
+    const cartCountEl = document.querySelector('.snipcart-items-count');
+    if (cartCountEl && cartBtn) {
+        const mo = new MutationObserver(() => {
+            updateCartUI();
+            cartBtn.classList.remove('cart-bump');
+            void cartBtn.offsetWidth; // reflow to restart animation
+            cartBtn.classList.add('cart-bump');
+        });
+        mo.observe(cartCountEl, { childList: true, characterData: true, subtree: true });
+        updateCartUI();
     }
 
-    // --- Quick add (shop page only) -----------------------------
-    document.querySelectorAll('.quick-add').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // Snipcart auto-detects via .snipcart-add-item class on this button
+    // --- Toast notification -------------------------------------
+    function ensureToast() {
+        let toast = document.getElementById('s-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 's-toast';
+            toast.className = 's-toast';
+            toast.innerHTML = '' +
+                '<span class="s-toast-tick">+</span>' +
+                '<div class="s-toast-body">' +
+                    '<span class="s-toast-title">Added to cart</span>' +
+                    '<span class="s-toast-sub"></span>' +
+                '</div>' +
+                '<button class="s-toast-view" type="button">View</button>';
+            document.body.appendChild(toast);
+
+            toast.querySelector('.s-toast-view').addEventListener('click', () => {
+                if (window.Snipcart) {
+                    window.Snipcart.api.theme.cart.open();
+                }
+                hideToast();
+            });
+        }
+        return toast;
+    }
+
+    function showToast(itemName) {
+        const toast = ensureToast();
+        toast.querySelector('.s-toast-sub').textContent = itemName || '';
+        toast.classList.add('open');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(hideToast, 4000);
+    }
+
+    function hideToast() {
+        const toast = document.getElementById('s-toast');
+        if (toast) toast.classList.remove('open');
+    }
+
+    // --- Wait for Snipcart, then hook events --------------------
+    document.addEventListener('snipcart.ready', () => {
+        if (!window.Snipcart) return;
+
+        // When an item is added, show our toast
+        window.Snipcart.events.on('item.added', (item) => {
+            showToast(item && item.name ? item.name : 'Item added');
         });
+
+        updateCartUI();
+    });
+
+    // --- Pre-Snipcart click feedback ----------------------------
+    // If Snipcart hasn't loaded yet, the click does nothing. Give visible
+    // feedback so the click doesn't feel dead, then re-fire when ready.
+    document.querySelectorAll('.snipcart-add-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (!window.Snipcart) {
+                btn.classList.add('is-loading');
+                const restoreText = btn.textContent;
+                btn.dataset._restore = restoreText;
+                btn.textContent = 'Loading…';
+                let tries = 0;
+                const poll = setInterval(() => {
+                    tries++;
+                    if (window.Snipcart) {
+                        clearInterval(poll);
+                        btn.textContent = btn.dataset._restore || restoreText;
+                        btn.classList.remove('is-loading');
+                        btn.click();
+                    } else if (tries > 30) {
+                        clearInterval(poll);
+                        btn.textContent = btn.dataset._restore || restoreText;
+                        btn.classList.remove('is-loading');
+                    }
+                }, 300);
+            }
+        }, true);
     });
 
     // --- Product gallery (detail pages) -------------------------
@@ -80,7 +152,6 @@
                 thumbs.forEach(x => x.classList.remove('active'));
                 t.classList.add('active');
                 const newSrc = t.querySelector('img').src;
-                // fade transition
                 mainImg.style.opacity = '0';
                 setTimeout(() => {
                     mainImg.src = newSrc;
