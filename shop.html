@@ -1,91 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop — Stag & Steel</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-.shop-header { padding: 160px 48px 80px; text-align: center; background: var(--bg); }
-.shop-header h1 { font-family: var(--ff); font-size: 3rem; color: var(--text); margin-bottom: 24px; font-weight: 400; }
-.shop-header p { font-size: 1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.8; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; padding: 48px; max-width: 1200px; margin: 0 auto; }
-.product-card { text-align: center; }
-.product-card img { max-width: 100%; mix-blend-mode: multiply; transition: transform 0.4s ease; background: var(--surface); padding: 48px; margin-bottom: 24px; }
-.product-card:hover img { transform: scale(1.02); }
-.product-card h3 { font-family: var(--ff); font-size: 1.5rem; color: var(--text); font-weight: 400; margin-bottom: 8px; }
-.product-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop — Stag &amp; Steel</title>
+    <meta name="description" content="The inaugural Stag & Steel collection. Hand-finished antler barware from Scotland.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="paper-grain"></div>
 
-<nav>
-  <a href="index.html" class="logo">Stag & Steel</a>
-  <ul class="nav-links">
-    <li><a href="index.html#the-idea">Story</a></li>
-    <li><a href="shop.html" style="color: var(--text);">Shop</a></li>
-    <li><a href="the-set.html">The Set</a></li>
-  </ul>
-  <button class="btn snipcart-checkout" style="padding: 10px 20px; font-size: 0.7rem;">Cart (<span class="snipcart-items-count">0</span>)</button>
-</nav>
+    <nav class="site-nav" id="siteNav">
+        <a href="index.html" class="logo">Stag &amp; Steel</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html#place">The Place</a></li>
+            <li><a href="index.html#craft">The Craft</a></li>
+            <li><a href="shop.html" class="active">Shop</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="cart-btn snipcart-checkout" aria-label="Open cart">
+                <span class="cart-dot"></span>
+                <span>Cart (<span class="snipcart-items-count">0</span>)</span>
+            </button>
+            <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
+        </div>
+    </nav>
 
+    <main>
 
-<div class="shop-header">
-  <h1>The Collection</h1>
-  <p>Estate sourced natural material, transformed into functional objects designed to last a lifetime. Quiet luxury, finished by hand.</p>
-</div>
+        <!-- HERO -->
+        <section class="shop-hero">
+            <span class="eyebrow fade-up">The Inaugural Collection</span>
+            <h1 class="fade-up delay-1">The Shop.</h1>
+            <p class="fade-up delay-2">
+                Estate-sourced natural material, transformed into functional objects designed to last a lifetime. Each piece is hand-numbered, made in small batches, and shipped from Edinburgh.
+            </p>
+        </section>
 
-<div class="grid">
-  <!-- TINE OPENER -->
-  <div class="product-card">
-    <a href="tine-opener.html">
-      <img src="tine_packaging.png" alt="The Tine Opener">
-      <h3>The Tine Opener</h3>
-      <p>£24.00</p>
-    </a>
-  </div>
+        <!-- META BAR -->
+        <div class="shop-meta">
+            <span class="count">04 Objects</span>
+            <span class="badge">Hand-numbered · Made to order</span>
+        </div>
 
-  <!-- STEM OPENER -->
-  <div class="product-card">
-    <a href="stem-opener.html">
-      <img src="stem_white.png" alt="The Stem Opener">
-      <h3>The Stem Opener</h3>
-      <p>£28.00</p>
-    </a>
-  </div>
+        <!-- PRODUCT GRID -->
+        <div class="product-grid">
 
-  <!-- CORKSCREW -->
-  <div class="product-card">
-    <a href="corkscrew.html">
-      <img src="corkscrew_main_white.jpg" alt="The Corkscrew">
-      <h3>The Corkscrew</h3>
-      <p>£38.00</p>
-    </a>
-  </div>
+            <!-- TINE OPENER -->
+            <div class="product-card scroll-reveal">
+                <div class="img-wrap">
+                    <a href="tine-opener.html" style="display: block; width: 100%; height: 100%;">
+                        <img class="primary" src="assets/tine_main_white.jpg" alt="The Tine Opener">
+                        <img class="alt" src="assets/tine_lifestyle.jpg" alt="The Tine Opener in use">
+                    </a>
+                    <button
+                        class="quick-add snipcart-add-item"
+                        data-item-id="tine-opener"
+                        data-item-price="24.00"
+                        data-item-url="/tine-opener.html"
+                        data-item-description="The Tine Opener — handcrafted antler bottle opener"
+                        data-item-image="assets/tine_main_white.jpg"
+                        data-item-name="The Tine Opener">Quick Add — £24</button>
+                </div>
+                <a href="tine-opener.html" style="display: block;">
+                    <div class="meta">
+                        <div class="left">
+                            <h3>The Tine Opener</h3>
+                            <span class="sub">Antler &amp; Forged Steel</span>
+                        </div>
+                        <span class="price">£24</span>
+                    </div>
+                </a>
+            </div>
 
-  <!-- THE SET -->
-  <div class="product-card">
-    <a href="the-set.html">
-      <img src="set_packaging.jpg" alt="The Set">
-      <h3>The Set</h3>
-      <p>£80.00</p>
-    </a>
-  </div>
-</div>
+            <!-- STEM OPENER -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="img-wrap">
+                    <a href="stem-opener.html" style="display: block; width: 100%; height: 100%;">
+                        <img class="primary" src="assets/stem_main_white.jpg" alt="The Stem Opener">
+                        <img class="alt" src="assets/stem_lifestyle.jpg" alt="The Stem Opener in use">
+                    </a>
+                    <button
+                        class="quick-add snipcart-add-item"
+                        data-item-id="stem-opener"
+                        data-item-price="28.00"
+                        data-item-url="/stem-opener.html"
+                        data-item-description="The Stem Opener — sculptural antler bottle opener"
+                        data-item-image="assets/stem_main_white.jpg"
+                        data-item-name="The Stem Opener">Quick Add — £28</button>
+                </div>
+                <a href="stem-opener.html" style="display: block;">
+                    <div class="meta">
+                        <div class="left">
+                            <h3>The Stem Opener</h3>
+                            <span class="sub">Antler &amp; Forged Steel</span>
+                        </div>
+                        <span class="price">£28</span>
+                    </div>
+                </a>
+            </div>
 
+            <!-- CORKSCREW -->
+            <div class="product-card scroll-reveal">
+                <div class="img-wrap">
+                    <a href="corkscrew.html" style="display: block; width: 100%; height: 100%;">
+                        <img class="primary" src="assets/corkscrew_main_white.jpg" alt="The Corkscrew">
+                        <img class="alt" src="assets/corkscrew_lifestyle.jpg" alt="The Corkscrew in use">
+                    </a>
+                    <button
+                        class="quick-add snipcart-add-item"
+                        data-item-id="corkscrew"
+                        data-item-price="38.00"
+                        data-item-url="/corkscrew.html"
+                        data-item-description="The Corkscrew — antler T-handle wine opener"
+                        data-item-image="assets/corkscrew_main_white.jpg"
+                        data-item-name="The Corkscrew">Quick Add — £38</button>
+                </div>
+                <a href="corkscrew.html" style="display: block;">
+                    <div class="meta">
+                        <div class="left">
+                            <h3>The Corkscrew</h3>
+                            <span class="sub">Antler &amp; Blackened Steel</span>
+                        </div>
+                        <span class="price">£38</span>
+                    </div>
+                </a>
+            </div>
 
-<footer>
-  <p>&copy; 2026 Stag & Steel. Handcrafted Estate Gifts from Scotland.</p>
-</footer>
+            <!-- THE SET -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="img-wrap">
+                    <a href="the-set.html" style="display: block; width: 100%; height: 100%;">
+                        <img class="primary" src="assets/set_main_white.jpg" alt="The Set">
+                        <img class="alt" src="assets/set_lifestyle.jpg" alt="The Set lifestyle">
+                    </a>
+                    <button
+                        class="quick-add snipcart-add-item"
+                        data-item-id="the-set"
+                        data-item-price="80.00"
+                        data-item-url="/the-set.html"
+                        data-item-description="The Set — three-piece estate gift box: Tine Opener, Stem Opener, Corkscrew"
+                        data-item-image="assets/set_main_white.jpg"
+                        data-item-name="The Set">Quick Add — £80</button>
+                </div>
+                <a href="the-set.html" style="display: block;">
+                    <div class="meta">
+                        <div class="left">
+                            <h3>The Set</h3>
+                            <span class="sub">Three-piece Estate Box</span>
+                        </div>
+                        <span class="price">£80</span>
+                    </div>
+                </a>
+            </div>
 
-<script>
-  window.SnipcartSettings = {
-    publicApiKey: "MDIyNWZhMDYtOTY5MS00MmU0LWE0MTgtMDFhMjgwZDdiODg4NjM4NDYzMzQwODQyMjM0ODYz",
-    loadStrategy: "on-user-interact",
-  };
-  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,n;(n=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m,g;(g=(m=window.SnipcartSettings).loadCSS)!=null||(m.loadCSS=!0);var y=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,f=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interact"&&(f.forEach(function(t){return document.addEventListener(t,o)}),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],i=document.querySelector("#snipcart"),e=document.querySelector('src[src^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][src$="snipcart.js"]')),n=document.querySelector('link[href^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][href$="snipcart.css"]'));i||(i=document.createElement("div"),i.id="snipcart",i.setAttribute("hidden","true"),document.body.appendChild(i)),v(i),e||(e=document.createElement("script"),e.src="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.js"),e.async=!0,t.appendChild(e)),!n&&window.SnipcartSettings.loadCSS&&(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.css"),t.prepend(n)),f.forEach(function(h){return document.removeEventListener(h,o)})}function v(t){!y||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}}();
-</script>
+        </div>
+
+        <!-- CLOSING NOTE -->
+        <section style="padding: 160px 40px 80px; text-align: center;">
+            <div class="scroll-reveal" style="max-width: 720px; margin: 0 auto;">
+                <span class="eyebrow" style="margin-bottom: 28px;">A Note on Production</span>
+                <p class="serif italic" style="font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 300; line-height: 1.4;">
+                    Antler is a natural material. No two pieces are identical. Slight variations in colour, weight, and grain are part of each object's character.
+                </p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="contact" class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-grid">
+                    <div>
+                        <h4>Estate<br>Inquiries.</h4>
+                        <p>Our objects are produced in small batches to honour the material's rarity. Join our private list for release notifications.</p>
+                        <form class="subscribe" onsubmit="event.preventDefault();">
+                            <input type="email" placeholder="Email Address" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                    <div class="footer-links">
+                        <a href="shop.html">Shop</a>
+                        <a href="index.html#place">Provenance</a>
+                        <a href="index.html#craft">The Craft</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                    <div class="footer-credit">
+                        <h4>Barker Digital</h4>
+                        <p>
+                            Designed by <a href="https://barkerdigital.co.uk" target="_blank" rel="noopener">Barker Digital</a><br>
+                            Edinburgh, Scotland
+                        </p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2026 Stag &amp; Steel</span>
+                    <span>Objects of Provenance</span>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+    <!-- SNIPCART -->
+    <script>
+      window.SnipcartSettings = {
+        publicApiKey: "MDIyNWZhMDYtOTY5MS00MmU0LWE0MTgtMDFhMjgwZDdiODg4NjM4NDYzMzQwODQyMjM0ODYz",
+        loadStrategy: "on-user-interact",
+      };
+      (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,n;(n=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m,g;(g=(m=window.SnipcartSettings).loadCSS)!=null||(m.loadCSS=!0);var y=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,f=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interact"&&(f.forEach(function(t){return document.addEventListener(t,o)}),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],i=document.querySelector("#snipcart"),e=document.querySelector('src[src^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][src$="snipcart.js"]')),n=document.querySelector('link[href^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][href$="snipcart.css"]'));i||(i=document.createElement("div"),i.id="snipcart",i.setAttribute("hidden","true"),document.body.appendChild(i)),v(i),e||(e=document.createElement("script"),e.src="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.js"),e.async=!0,t.appendChild(e)),!n&&window.SnipcartSettings.loadCSS&&(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.css"),t.prepend(n)),f.forEach(function(h){return document.removeEventListener(h,o)})}function v(t){!y||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}}();
+    </script>
+
 </body>
 </html>
