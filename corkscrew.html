@@ -21,9 +21,9 @@
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <div class="nav-right">
-            <button class="cart-btn snipcart-checkout" aria-label="Open cart">
+            <button class="cart-btn" aria-label="Open cart">
                 <span class="cart-dot"></span>
-                <span>Cart (<span class="snipcart-items-count">0</span>)</span>
+                <span>Cart (<span class="js-cart-count">0</span>)</span>
             </button>
             <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
         </div>
@@ -70,15 +70,7 @@
                             <span class="qty-value">1</span>
                             <button data-qty="plus" type="button" aria-label="Increase">+</button>
                         </div>
-                        <button
-                            class="btn btn-solid add-to-cart snipcart-add-item"
-                            data-item-id="corkscrew"
-                            data-item-price="25.00"
-                            data-item-url="corkscrew.html"
-                            data-item-description="The Corkscrew — Stag & Steel"
-                            data-item-image="assets/corkscrew_main_white.jpg"
-                            data-item-name="The Corkscrew"
-                            data-item-quantity="1">Add to Cart</button>
+                        <button class="btn btn-solid add-to-cart" data-add-to-cart="corkscrew">Add to Cart</button>
                     </div>
 
                     <div class="note">
@@ -185,20 +177,5 @@
     </main>
 
     <script src="script.js"></script>
-
-        <!-- Snipcart -->
-    <div hidden id="snipcart"></div>
-
-    <script>
-      window.SnipcartSettings = {
-        publicApiKey: "YjE4ZDRmMTctNjIyYy00MmU4LTkxOWMtZTQyZTVhZjE0ZmU2NjM5MTA2Nzg0NTk0NDcyODA2",
-        loadStrategy: "on-user-interaction",
-        version: "3.7.3",
-        currency: "gbp",
-        addProductBehavior: "none"
-      };
-
-      (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m,g;(g=(m=window.SnipcartSettings).loadCSS)!=null||(m.loadCSS=!0);var y=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,f=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(f.forEach(function(t){return document.addEventListener(t,o)}),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],i=document.querySelector("#snipcart"),e=document.querySelector('src[src^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][src$="snipcart.js"]')),n=document.querySelector('link[href^="'.concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,'"][href$="snipcart.css"]'));i||(i=document.createElement("div"),i.id="snipcart",i.setAttribute("hidden","true"),document.body.appendChild(i)),v(i),e||(e=document.createElement("script"),e.src="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.js"),e.async=!0,t.appendChild(e)),!n&&window.SnipcartSettings.loadCSS&&(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href="".concat(window.SnipcartSettings.protocol,"://").concat(window.SnipcartSettings.domain,"/themes/v").concat(window.SnipcartSettings.version,"/default/snipcart.css"),t.prepend(n)),f.forEach(function(h){return document.removeEventListener(h,o)})}function v(t){!y||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
-    </script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+{
+  "name": "stag-and-steel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stag & Steel — handcrafted antler barware. Static site with Stripe Checkout serverless function.",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}
