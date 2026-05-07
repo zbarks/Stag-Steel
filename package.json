@@ -1,0 +1,20 @@
+{
+  "name": "stag-steel",
+  "version": "1.0.0",
+  "description": "Stag & Steel - Handcrafted Antler Barware",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "barware",
+    "antler",
+    "handcrafted"
+  ],
+  "author": "Stag & Steel",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
