@@ -1,12 +1,13 @@
 {
   "name": "stag-and-steel",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Stag & Steel — handcrafted antler barware. Static site with Stripe Checkout serverless function.",
+  "description": "Stag & Steel — handcrafted antler barware. Static storefront with Stripe Checkout + Supabase order storage.",
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "stripe": "^17.0.0"
+    "stripe": "^17.0.0",
+    "@supabase/supabase-js": "^2.45.0"
   }
 }

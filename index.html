@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stag &amp; Steel — Handcrafted Antler Barware</title>
-    <meta name="description" content="Sculptural barware in naturally shed Red Deer antler and hand-finished steel. Made in Scotland.">
+    <title>Stag &amp; Steel — Handcrafted Antler Barware, Made in Scotland</title>
+    <meta name="description" content="Bottle openers and corkscrews made from naturally shed red deer antler, collected on a family farm in Midlothian and finished by hand. Small-batch, UK delivery.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="paper-grain"></div>
+<body class="scrub-page">
+
+    <!-- Fixed scrubbing video (frames) -->
+    <div class="scrub-stage"><canvas id="scrubCanvas"></canvas></div>
+    <div class="scrub-scrim"></div>
 
     <nav class="site-nav" id="siteNav">
         <a href="index.html" class="logo">Stag &amp; Steel</a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="index.html#place">The Place</a></li>
-            <li><a href="index.html#craft">The Craft</a></li>
+            <li><a href="index.html#material">The Material</a></li>
+            <li><a href="index.html#making">How It's Made</a></li>
+            <li><a href="index.html#team">Who We Are</a></li>
             <li><a href="shop.html">Shop</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <div class="nav-right">
             <button class="cart-btn" aria-label="Open cart">
@@ -32,94 +35,109 @@
     <main>
 
         <!-- HERO -->
-        <section class="hero" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 32px; position: relative;">
-            <div style="max-width: 880px;">
-                <span class="eyebrow fade-up" style="margin-bottom: 28px;">Handcrafted Antler Barware</span>
+        <section class="vhero">
+            <div style="max-width: 900px;">
+                <span class="eyebrow fade-up" style="margin-bottom: 28px;">Handcrafted in Midlothian, Scotland</span>
                 <h1 class="serif italic text-display fade-up delay-1" style="font-weight: 300; margin: 0 0 32px;">
                     Shaped by nature,<br>finished by hand.
                 </h1>
-                <p class="fade-up delay-2" style="color: var(--mist); max-width: 520px; margin: 0 auto 56px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3em; line-height: 2;">
-                    A sculptural dialogue between organic form and industrial precision
+                <p class="lede fade-up delay-2" style="max-width: 560px; margin: 0 auto 48px; font-size: 1.05rem; line-height: 1.85;">
+                    Bottle openers and corkscrews made from red deer antler &mdash; shed naturally on the hill, collected by hand, and set into polished steel. No two are ever the same.
                 </p>
-                <a href="shop.html" class="btn btn-large fade-up delay-3">Enter the Collection</a>
+                <a href="shop.html" class="btn btn-large fade-up delay-3">Shop the Collection</a>
+                <p class="fade-up delay-3" style="margin-top: 24px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: rgba(249,247,244,0.7);">From £25 &middot; Free of harm to any animal</p>
             </div>
             <div class="fade-up delay-4" style="position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%);">
                 <div class="scroll-cue"></div>
             </div>
         </section>
 
-        <!-- THE MATERIAL -->
-        <section style="padding: 160px 40px; max-width: 1280px; margin: 0 auto;">
-            <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center;" class="responsive-grid">
-                <div class="scroll-reveal" style="order: 1;">
-                    <span class="eyebrow" style="margin-bottom: 24px;">01 — The Material</span>
-                    <h2 class="serif italic" style="font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 300; line-height: 1.1; margin: 0 0 32px; letter-spacing: -0.02em;">
-                        Estate-sourced<br>natural material.
+        <!-- THE MATERIAL (panel left) -->
+        <section id="material" class="vsection to-left">
+            <div class="vpanel scroll-reveal">
+                <div class="glass">
+                    <span class="eyebrow" style="margin-bottom: 22px;">The Material</span>
+                    <h2 class="serif italic" style="font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 300; line-height: 1.1; margin: 0 0 26px; letter-spacing: -0.02em;">
+                        Naturally shed<br>red deer antler.
                     </h2>
-                    <p style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 32px;">
-                        We work exclusively with naturally shed Red Deer antler, gathered from Mauldslie Farm in Midlothian. Each piece is a geological record of the season &mdash; marked by the weather, the diet, and the life of the stag.
+                    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px;">
+                        Every spring, red deer drop their antlers &mdash; it's a natural part of their year, and they grow a new set the next. We walk the hill and gather what's been shed. Nothing is cut, and no animal is ever harmed.
                     </p>
-                    <div class="divider scroll-reveal-divider"></div>
-                </div>
-                <div class="img-zoom-container scroll-reveal" style="aspect-ratio: 4/5; order: 2;">
-                    <img src="assets/raw_003.jpg" alt="Naturally shed Red Deer antler">
-                </div>
-            </div>
-        </section>
-
-        <!-- THE PLACE -->
-        <section id="place" style="padding: 160px 0; background: var(--earth-stone-warm);">
-            <div style="max-width: 1280px; margin: 0 auto; padding: 0 40px;">
-                <div style="display: grid; grid-template-columns: 8fr 4fr; gap: 80px;" class="responsive-grid">
-                    <div class="img-zoom-container scroll-reveal" style="aspect-ratio: 16/10;">
-                        <img src="assets/hero-stag.jpg" alt="Scottish Highlands">
-                    </div>
-                    <div class="scroll-reveal" style="display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 24px;">
-                        <span class="eyebrow" style="margin-bottom: 24px;">02 — The Place</span>
-                        <h2 class="serif italic" style="font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 300; line-height: 1.1; margin: 0 0 24px; letter-spacing: -0.02em;">
-                            Highland<br>provenance.
-                        </h2>
-                        <p style="font-size: 0.95rem; line-height: 1.85; color: var(--mist);">
-                            Sourced from working farmland on the edge of the Scottish lowlands. The environment is not a backdrop &mdash; it is our primary collaborator. The cold, the silence, and the rugged terrain dictate the pace of our production.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- THE CRAFT -->
-        <section id="craft" style="padding: 160px 40px; text-align: center;">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="scroll-reveal">
-                    <span class="eyebrow" style="margin-bottom: 28px;">03 — The Craft</span>
-                    <h2 class="serif italic" style="font-size: clamp(2.5rem, 5.5vw, 4rem); font-weight: 300; line-height: 1.05; margin: 0 0 48px; letter-spacing: -0.02em;">
-                        Restrained design<br>meets sculptural honesty.
-                    </h2>
-                    <p style="font-size: 1.15rem; font-weight: 300; line-height: 1.85; margin-bottom: 56px;">
-                        We avoid the novelty of the rustic. Instead, we look to Scandinavian restraint and Japanese material respect. Every antler is carved to expose its inner core, then paired with hand-polished steel.
+                    <p style="font-size: 1rem; line-height: 1.8; margin: 0;">
+                        Because each antler grew on a different animal in a different year, every piece carries its own colour, weight and grain. Yours will be slightly unlike anyone else's &mdash; that's the point.
                     </p>
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1280px; margin: 56px auto 0;" class="craft-grid">
-                <div class="img-zoom-container scroll-reveal" style="aspect-ratio: 1;">
-                    <img src="assets/raw_001.jpg" alt="Antler texture">
-                </div>
-                <div class="img-zoom-container scroll-reveal" style="aspect-ratio: 1; transition-delay: 0.15s;">
-                    <img src="assets/raw_005.jpg" alt="Workshop detail">
-                </div>
-                <div class="img-zoom-container scroll-reveal" style="aspect-ratio: 1; transition-delay: 0.3s;">
-                    <img src="assets/raw_007.jpg" alt="Steel and antler">
+        </section>
+
+        <!-- WHERE IT COMES FROM (panel right) -->
+        <section id="place" class="vsection to-right">
+            <div class="vpanel scroll-reveal">
+                <div class="glass">
+                    <span class="eyebrow" style="margin-bottom: 22px;">Where It Comes From</span>
+                    <h2 class="serif italic" style="font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 300; line-height: 1.1; margin: 0 0 24px; letter-spacing: -0.02em;">
+                        Mauldslie Farm,<br>Midlothian.
+                    </h2>
+                    <p style="font-size: 1rem; line-height: 1.8; margin: 0;">
+                        The antler comes from a family farm in the Moorfoot Hills near Temple, looking out over Gladhouse Reservoir. It's a working landscape with a native herd of red deer &mdash; the same hills the material is gathered from each year.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- SHOP PREVIEW -->
-        <section id="shop-preview" style="padding: 160px 40px; background: var(--earth-stone-warm);">
+        <!-- HOW IT'S MADE (panel left, steps) -->
+        <section id="making" class="vsection to-left">
+            <div class="vpanel scroll-reveal">
+                <div class="glass">
+                    <span class="eyebrow" style="margin-bottom: 22px;">How It's Made</span>
+                    <h2 class="serif italic" style="font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 300; line-height: 1.1; margin: 0 0 18px; letter-spacing: -0.02em;">
+                        Four steps, by hand.
+                    </h2>
+                    <p style="font-size: 0.98rem; line-height: 1.8; margin: 0;">
+                        We make everything ourselves, in small batches. No factory, no production line &mdash; just two of us, a workbench, and a pile of antler.
+                    </p>
+                    <div class="steps-stack">
+                        <div class="step-row"><span class="n">01</span><div><h3>Collected</h3><p>Shed antler gathered from the hill through spring, then sorted by size, shape and condition.</p></div></div>
+                        <div class="step-row"><span class="n">02</span><div><h3>Cut &amp; matched</h3><p>Each piece chosen for its part of the antler &mdash; the tine, the beam, the burr &mdash; then cut and cleaned.</p></div></div>
+                        <div class="step-row"><span class="n">03</span><div><h3>Fitted to steel</h3><p>Set onto a hand-polished stainless opener or worm, anchored to sit solid for good.</p></div></div>
+                        <div class="step-row"><span class="n">04</span><div><h3>Finished &amp; checked</h3><p>Sanded, sealed and checked by hand before it's boxed and sent to you.</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO WE ARE (panel right, team) -->
+        <section id="team" class="vsection to-right">
+            <div class="vpanel scroll-reveal">
+                <div class="glass">
+                    <span class="eyebrow" style="margin-bottom: 22px;">Who We Are</span>
+                    <h2 class="serif italic" style="font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 300; line-height: 1.1; margin: 0 0 18px; letter-spacing: -0.02em;">
+                        Just the two of us.
+                    </h2>
+                    <p style="font-size: 0.98rem; line-height: 1.8; margin: 0;">
+                        Stag &amp; Steel is a two-person operation. We do the lot ourselves &mdash; from the hill to the bench to the box on your doorstep.
+                    </p>
+                    <div class="team-mini">
+                        <figure>
+                            <img src="assets/team-harry.jpg" alt="Harry, co-founder of Stag &amp; Steel">
+                            <figcaption><h3 class="serif italic">Harry</h3><p>Does most of the hands-on work &mdash; sorting antler, cutting, fitting and finishing. If it's in your hands, he held it first.</p></figcaption>
+                        </figure>
+                        <figure>
+                            <img src="assets/team-zach.jpg" alt="Zach, co-founder of Stag &amp; Steel">
+                            <figcaption><h3 class="serif italic">Zach</h3><p>Looks after how things look and runs the shop, the orders and everything behind the scenes.</p></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE SHOP (solid band) -->
+        <section id="shop-preview" class="solid-band" style="padding: 150px 40px;">
             <div style="max-width: 1280px; margin: 0 auto;">
-                <div class="scroll-reveal" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; border-bottom: 1px solid var(--line); padding-bottom: 32px;" id="shopHead">
+                <div class="shop-head" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; gap: 24px; flex-wrap: wrap;">
                     <div>
-                        <span class="eyebrow" style="margin-bottom: 16px;">04 — The Shop</span>
-                        <h2 class="serif italic" style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; margin: 0; line-height: 1; letter-spacing: -0.02em;">The Inaugural Collection</h2>
+                        <span class="eyebrow" style="margin-bottom: 16px;">The Shop</span>
+                        <h2 class="serif italic" style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; margin: 0; line-height: 1; letter-spacing: -0.02em;">The First Collection</h2>
                     </div>
                     <a href="shop.html" class="view-all-link" style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; border-bottom: 1px solid var(--oak); padding-bottom: 4px;">View All</a>
                 </div>
@@ -131,10 +149,7 @@
                             <img class="alt" src="assets/tine_lifestyle.jpg" alt="The Tine Opener in use">
                         </div>
                         <div class="meta">
-                            <div class="left">
-                                <h3>The Tine Opener</h3>
-                                <span class="sub">From the antler's outer point</span>
-                            </div>
+                            <div class="left"><h3>The Tine Opener</h3><span class="sub">From the antler's outer point</span></div>
                             <span class="price">£30</span>
                         </div>
                     </a>
@@ -144,10 +159,7 @@
                             <img class="alt" src="assets/stem_lifestyle.jpg" alt="The Stem Opener in use">
                         </div>
                         <div class="meta">
-                            <div class="left">
-                                <h3>The Stem Opener</h3>
-                                <span class="sub">Cut from the antler's main beam</span>
-                            </div>
+                            <div class="left"><h3>The Stem Opener</h3><span class="sub">Cut from the antler's main beam</span></div>
                             <span class="price">£25</span>
                         </div>
                     </a>
@@ -157,10 +169,7 @@
                             <img class="alt" src="assets/corkscrew_lifestyle.jpg" alt="The Corkscrew in use">
                         </div>
                         <div class="meta">
-                            <div class="left">
-                                <h3>The Corkscrew</h3>
-                                <span class="sub">From the antler's burr &mdash; dense and short</span>
-                            </div>
+                            <div class="left"><h3>The Corkscrew</h3><span class="sub">From the antler's burr &mdash; dense and short</span></div>
                             <span class="price">£25</span>
                         </div>
                     </a>
@@ -170,10 +179,7 @@
                             <img class="alt" src="assets/set_lifestyle.jpg" alt="The Set in use">
                         </div>
                         <div class="meta">
-                            <div class="left">
-                                <h3>The Set</h3>
-                                <span class="sub">Two-piece presentation box</span>
-                            </div>
+                            <div class="left"><h3>The Set</h3><span class="sub">Two pieces in a presentation box</span></div>
                             <span class="price">£40</span>
                         </div>
                     </a>
@@ -181,13 +187,37 @@
             </div>
         </section>
 
-        <!-- FOOTER -->
+        <!-- GOOD TO KNOW (solid band) -->
+        <section id="good-to-know" class="solid-band" style="padding: 120px 40px; border-top: 1px solid var(--line);">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div class="assurance-grid">
+                    <div class="assurance scroll-reveal">
+                        <h4 class="serif italic">Made to order, in small batches</h4>
+                        <p>Because it's just the two of us, pieces are made a few at a time. Allow up to a week before dispatch.</p>
+                    </div>
+                    <div class="assurance scroll-reveal" style="transition-delay: 0.1s;">
+                        <h4 class="serif italic">UK delivery, tracked</h4>
+                        <p>Flat £4.50 shipping across the UK via Royal Mail, with tracking. You'll get an email when it's on its way.</p>
+                    </div>
+                    <div class="assurance scroll-reveal" style="transition-delay: 0.2s;">
+                        <h4 class="serif italic">Not right? Send it back</h4>
+                        <p>If it's not for you, return it unused within 14 days for a refund. Get in touch and we'll sort it.</p>
+                    </div>
+                    <div class="assurance scroll-reveal" style="transition-delay: 0.3s;">
+                        <h4 class="serif italic">A real place, a real pair of hands</h4>
+                        <p>Questions before you buy? Email <a href="mailto:hello@stagandsteel.co.uk">hello@stagandsteel.co.uk</a> &mdash; you'll reach one of us.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER (video stops here) -->
         <footer id="contact" class="site-footer">
             <div class="footer-inner">
                 <div class="footer-grid">
                     <div>
-                        <h4>Join the<br>Stags.</h4>
-                        <p>Our objects are produced in small batches to honour the material's rarity. Subscribe for first access to new releases.</p>
+                        <h4>Keep in<br>touch.</h4>
+                        <p>We release new pieces a few at a time. Leave your email and we'll let you know when the next batch is ready &mdash; no spam, just the good stuff.</p>
                         <form class="subscribe" onsubmit="event.preventDefault();">
                             <input type="email" placeholder="Email Address" required>
                             <button type="submit">Subscribe</button>
@@ -195,27 +225,22 @@
                     </div>
                     <div class="footer-links">
                         <a href="shop.html">Shop</a>
-                        <a href="index.html#place">Provenance</a>
-                        <a href="index.html#craft">The Craft</a>
-                        <a href="#">Instagram</a>
+                        <a href="index.html#material">The Material</a>
+                        <a href="index.html#making">How It's Made</a>
+                        <a href="index.html#team">Who We Are</a>
+                        <a href="mailto:hello@stagandsteel.co.uk">Contact</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <span>© 2026 Stag &amp; Steel</span>
-                    <span>Designed by <a href="https://barkerdigital.co.uk" target="_blank" rel="noopener">Barker Digital</a></span>
+                    <span>© 2026 Stag &amp; Steel &middot; Mauldslie Farm, Temple, Midlothian</span>
+                    <span>Site by <a href="https://barkerdigital.co.uk" target="_blank" rel="noopener">Barker Digital</a></span>
                 </div>
             </div>
         </footer>
 
     </main>
 
-    <style>
-        @media (max-width: 900px) {
-            .responsive-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-            .craft-grid { grid-template-columns: 1fr !important; }
-        }
-    </style>
-
+    <script src="scrub.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
