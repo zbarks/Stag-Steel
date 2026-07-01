@@ -48,9 +48,12 @@
     }
 
     function targetFrame() {
+        const intro = document.getElementById('intro');
+        const start = intro ? (intro.offsetTop + intro.offsetHeight) : 0;
         const footer = document.querySelector('.site-footer');
         const end = (footer ? footer.offsetTop : document.body.scrollHeight) - window.innerHeight;
-        const p = Math.min(1, Math.max(0, window.scrollY / Math.max(1, end)));
+        const span = Math.max(1, end - start);
+        const p = Math.min(1, Math.max(0, (window.scrollY - start) / span));
         return Math.round(p * (FRAME_COUNT - 1));
     }
 

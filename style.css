@@ -6,6 +6,7 @@
 :root {
     --earth-stone: #e8e2d9;
     --earth-stone-warm: #f9f7f4;
+    --cream: #f9f7f4;
     --oak: #3d342f;
     --peat: #2a2421;
     --moss-dark: #4a4d44;
@@ -1594,3 +1595,54 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
     .scrub-page .vhero .hero-line { width: 88vw; max-width: 460px; }
     .scrub-page .vhero .hero-line h1 { font-size: clamp(2.4rem, 9vw, 3.4rem); }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   V4 — cinematic intro, smaller logo, one-line wordmark, dark CTA
+   ══════════════════════════════════════════════════════════════ */
+
+/* Intro runway (scroll distance for the title → full-frame sequence) */
+.intro { position: relative; height: 220vh; z-index: 2; pointer-events: none; }
+
+/* The video stage grows from a centred card to full frame during the intro */
+.scrub-page.has-intro .scrub-stage {
+    clip-path: inset(var(--cy, 0%) var(--cx, 0%) var(--cy, 0%) var(--cx, 0%) round var(--cr, 0px));
+    -webkit-clip-path: inset(var(--cy, 0%) var(--cx, 0%) var(--cy, 0%) var(--cx, 0%) round var(--cr, 0px));
+}
+
+/* Intro title */
+.intro-title {
+    position: fixed; inset: 0; z-index: 6;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; pointer-events: none; padding: 0 24px;
+}
+.intro-brand {
+    font-size: clamp(2.6rem, 8.5vw, 6.4rem); font-weight: 500; line-height: 1;
+    letter-spacing: 0.09em; color: var(--cream);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.55), 0 0 26px rgba(0,0,0,0.5);
+}
+.intro-sub {
+    margin-top: 20px; font-size: clamp(1.1rem, 2.6vw, 1.85rem);
+    letter-spacing: 0.05em; color: rgba(249,247,244,0.82);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Smaller logo in the toggle */
+.nav-toggle .nt-logo { width: 88px; }
+@media (max-width: 700px) { .nav-toggle .nt-logo { width: 66px; } }
+
+/* Drawer wordmark: STAG AND STEEL on one line */
+.nd-wordmark {
+    white-space: nowrap; font-style: normal;
+    font-size: clamp(1.3rem, 2.3vw, 1.75rem); letter-spacing: 0.06em;
+    line-height: 1; color: #f4efe8;
+}
+
+/* Shop Now — dark forged button so it reads over the light video */
+.hero-cta {
+    background: linear-gradient(180deg, #322a24 0%, #201b17 100%);
+    color: var(--cream);
+    border: 1px solid rgba(249,247,244,0.16);
+    box-shadow: 0 24px 55px -26px rgba(0,0,0,0.7), inset 0 1px 0 rgba(249,247,244,0.06);
+}
+.hero-cta em { color: #d8b89a; font-style: normal; }
+.hero-cta:hover { background: linear-gradient(180deg, #3c332c 0%, #2a2420 100%); }
