@@ -77,6 +77,7 @@ module.exports = async (req, res) => {
         // Reject anything we don't recognise.
         const origin = getOrigin(req);
         const lineItems = [];
+        const skuMap = {}; // { 'tine-opener': 2, ... } — recorded in metadata for the webhook
 
         for (const item of items) {
             const id = String(item.id || '').trim();
@@ -86,6 +87,8 @@ module.exports = async (req, res) => {
             if (!product) {
                 return res.status(400).json({ error: `Unknown product: ${id}` });
             }
+
+            skuMap[id] = (skuMap[id] || 0) + qty;
 
             lineItems.push({
                 quantity: qty,
@@ -129,9 +132,12 @@ module.exports = async (req, res) => {
             success_url: `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/shop.html`,
 
-            // Light touch metadata for your own records
+            // Light touch metadata for your own records + the webhook.
+            // `skus` lets the order-storage webhook record exactly what sold,
+            // without having to reverse-engineer product names from line items.
             metadata: {
-                source: 'stagandsteel.vercel.app',
+                source: 'stagandsteel.co.uk',
+                skus: JSON.stringify(skuMap), // e.g. {"tine-opener":2,"corkscrew":1}
             },
 
             // Collect customer email
