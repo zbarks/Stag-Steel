@@ -1646,3 +1646,22 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 }
 .hero-cta em { color: #d8b89a; font-style: normal; }
 .hero-cta:hover { background: linear-gradient(180deg, #3c332c 0%, #2a2420 100%); }
+
+/* ══════════════════════════════════════════════════════════════
+   V5 — blank earthy-brown intro, L→R title reveal, video pops open
+   ══════════════════════════════════════════════════════════════ */
+
+/* Earthy brown base — the blank intro screen shows this */
+.scrub-page { background: #4b3b29; }
+
+/* Pre-arm (before GSAP runs): blank brown — no video, no vignette, no logo */
+.intro-armed .scrub-stage {
+    clip-path: inset(50% 50% 50% 50% round 12px);
+    -webkit-clip-path: inset(50% 50% 50% 50% round 12px);
+}
+.intro-armed .scrub-scrim { opacity: 0; }
+.intro-armed .nav-toggle { opacity: 0; }
+
+/* Per-letter reveal for the intro brand line */
+.intro-brand .ch { display: inline-block; }
+.intro-brand .sp { display: inline-block; width: 0.42em; }

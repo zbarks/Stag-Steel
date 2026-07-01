@@ -1,15 +1,21 @@
-/* Cinematic intro — the video's first frame grows from a centred card to
-   full screen while the "STAG AND STEEL / Crafted by hand" title fades out.
-   Once full-frame, scrub.js takes over. Uses vendored GSAP + ScrollTrigger. */
+/* Cinematic intro
+   1. Opens on a blank earthy-brown screen — no photo, no logo.
+   2. "STAG AND STEEL / Crafted by hand" fades in, letter by letter, left to right.
+   3. On scroll the title fades away and the video pops open from the centre,
+      growing to full frame while the vignette and logo fade in. Then scrub.js
+      takes over. Uses vendored GSAP + ScrollTrigger. */
 (function () {
     const intro = document.getElementById('intro');
     const stage = document.querySelector('.scrub-stage');
+    const scrim = document.querySelector('.scrub-scrim');
+    const toggle = document.querySelector('.nav-toggle');
     const title = document.getElementById('introTitle');
 
-    // Graceful fallback: if GSAP didn't load, skip the intro entirely.
+    // Fallback: no GSAP → skip the intro, show the site normally.
     if (!window.gsap || !window.ScrollTrigger || !intro || !stage) {
         if (intro) intro.style.display = 'none';
         if (title) title.style.display = 'none';
+        document.documentElement.classList.remove('intro-armed');
         document.body.classList.add('no-intro');
         return;
     }
@@ -17,27 +23,27 @@
     gsap.registerPlugin(ScrollTrigger);
     document.body.classList.add('has-intro');
 
-    // Start clipped to a small centred card.
-    gsap.set(stage, { '--cy': '34%', '--cx': '32%', '--cr': '22px' });
-    gsap.set(title, { opacity: 1, scale: 1 });
+    // Blank brown start: video clipped to nothing, vignette + logo hidden.
+    gsap.set(stage, { '--cy': '50%', '--cx': '50%', '--cr': '12px' });
+    if (scrim) gsap.set(scrim, { opacity: 0 });
+    if (toggle) gsap.set(toggle, { opacity: 0 });
+    gsap.set(title, { opacity: 1 });
 
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: intro,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1,
-        },
+    // Entrance: letters fade in left -> right, then the sub-line.
+    gsap.from('.intro-brand .ch', {
+        opacity: 0, yPercent: 45, stagger: 0.05,
+        duration: 0.7, ease: 'power2.out', delay: 0.35,
     });
+    gsap.from('.intro-sub', { opacity: 0, y: 12, duration: 0.9, ease: 'power2.out', delay: 1.1 });
 
-    // Title holds, then fades and lifts away.
-    tl.to(title, { opacity: 0, scale: 1.1, ease: 'power2.in', duration: 0.42 }, 0.14);
-
-    // The card grows to fill the screen.
-    tl.to(stage, {
-        '--cy': '0%', '--cx': '0%', '--cr': '0px',
-        ease: 'power2.inOut', duration: 0.72,
-    }, 0.10);
+    // Scroll: title fades/pops away, video grows from centre, vignette + logo in.
+    const tl = gsap.timeline({
+        scrollTrigger: { trigger: intro, start: 'top top', end: 'bottom bottom', scrub: 1 },
+    });
+    tl.to(title, { opacity: 0, scale: 1.16, ease: 'power2.in', duration: 0.30 }, 0.02)
+      .to(stage, { '--cy': '0%', '--cx': '0%', '--cr': '0px', ease: 'power2.inOut', duration: 0.72 }, 0.16);
+    if (scrim) tl.to(scrim, { opacity: 1, ease: 'none', duration: 0.5 }, 0.22);
+    if (toggle) tl.to(toggle, { opacity: 1, ease: 'none', duration: 0.32 }, 0.62);
 
     ScrollTrigger.refresh();
 })();
