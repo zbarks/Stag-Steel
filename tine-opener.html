@@ -12,22 +12,28 @@
 <body>
     <div class="paper-grain"></div>
 
-    <nav class="site-nav solid" id="siteNav">
-        <a href="index.html" class="logo">Stag &amp; Steel</a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html#place">The Place</a></li>
-            <li><a href="index.html#craft">The Craft</a></li>
-            <li><a href="shop.html" class="active">Shop</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-        <div class="nav-right">
-            <button class="cart-btn" aria-label="Open cart">
-                <span class="cart-dot"></span>
-                <span>Cart (<span class="js-cart-count">0</span>)</span>
-            </button>
-            <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
+        <!-- Spinning logo toggle (top right) -->
+    <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <img src="assets/logo.png" class="nt-logo" alt="Stag &amp; Steel">
+    </button>
+
+    <!-- Right-hand nav drawer -->
+    <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+        <div class="nav-drawer-inner">
+            <a href="index.html" class="nd-wordmark serif">STAG AND STEEL</a>
+            <nav class="nd-links">
+                <a href="index.html"><span>01</span> Home</a>
+                <a href="index.html#making"><span>02</span> How It's Made</a>
+                <a href="index.html#mission"><span>03</span> Our Mission</a>
+                <a href="shop.html" aria-current="page"><span>04</span> Shop</a>
+            </nav>
+            <div class="nd-foot">
+                <button class="cart-btn nd-cart" aria-label="Open cart"><span>Cart (<span class="js-cart-count">0</span>)</span></button>
+                <a href="mailto:hello@stagandsteel.co.uk">hello@stagandsteel.co.uk</a>
+            </div>
         </div>
-    </nav>
+    </aside>
+    <div class="nav-backdrop" id="navBackdrop"></div>
 
     <main>
 
@@ -177,5 +183,6 @@
     </main>
 
     <script src="script.js"></script>
+    <script src="nav.js"></script>
 </body>
 </html>

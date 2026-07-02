@@ -346,7 +346,7 @@ footer.site-footer .footer-bottom a:hover { opacity: 0.55; text-decoration: unde
    ============================================================ */
 
 .shop-hero {
-    padding: 200px 40px 80px;
+    padding: 150px 40px 80px;
     text-align: center;
     max-width: 1100px;
     margin: 0 auto;
@@ -490,7 +490,7 @@ footer.site-footer .footer-bottom a:hover { opacity: 0.55; text-decoration: unde
    ============================================================ */
 
 .product-detail {
-    padding: 180px 0 0;
+    padding: 150px 0 0;
 }
 .product-detail .breadcrumb {
     max-width: 1280px;
@@ -1420,6 +1420,8 @@ body.nav-open .nav-drawer { transform: translateX(0); }
 }
 .nd-links a span { font-family: 'Inter', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; color: #cdad8d; }
 .nd-links a:hover { color: var(--cream); padding-left: 8px; }
+.nd-links a[aria-current="page"] { color: var(--cream); }
+.nd-links a[aria-current="page"] span { color: var(--cream); }
 .nd-foot { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
 .nd-foot .cart-btn {
     color: var(--cream); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em;
