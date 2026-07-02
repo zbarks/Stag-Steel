@@ -1665,3 +1665,16 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 /* Per-letter reveal for the intro brand line */
 .intro-brand .ch { display: inline-block; }
 .intro-brand .sp { display: inline-block; width: 0.42em; }
+
+/* ── Kill the browser's blue focus ring / tap highlight on the logo button ── */
+.nav-toggle {
+    background: transparent !important;
+    -webkit-appearance: none; appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+.nav-toggle:focus,
+.nav-toggle:focus-visible,
+.nav-toggle:active { outline: none; background: transparent !important; box-shadow: none; }
+/* softer, neutral shadow only (no coloured glow) */
+.nav-toggle .nt-logo { filter: drop-shadow(0 3px 7px rgba(0,0,0,0.38)); }

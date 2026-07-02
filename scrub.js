@@ -49,7 +49,9 @@
 
     function targetFrame() {
         const intro = document.getElementById('intro');
-        const start = intro ? (intro.offsetTop + intro.offsetHeight) : 0;
+        // Begin spinning the moment the product first pops into view (~17% through
+        // the intro, where the clip starts growing) rather than after the intro.
+        const start = intro ? (intro.offsetTop + intro.offsetHeight * 0.17) : 0;
         const footer = document.querySelector('.site-footer');
         const end = (footer ? footer.offsetTop : document.body.scrollHeight) - window.innerHeight;
         const span = Math.max(1, end - start);

@@ -45,5 +45,16 @@
     if (scrim) tl.to(scrim, { opacity: 1, ease: 'none', duration: 0.5 }, 0.22);
     if (toggle) tl.to(toggle, { opacity: 1, ease: 'none', duration: 0.32 }, 0.62);
 
+    // Reveal the hero line + Shop Now a touch earlier than the default in-view trigger.
+    ['.vhero .hero-line', '.vhero .hero-cta-wrap'].forEach(function (sel) {
+        const el = document.querySelector(sel);
+        if (!el) return;
+        ScrollTrigger.create({
+            trigger: el,
+            start: 'top 96%',
+            onEnter: function () { el.classList.add('active'); },
+        });
+    });
+
     ScrollTrigger.refresh();
 })();
