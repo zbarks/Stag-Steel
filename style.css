@@ -1661,6 +1661,10 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 }
 .intro-armed .scrub-scrim { opacity: 0; }
 .intro-armed .nav-toggle { opacity: 0; }
+/* Nothing renders on load: hide the title until GSAP reveals + animates it in.
+   intro.js does gsap.set(title, {opacity:1}) which overrides this the instant
+   GSAP is ready, and by then the letters/sub are already pinned to opacity 0. */
+.intro-armed .intro-title { opacity: 0; }
 
 /* Per-letter reveal for the intro brand line */
 .intro-brand .ch { display: inline-block; }
@@ -1669,6 +1673,10 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 /* ── Kill the browser's blue focus ring / tap highlight on the logo button ── */
 .nav-toggle {
     background: transparent !important;
+    /* Kill the leftover backdrop blur that was creating a blurred box behind
+       the logo (and smearing the video as you scrolled). Just the image now. */
+    -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+    box-shadow: none !important;
     -webkit-appearance: none; appearance: none;
     -webkit-tap-highlight-color: transparent;
     outline: none;
@@ -1676,5 +1684,5 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 .nav-toggle:focus,
 .nav-toggle:focus-visible,
 .nav-toggle:active { outline: none; background: transparent !important; box-shadow: none; }
-/* softer, neutral shadow only (no coloured glow) */
-.nav-toggle .nt-logo { filter: drop-shadow(0 3px 7px rgba(0,0,0,0.38)); }
+/* Just the image — a tiny, subtle shadow, nothing else. */
+.nav-toggle .nt-logo { filter: drop-shadow(0 1px 3px rgba(0,0,0,0.28)); }
