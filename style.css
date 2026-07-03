@@ -1618,8 +1618,8 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
     text-align: center; pointer-events: none; padding: 0 24px;
 }
 .intro-brand {
-    font-size: clamp(2.6rem, 8.5vw, 6.4rem); font-weight: 500; line-height: 1;
-    letter-spacing: 0.09em; color: var(--cream);
+    font-size: clamp(1.5rem, 8.2vw, 6.4rem); font-weight: 500; line-height: 1;
+    letter-spacing: 0.09em; color: var(--cream); white-space: nowrap;
     text-shadow: 0 2px 5px rgba(0,0,0,0.55), 0 0 26px rgba(0,0,0,0.5);
 }
 .intro-sub {
@@ -1667,6 +1667,44 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
    intro.js does gsap.set(title, {opacity:1}) which overrides this the instant
    GSAP is ready, and by then the letters/sub are already pinned to opacity 0. */
 .intro-armed .intro-title { opacity: 0; }
+
+/* ── Mobile tidy-up: keep the wordmark on ONE line, neaten the drawer ── */
+@media (max-width: 600px) {
+    /* Hero wordmark: tighter frame + spacing so STAG AND STEEL never wraps */
+    .intro-title { padding: 0 16px; }
+    .intro-brand { letter-spacing: 0.05em; }
+    .intro-sub { margin-top: 14px; }
+
+    /* Menu drawer: near-full width, comfortable padding, wordmark stays single-line */
+    .nav-drawer { width: 86vw; min-width: 0; max-width: 340px; }
+    .nav-drawer-inner { padding: 8vh 30px 34px; }
+    .nd-wordmark { white-space: nowrap; font-size: 1.5rem; }
+    .nd-links { margin: 32px 0; }
+    .nd-links a { font-size: 1.45rem; }
+}
+@media (max-width: 360px) {
+    .intro-brand { letter-spacing: 0.03em; }
+    .nd-wordmark { font-size: 1.35rem; }
+}
+
+/* ── Smooth "whoosh" scroll (Lenis) ────────────────────────────────────────
+   Base styles the library needs, plus a velocity-driven motion blur applied
+   only to foreground sections. The fixed video (.scrub-stage) sits outside
+   <main>, so it stays crisp while content streaks past. --wb is set per-frame
+   by smooth.js; when idle the .whooshing class is removed, so there is zero
+   filter cost and no stacking-context side-effects. */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+html.whooshing :is(.vhero, .vsection, .solid-band, .site-footer) {
+    filter: blur(var(--wb, 0px));
+    will-change: filter;
+}
+@media (prefers-reduced-motion: reduce) {
+    html.whooshing :is(.vhero, .vsection, .solid-band, .site-footer) { filter: none; }
+}
 
 /* Per-letter reveal for the intro brand line */
 .intro-brand .ch { display: inline-block; }
