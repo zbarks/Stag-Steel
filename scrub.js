@@ -6,6 +6,12 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
 
+    // How much of the frame fills the stage. 1 = full-bleed cover (most zoomed /
+    // softest on a big screen). Below 1 renders the stag a bit smaller — less
+    // upscaling, so it holds its resolution — with the stage colour around it.
+    const FRAME_FILL = 0.9;
+    const STAGE_BG = '#221d1a';
+
     const FRAME_COUNT = 133;
     const pad = (n) => String(n).padStart(3, '0');
     const src = (i) => 'assets/frames/f' + pad(i) + '.jpg';
@@ -44,6 +50,14 @@
         let dw, dh, dx, dy;
         if (cr > ir) { dw = cw; dh = cw / ir; dx = 0; dy = (ch - dh) / 2; }
         else { dh = ch; dw = ch * ir; dy = 0; dx = (cw - dw) / 2; }
+        if (FRAME_FILL !== 1) {
+            // Shrink toward the centre so the stag isn't blown up as much.
+            const nw = dw * FRAME_FILL, nh = dh * FRAME_FILL;
+            dx += (dw - nw) / 2; dy += (dh - nh) / 2;
+            dw = nw; dh = nh;
+            ctx.fillStyle = STAGE_BG;
+            ctx.fillRect(0, 0, cw, ch);
+        }
         ctx.drawImage(img, dx, dy, dw, dh);
     }
 
