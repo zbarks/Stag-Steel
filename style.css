@@ -1521,11 +1521,8 @@ body.nav-open .nav-toggle { transform: rotate(360deg); background: #f3eee7; colo
 .nav-toggle .nt-logo {
     width: 104px; height: auto; object-fit: contain;
     filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4)) drop-shadow(0 0 14px rgba(249,247,244,0.28));
-    animation: ssPulse 2.6s ease-in-out infinite;
 }
-@keyframes ssPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 body.nav-open .nav-toggle { transform: rotate(360deg); background: transparent; border-color: transparent; }
-body.nav-open .nav-toggle .nt-logo { animation: none; }
 @media (max-width: 700px) { .nav-toggle { top: 16px; right: 18px; } .nav-toggle .nt-logo { width: 74px; } }
 
 /* Hero — larger, bolder, readable on the cream frame */
@@ -1629,8 +1626,8 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 }
 
 /* Smaller logo in the toggle */
-.nav-toggle .nt-logo { width: auto; height: 88px; }
-@media (max-width: 700px) { .nav-toggle .nt-logo { width: auto; height: 66px; } }
+.nav-toggle .nt-logo { width: auto; height: 62px; }
+@media (max-width: 700px) { .nav-toggle .nt-logo { width: auto; height: 48px; } }
 
 /* Drawer wordmark: STAG AND STEEL on one line */
 .nd-wordmark {
@@ -1706,4 +1703,4 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 .nav-toggle:focus-visible,
 .nav-toggle:active { outline: none; background: transparent !important; box-shadow: none; }
 /* Just the image — a tiny, subtle shadow, nothing else. */
-.nav-toggle .nt-logo { filter: drop-shadow(0 1px 3px rgba(0,0,0,0.28)); }
+.nav-toggle .nt-logo { filter: drop-shadow(0 2px 5px rgba(0,0,0,0.42)); }
