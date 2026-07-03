@@ -19,7 +19,7 @@
     const CATALOGUE = {
         'tine-opener': { name: 'The Tine Opener', price: 30.00, image: 'assets/tine_main_white.jpg', subtitle: "From the antler's outer point" },
         'stem-opener': { name: 'The Stem Opener', price: 25.00, image: 'assets/stem_main_white.jpg', subtitle: "Cut from the antler's main beam" },
-        'corkscrew':   { name: 'The Corkscrew',   price: 25.00, image: 'assets/corkscrew_main_white.jpg', subtitle: "From the antler's burr — dense and short" },
+        'corkscrew':   { name: 'The Corkscrew',   price: 25.00, image: 'assets/corkscrew_main_white.jpg', subtitle: "From the antler's burr, dense and short" },
         'the-set':     { name: 'The Set',         price: 40.00, image: 'assets/set_main_white.jpg', subtitle: 'Two-piece presentation box' },
     };
 

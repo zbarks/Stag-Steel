@@ -30,7 +30,7 @@ const PRODUCTS = {
         name: 'The Corkscrew',
         price: 2500, // £25.00
         image: 'corkscrew_main_white.jpg',
-        description: "From the antler's burr — dense and short",
+        description: "From the antler's burr, dense and short",
     },
     'the-set': {
         name: 'The Set',

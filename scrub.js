@@ -33,6 +33,9 @@
         canvas.width = Math.round(cw * dpr);
         canvas.height = Math.round(ch * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        // Best-quality scaling (resets whenever the canvas is resized).
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
         curFrame = -1;      // force redraw
         update(true);
     }

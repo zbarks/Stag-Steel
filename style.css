@@ -1629,8 +1629,8 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 }
 
 /* Smaller logo in the toggle */
-.nav-toggle .nt-logo { width: 88px; }
-@media (max-width: 700px) { .nav-toggle .nt-logo { width: 66px; } }
+.nav-toggle .nt-logo { width: auto; height: 88px; }
+@media (max-width: 700px) { .nav-toggle .nt-logo { width: auto; height: 66px; } }
 
 /* Drawer wordmark: STAG AND STEEL on one line */
 .nd-wordmark {
