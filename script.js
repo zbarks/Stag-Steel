@@ -118,7 +118,6 @@
         drawer.className = 'cart-drawer';
         drawer.setAttribute('aria-hidden', 'true');
         drawer.setAttribute('inert', '');
-        drawer.setAttribute('data-lenis-prevent', '');
         drawer.innerHTML = ''
             + '<div class="cart-drawer-overlay" data-close></div>'
             + '<div class="cart-drawer-panel" role="dialog" aria-label="Cart">'

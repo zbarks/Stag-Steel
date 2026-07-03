@@ -1603,7 +1603,7 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
    ══════════════════════════════════════════════════════════════ */
 
 /* Intro runway (scroll distance for the title → full-frame sequence) */
-.intro { position: relative; height: 130vh; z-index: 2; pointer-events: none; }
+.intro { position: relative; height: 220vh; z-index: 2; pointer-events: none; }
 
 /* The video stage grows from a centred card to full frame during the intro */
 .scrub-page.has-intro .scrub-stage {
@@ -1685,25 +1685,6 @@ body.nav-open .nav-toggle .nt-logo { animation: none; }
 @media (max-width: 360px) {
     .intro-brand { letter-spacing: 0.03em; }
     .nd-wordmark { font-size: 1.35rem; }
-}
-
-/* ── Smooth "whoosh" scroll (Lenis) ────────────────────────────────────────
-   Base styles the library needs, plus a velocity-driven motion blur applied
-   only to foreground sections. The fixed video (.scrub-stage) sits outside
-   <main>, so it stays crisp while content streaks past. --wb is set per-frame
-   by smooth.js; when idle the .whooshing class is removed, so there is zero
-   filter cost and no stacking-context side-effects. */
-html.lenis, html.lenis body { height: auto; }
-.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-smooth iframe { pointer-events: none; }
-
-html.whooshing :is(.vhero, .vsection, .solid-band, .site-footer) {
-    filter: blur(var(--wb, 0px));
-    will-change: filter;
-}
-@media (prefers-reduced-motion: reduce) {
-    html.whooshing :is(.vhero, .vsection, .solid-band, .site-footer) { filter: none; }
 }
 
 /* Per-letter reveal for the intro brand line */

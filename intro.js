@@ -38,9 +38,9 @@
 
     // Scroll: title fades/pops away, video grows from centre, vignette + logo in.
     const tl = gsap.timeline({
-        scrollTrigger: { trigger: intro, start: 'top top', end: 'bottom bottom', scrub: 0.5 },
+        scrollTrigger: { trigger: intro, start: 'top top', end: 'bottom bottom', scrub: 1 },
     });
-    tl.to(title, { opacity: 0, scale: 1.12, yPercent: -24, ease: 'power2.in', duration: 0.30 }, 0.02)
+    tl.to(title, { opacity: 0, scale: 1.16, ease: 'power2.in', duration: 0.30 }, 0.02)
       .to(stage, { '--cy': '0%', '--cx': '0%', '--cr': '0px', ease: 'power2.inOut', duration: 0.72 }, 0.16);
     if (scrim) tl.to(scrim, { opacity: 1, ease: 'none', duration: 0.5 }, 0.22);
     if (toggle) tl.to(toggle, { opacity: 1, ease: 'none', duration: 0.32 }, 0.62);
