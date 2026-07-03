@@ -6,10 +6,9 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
 
-    // How much of the frame fills the stage. 1 = full-bleed cover (most zoomed /
-    // softest on a big screen). Below 1 renders the stag a bit smaller — less
-    // upscaling, so it holds its resolution — with the stage colour around it.
-    const FRAME_FILL = 0.9;
+    // Full-bleed cover. (1 = fills the screen; lower would render smaller with
+    // the stage colour around it — kept at 1 so there are no side borders.)
+    const FRAME_FILL = 1;
     const STAGE_BG = '#221d1a';
 
     const FRAME_COUNT = 133;
