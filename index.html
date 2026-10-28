@@ -1,290 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stag &amp; Steel | Handcrafted Antler Barware, Made in Scotland</title>
-    <meta name="description" content="Bottle openers and corkscrews made from naturally shed red deer antler, collected on a family farm in Midlothian and finished by hand. Small-batch, UK delivery.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script>document.documentElement.classList.add('intro-armed');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stag & Steel | Handmade Antler Bottle Openers and Dog Chews, Scotland</title>
+<meta name="description" content="Antler bottle openers and antler dog chews, made by hand in small batches at Mauldslie Farm, Midlothian. Tracked UK delivery.">
+<meta property="og:title" content="Stag & Steel | Handmade Antler Bottle Openers and Dog Chews, Scotland">
+<meta property="og:description" content="Antler bottle openers and antler dog chews, made by hand in small batches at Mauldslie Farm, Midlothian. Tracked UK delivery.">
+<meta property="og:image" content="https://www.stagandsteel.co.uk/assets/opener-box.jpg">
+<meta name="theme-color" content="#120f0d">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<link rel="preload" as="image" href="assets/hero-poster.jpg">
+<script src="app.js?v=3" defer></script>
 </head>
-<body class="scrub-page">
+<body class="home">
+<header class="site-head">
+  <nav class="head-links" aria-label="Main">
+    <a href="shop.html">Shop</a>
+    <a href="bundle.html">The Bundle</a>
+    <a href="story.html">Our Story</a>
+  </nav>
+  <a href="index.html" class="wordmark" aria-label="Stag and Steel, home">Stag &amp; Steel</a>
+  <div class="head-right">
+    <a href="mailto:hello@stagandsteel.co.uk">Contact</a>
+    <button class="cart-btn keep" type="button" data-cart aria-label="Open basket">Basket<span class="cart-count" data-n="0">0</span></button>
+    <button class="menu-btn" type="button" data-menu aria-label="Open menu">Menu</button>
+  </div>
+</header>
+<div class="mobile-menu" aria-label="Menu">
+  <button class="mm-close" type="button" data-menu>Close</button>
+  <a href="shop.html"><span>01</span>Shop</a>
+  <a href="stag-opener.html"><span>02</span>The Stag Opener</a>
+  <a href="dog-chew.html"><span>03</span>Antler Dog Chew</a>
+  <a href="bundle.html"><span>04</span>The Bundle</a>
+  <a href="story.html"><span>05</span>Our Story</a>
+  <div class="mm-foot">hello@stagandsteel.co.uk</div>
+</div>
 
-    <!-- Fixed scrubbing video (frames) -->
-    <div class="scrub-stage"><canvas id="scrubCanvas"></canvas></div>
-    <div class="scrub-scrim"></div>
+<main>
+<section class="hero">
+  <video autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true">
+    <source src="assets/hero-sm.mp4" type="video/mp4" media="(max-width: 760px)">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner">
+    <div class="hero-row">
+      <p class="tag">Let the good times begin.</p>
+      <a href="shop.html" class="btn">Shop the range <span class="arr">&rarr;</span></a>
+    </div>
+    <h1 class="wordmark hero-wordmark">Stag &amp; Steel</h1>
+    <div class="hero-meta"><span>Handmade in Scotland</span><span>Red deer antler &middot; Polished steel</span><span>From £10</span></div>
+  </div>
+</section>
 
-    <!-- Spinning logo toggle (top right) -->
-    <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-        <img src="assets/staglogo.png" class="nt-logo" alt="Stag &amp; Steel">
-    </button>
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Let the good times begin</span><span>Handmade in Scotland</span><span>One of one, every time</span><span>Red deer antler</span><span>Mauldslie Farm, Midlothian</span><span>Small batches</span><span>Let the good times begin</span><span>Handmade in Scotland</span><span>One of one, every time</span><span>Red deer antler</span><span>Mauldslie Farm, Midlothian</span><span>Small batches</span></div></div>
 
-    <!-- Right-hand nav drawer -->
-    <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
-        <div class="nav-drawer-inner">
-            <a href="index.html" class="nd-wordmark serif">STAG AND STEEL</a>
-            <nav class="nd-links">
-                <a href="index.html" aria-current="page"><span>01</span> Home</a>
-                <a href="index.html#making"><span>02</span> How It's Made</a>
-                <a href="index.html#mission"><span>03</span> Our Mission</a>
-                <a href="shop.html"><span>04</span> Shop</a>
-            </nav>
-            <div class="nd-foot">
-                <button class="cart-btn nd-cart" aria-label="Open cart"><span>Cart (<span class="js-cart-count">0</span>)</span></button>
-                <a href="mailto:hello@stagandsteel.co.uk">hello@stagandsteel.co.uk</a>
-            </div>
-        </div>
-    </aside>
-    <div class="nav-backdrop" id="navBackdrop"></div>
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">The Range</span><h2 class="h-l">Three things,<br><span class="it">done properly.</span></h2></div>
+      <a href="shop.html" class="link-u">View the shop</a>
+    </div>
+    <div class="range">
+      <a class="card rv" href="stag-opener.html">
+        <div class="card-media"><img src="assets/opener-main.jpg" alt="The Stag Opener beside a bottle and a Stag &amp; Steel box" loading="lazy"><img class="alt" src="assets/opener-box.jpg" alt="" loading="lazy"></div>
+        <div class="card-info"><div><span class="no">No. 01</span><h3>The Stag Opener</h3><p>Red deer antler, polished steel</p></div><span class="price">£15</span></div>
+      </a>
+      <a class="card rv d1" href="dog-chew.html">
+        <div class="card-media"><img src="assets/chew-main.jpg" alt="Stag &amp; Steel antler dog chew with its paper band" loading="lazy"><img class="alt" src="assets/chew-box.jpg" alt="" loading="lazy"></div>
+        <div class="card-info"><div><span class="no">No. 02</span><h3>Antler Dog Chew</h3><p>Solid antler, nothing added</p></div><span class="price">£10</span></div>
+      </a>
+      <a class="card rv d2" href="bundle.html">
+        <div class="card-media"><span class="card-badge">Save £5</span><div class="split"><div><img src="assets/opener-main.jpg" alt="The Stag Opener" loading="lazy"></div><div><img src="assets/chew-main.jpg" alt="Antler Dog Chew" loading="lazy"></div><span class="amp" aria-hidden="true"><span>&amp;</span></span></div></div>
+        <div class="card-info"><div><span class="no">No. 03</span><h3>The Bundle</h3><p>One for you, one for the dog</p></div><span class="price"><s>£25</s>£20</span></div>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <main>
+<section class="sec sec-light">
+  <div class="wrap edit">
+    <div class="edit-media rv"><img src="assets/opener-box.jpg" alt="The Stag Opener packed in its kraft box" loading="lazy"><div class="vert"><span>Stag &amp; Steel</span><span>Est. Midlothian</span></div></div>
+    <div class="edit-copy rv d1">
+      <span class="eyebrow">The Material</span>
+      <h2 class="h-l">Grown on a hillside,<br><span class="it">not in a factory.</span></h2>
+      <p class="lede">Our antler comes from red deer on one family farm in the Moorfoot Hills, above Temple in Midlothian. Each length has its own colour, weight and grain.</p>
+      <p class="lede">That means no two pieces are alike. The one you receive is yours alone.</p>
+      <ul class="facts">
+        <li><span class="no">01</span><span>Red deer antler from Mauldslie Farm</span></li>
+        <li><span class="no">02</span><span>Cut, cleaned and finished by hand</span></li>
+        <li><span class="no">03</span><span>Boxed in our own kraft packaging, ready to give</span></li>
+      </ul>
+      <a href="story.html" class="link-u">Read our story</a>
+    </div>
+  </div>
+</section>
 
-        <!-- CINEMATIC INTRO (blank brown → title fades in L→R → video pops open) -->
-        <section class="intro" id="intro">
-            <div class="intro-title" id="introTitle">
-                <span class="intro-brand serif" aria-label="Stag and Steel"><span class="ch">S</span><span class="ch">T</span><span class="ch">A</span><span class="ch">G</span><span class="sp"></span><span class="ch">A</span><span class="ch">N</span><span class="ch">D</span><span class="sp"></span><span class="ch">S</span><span class="ch">T</span><span class="ch">E</span><span class="ch">E</span><span class="ch">L</span></span>
-                <span class="intro-sub serif italic">Handmade in Scotland</span>
-            </div>
-        </section>
+<section class="sec sec-ink">
+  <div class="wrap band">
+    <div class="band-pic rv"><img src="assets/opener-box.jpg" alt="The Stag Opener in its box" loading="lazy"></div>
+    <div class="band-mid rv d1">
+      <span class="eyebrow">The Bundle</span>
+      <span class="big-amp" aria-hidden="true">&amp;</span>
+      <h2 class="h-l it">One for you.<br>One for the dog.</h2>
+      <p>The Stag Opener and an Antler Dog Chew, packed and sent together. Better value than buying them apart.</p>
+      <div class="sum"><span>£15 + £10</span><s>£25</s><b>£20</b><span class="save-tag">Save £5</span></div><br>
+      <a href="bundle.html" class="btn">Get the bundle <span class="arr">&rarr;</span></a>
+    </div>
+    <div class="band-pic rv d2"><img src="assets/chew-box.jpg" alt="The antler dog chew in its box" loading="lazy"></div>
+  </div>
+</section>
 
-        <!-- HERO -->
-        <section class="vhero">
-            <div class="hero-line scroll-reveal">
-                <span class="eyebrow">Handmade in the hills of Scotland</span>
-                <h1 class="serif italic">Stag up<br>your life.</h1>
-                <p class="lede">Bottle openers and corkscrews, handcrafted using antler and hand-polished steel. One of one, every single time.</p>
-                <span class="hero-meta">From £25 &middot; Wilderness to your doorstep</span>
-            </div>
-            <div class="hero-cta-wrap scroll-reveal">
-                <a href="shop.html" class="hero-cta">Shop Now <em>&rarr;</em></a>
-            </div>
-            <div class="scroll-cue-wrap" style="position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%);">
-                <div class="scroll-cue"></div>
-            </div>
-        </section>
-
-        <!-- THE MATERIAL (panel left, details right) -->
-        <section id="material" class="vsection to-left">
-            <div class="vpanel scroll-reveal">
-                <div class="glass">
-                    <span class="eyebrow" style="margin-bottom: 22px;">The Material</span>
-                    <h2 class="serif italic vh2">Authentic red deer<br>antler.</h2>
-                    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px;">
-                        Antler isn't made in a factory. It's grown by a wild animal, over one wild Scottish season. Every length has its own colour, weight and grain. Pretty cool, right?
-                    </p>
-                    <p style="font-size: 1.05rem; line-height: 1.8; margin: 0;">
-                        So no two pieces are ever the same. Yours is one of one. Literally nobody else on the planet has the same one. Feel free to &ldquo;stag&rdquo; about it.
-                    </p>
-                </div>
-            </div>
-            <div class="vside scroll-reveal">
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 3c0 4-4 5-4 9M7 3c1.6 1.2 2 3 2 6M7 3c1.4 0 3 .5 4 2M17 3c0 4 4 5 4 9M17 3c-1.6 1.2-2 3-2 6M17 3c-1.4 0-3 .5-4 2M12 12v9"/></svg></span>
-                    <div><h4>One of a kind</h4><p>No two grains, tones or shapes repeat.</p></div>
-                </div>
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></span>
-                    <div><h4>Naturally varied</h4><p>Colour and weight shift from piece to piece.</p></div>
-                </div>
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20l8-8m0 0l3-3a3 3 0 10-4-4l-3 3m4 4l4 4"/></svg></span>
-                    <div><h4>Locked into steel</h4><p>Fitted to hand-polished stainless, for good.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- WHERE IT COMES FROM (panel right, details left) -->
-        <section id="place" class="vsection to-right">
-            <div class="vpanel scroll-reveal">
-                <div class="glass">
-                    <span class="eyebrow" style="margin-bottom: 22px;">Where It Comes From</span>
-                    <h2 class="serif italic vh2">Mauldslie Farm,<br>Midlothian.</h2>
-                    <p style="font-size: 1.05rem; line-height: 1.8; margin: 0;">
-                        Our antler comes from one family farm in the Moorfoot Hills above Temple, looking out over Gladhouse Reservoir. Real land. Real deer. Real Scotland.
-                    </p>
-                </div>
-            </div>
-            <div class="vside scroll-reveal">
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
-                    <div><h4>Temple, Midlothian</h4><p>In the Moorfoot Hills, south of Edinburgh.</p></div>
-                </div>
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg></span>
-                    <div><h4>Gladhouse Reservoir</h4><p>The farm looks out over the water.</p></div>
-                </div>
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20h16M6 20V9l6-5 6 5v11M10 20v-5h4v5"/></svg></span>
-                    <div><h4>A family farm</h4><p>Generations on the same Scottish hills.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HOW IT'S MADE (panel left, steps) -->
-        <section id="making" class="vsection to-left">
-            <div class="vpanel scroll-reveal">
-                <div class="glass">
-                    <span class="eyebrow" style="margin-bottom: 22px;">How It's Made</span>
-                    <h2 class="serif italic vh2" style="margin-bottom: 18px;">Four steps,<br>by hand.</h2>
-                    <p style="font-size: 1rem; line-height: 1.8; margin: 0;">
-                        Every piece is made by hand, in small batches. No factory. No production line. No shortcuts.
-                    </p>
-                    <div class="steps-stack">
-                        <div class="step-row"><span class="n">01</span><div><h3>Harvested</h3><p>Antler is harvested from live red deer, then sorted by size, shape and condition.</p></div></div>
-                        <div class="step-row"><span class="n">02</span><div><h3>Cut &amp; matched</h3><p>Each piece is chosen for its part of the antler (the tine, the beam, the burr), then cut and cleaned.</p></div></div>
-                        <div class="step-row"><span class="n">03</span><div><h3>Fitted to steel</h3><p>Set onto a hand-polished stainless opener or worm, anchored to sit solid for good.</p></div></div>
-                        <div class="step-row"><span class="n">04</span><div><h3>Boxed for you</h3><p>Sanded, sealed and checked by hand, then packed into premium packaging and sent to your door.</p></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- OUR MISSION (panel right, details left) -->
-        <section id="mission" class="vsection to-right">
-            <div class="vpanel scroll-reveal">
-                <div class="glass">
-                    <span class="eyebrow" style="margin-bottom: 22px;">What We're Building</span>
-                    <h2 class="serif italic vh2">More than<br>an opener.</h2>
-                    <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px;">
-                        Stag &amp; Steel is a bespoke, made-to-order brand. Pieces made for you, tied to the land they came from and the hands that shaped them.
-                    </p>
-                    <p style="font-size: 1.05rem; line-height: 1.8; margin: 0;">
-                        One antler. One maker. One piece at a time. Built to be kept, passed down, and shown off.
-                    </p>
-                </div>
-            </div>
-            <div class="vside scroll-reveal">
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9-2.9.9-5.5-4-3.9 5.5-.8z"/></svg></span>
-                    <div><h4>Bespoke</h4><p>Made for you, start to finish.</p></div>
-                </div>
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 13l4 4L19 7"/></svg></span>
-                    <div><h4>Made to order</h4><p>Nothing mass-produced, ever.</p></div>
-                </div>
-                <div class="detail-row">
-                    <span class="di" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21C7 17 4 13.5 4 9.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 2.5C20 13.5 17 17 12 21z"/></svg></span>
-                    <div><h4>Built to be kept</h4><p>Made to last a lifetime, and then some.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- THE SHOP (solid band) -->
-        <section id="shop-preview" class="solid-band" style="padding: 150px 40px;">
-            <div style="max-width: 1280px; margin: 0 auto;">
-                <div class="shop-head" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; gap: 24px; flex-wrap: wrap;">
-                    <div>
-                        <span class="eyebrow" style="margin-bottom: 16px;">The Shop</span>
-                        <h2 class="serif italic" style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; margin: 0; line-height: 1; letter-spacing: -0.02em;">The Signature Collection</h2>
-                    </div>
-                    <a href="shop.html" class="view-all-link" style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; border-bottom: 1px solid var(--oak); padding-bottom: 4px;">View All</a>
-                </div>
-
-                <div class="product-grid">
-                    <a href="tine-opener.html" class="product-card scroll-reveal">
-                        <div class="img-wrap">
-                            <img class="primary" src="assets/tine_main_white.jpg" alt="The Tine Opener">
-                            <img class="alt" src="assets/tine_lifestyle.jpg" alt="The Tine Opener in use">
-                        </div>
-                        <div class="meta">
-                            <div class="left"><h3>The Tine Opener</h3><span class="sub">From the antler's outer point</span></div>
-                            <span class="price">£30</span>
-                        </div>
-                    </a>
-                    <a href="stem-opener.html" class="product-card scroll-reveal" style="transition-delay: 0.1s;">
-                        <div class="img-wrap">
-                            <img class="primary" src="assets/stem_main_white.jpg" alt="The Stem Opener">
-                            <img class="alt" src="assets/stem_lifestyle.jpg" alt="The Stem Opener in use">
-                        </div>
-                        <div class="meta">
-                            <div class="left"><h3>The Stem Opener</h3><span class="sub">Cut from the antler's main beam</span></div>
-                            <span class="price">£25</span>
-                        </div>
-                    </a>
-                    <a href="corkscrew.html" class="product-card scroll-reveal">
-                        <div class="img-wrap">
-                            <img class="primary" src="assets/corkscrew_main_white.jpg" alt="The Corkscrew">
-                            <img class="alt" src="assets/corkscrew_lifestyle.jpg" alt="The Corkscrew in use">
-                        </div>
-                        <div class="meta">
-                            <div class="left"><h3>The Corkscrew</h3><span class="sub">From the antler's burr, dense and short</span></div>
-                            <span class="price">£25</span>
-                        </div>
-                    </a>
-                    <a href="the-set.html" class="product-card scroll-reveal" style="transition-delay: 0.1s;">
-                        <div class="img-wrap">
-                            <img class="primary" src="assets/set_main_white.jpg" alt="The Set">
-                            <img class="alt" src="assets/set_lifestyle.jpg" alt="The Set in use">
-                        </div>
-                        <div class="meta">
-                            <div class="left"><h3>The Set</h3><span class="sub">Two pieces in a presentation box</span></div>
-                            <span class="price">£40</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- GOOD TO KNOW (solid band) -->
-        <section id="good-to-know" class="solid-band" style="padding: 120px 40px; border-top: 1px solid var(--line);">
-            <div style="max-width: 1280px; margin: 0 auto;">
-                <div class="assurance-grid">
-                    <div class="assurance scroll-reveal">
-                        <h4 class="serif italic">Made to order, in small batches</h4>
-                        <p>Everything's made a few at a time, by hand, and on your doorstep within a week.</p>
-                    </div>
-                    <div class="assurance scroll-reveal" style="transition-delay: 0.1s;">
-                        <h4 class="serif italic">UK delivery, tracked</h4>
-                        <p>Flat £4.50 shipping across the UK via Royal Mail, with tracking. You'll get an email when it's on its way.</p>
-                    </div>
-                    <div class="assurance scroll-reveal" style="transition-delay: 0.2s;">
-                        <h4 class="serif italic">Not right? Send it back</h4>
-                        <p>If it's not for you, return it unused within 14 days for a refund. Get in touch and we'll sort it.</p>
-                    </div>
-                    <div class="assurance scroll-reveal" style="transition-delay: 0.3s;">
-                        <h4 class="serif italic">A real place, a real pair of hands</h4>
-                        <p>Questions before you buy? Email <a href="mailto:hello@stagandsteel.co.uk">hello@stagandsteel.co.uk</a>, and you'll reach one of us.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER (video stops here) -->
-        <footer id="contact" class="site-footer">
-            <div class="footer-inner">
-                <div class="footer-grid">
-                    <div>
-                        <h4>Welcome to<br>the Stags.</h4>
-                        <p>Our pieces are limited, so we release them in batches. Join the Stags and you'll be first to know the second the Signature Collection is back in stock, plus every new drop from the herd.</p>
-                        <form class="subscribe" onsubmit="event.preventDefault();">
-                            <input type="email" placeholder="Email Address" required>
-                            <button type="submit">Subscribe</button>
-                        </form>
-                    </div>
-                    <div class="footer-links">
-                        <a href="shop.html">Shop</a>
-                        <a href="index.html#material">The Material</a>
-                        <a href="index.html#making">How It's Made</a>
-                        <a href="index.html#mission">Our Mission</a>
-                        <a href="mailto:hello@stagandsteel.co.uk">Contact</a>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <span>© 2026 Stag &amp; Steel &middot; Mauldslie Farm, Temple, Midlothian</span>
-                    <span>Site by <a href="https://barkerdigital.co.uk" target="_blank" rel="noopener">Barker Digital</a></span>
-                </div>
-            </div>
-        </footer>
-
-    </main>
-
-    <script src="assets/vendor/gsap.min.js"></script>
-    <script src="assets/vendor/ScrollTrigger.min.js"></script>
-    <script src="scrub.js"></script>
-    <script src="intro.js"></script>
-    <script src="nav.js"></script>
-    <script src="script.js"></script>
+<section class="sec">
+  <div class="wrap">
+    <div class="promises">
+      <div class="rv"><span class="no">i.</span><h3>Made by hand</h3><p>Every piece is cut, fitted and finished by hand in small batches. No two are the same.</p></div>
+      <div class="rv d1"><span class="no">ii.</span><h3>Tracked UK delivery</h3><p>A flat £4.50 to anywhere in the UK by Royal Mail, with tracking. Usually with you within a week.</p></div>
+      <div class="rv d2"><span class="no">iii.</span><h3>Easy returns</h3><p>If it is not for you, send it back unused within 14 days for a full refund.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <h4>Stag &amp; Steel</h4>
+        <p>Antler barware and dog chews, made by hand in small batches at Mauldslie Farm, Temple, Midlothian.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="stag-opener.html">The Stag Opener</a></li>
+          <li><a href="dog-chew.html">Antler Dog Chew</a></li>
+          <li><a href="bundle.html">The Bundle</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="mailto:hello@stagandsteel.co.uk">hello@stagandsteel.co.uk</a></li>
+          <li>UK delivery, £4.50 tracked</li>
+          <li>Returns within 14 days</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-mark wordmark" aria-hidden="true">Stag &amp; Steel</div>
+    <div class="foot-base">
+      <span>&copy; 2026 Stag &amp; Steel &middot; Mauldslie Farm, Temple, Midlothian</span>
+      <span>Payments handled securely by Stripe &middot; Site by <a href="https://barkerdigital.co.uk" class="link-u" style="padding-bottom:2px;letter-spacing:.1em">Barker Digital</a></span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

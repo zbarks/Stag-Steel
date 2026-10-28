@@ -1,82 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank you | Stag &amp; Steel</title>
-    <meta name="robots" content="noindex">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you | Stag & Steel</title>
+<meta name="description" content="Order received.">
+<meta property="og:title" content="Thank you | Stag & Steel">
+<meta property="og:description" content="Order received.">
+<meta property="og:image" content="https://www.stagandsteel.co.uk/assets/opener-box.jpg">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#120f0d">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<script src="app.js?v=3" defer></script>
 </head>
-<body>
-    <div class="paper-grain"></div>
+<body data-clear-cart>
+<header class="site-head" data-solid>
+  <nav class="head-links" aria-label="Main">
+    <a href="shop.html">Shop</a>
+    <a href="bundle.html">The Bundle</a>
+    <a href="story.html">Our Story</a>
+  </nav>
+  <a href="index.html" class="wordmark" aria-label="Stag and Steel, home">Stag &amp; Steel</a>
+  <div class="head-right">
+    <a href="mailto:hello@stagandsteel.co.uk">Contact</a>
+    <button class="cart-btn keep" type="button" data-cart aria-label="Open basket">Basket<span class="cart-count" data-n="0">0</span></button>
+    <button class="menu-btn" type="button" data-menu aria-label="Open menu">Menu</button>
+  </div>
+</header>
+<div class="mobile-menu" aria-label="Menu">
+  <button class="mm-close" type="button" data-menu>Close</button>
+  <a href="shop.html"><span>01</span>Shop</a>
+  <a href="stag-opener.html"><span>02</span>The Stag Opener</a>
+  <a href="dog-chew.html"><span>03</span>Antler Dog Chew</a>
+  <a href="bundle.html"><span>04</span>The Bundle</a>
+  <a href="story.html"><span>05</span>Our Story</a>
+  <div class="mm-foot">hello@stagandsteel.co.uk</div>
+</div>
 
-    <nav class="site-nav solid" id="siteNav">
-        <a href="index.html" class="logo">Stag &amp; Steel</a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html#place">The Place</a></li>
-            <li><a href="index.html#craft">The Craft</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+<main>
+<section class="simple">
+  <div>
+    <img class="mono" src="assets/monogram-cream.png" alt="">
+    <span class="eyebrow">Order received</span>
+    <h1>Thank you.</h1>
+    <p>Your order is being prepared by hand. Stripe will send a confirmation email within a few minutes, and we will email again when it is on its way.</p>
+    <p>Let the good times begin.</p>
+    <a href="shop.html" class="btn">Back to the shop <span class="arr">&rarr;</span></a>
+  </div>
+</section>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <h4>Stag &amp; Steel</h4>
+        <p>Antler barware and dog chews, made by hand in small batches at Mauldslie Farm, Temple, Midlothian.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="stag-opener.html">The Stag Opener</a></li>
+          <li><a href="dog-chew.html">Antler Dog Chew</a></li>
+          <li><a href="bundle.html">The Bundle</a></li>
         </ul>
-        <div class="nav-right">
-            <button class="cart-btn" aria-label="Open cart">
-                <span class="cart-dot"></span>
-                <span>Cart (<span class="js-cart-count">0</span>)</span>
-            </button>
-            <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
-        </div>
-    </nav>
-
-    <main>
-        <section class="simple-page">
-            <span class="eyebrow fade-up" style="margin-bottom: 28px; display: block;">Order Received</span>
-            <h1 class="serif italic fade-up delay-1">Thank you.</h1>
-            <p class="fade-up delay-2" style="font-size: 1.05rem; line-height: 1.85; margin-bottom: 16px;">
-                Your order is being prepared by hand. You'll receive a confirmation email from Stripe within a few minutes, and a separate dispatch note when your piece is on its way.
-            </p>
-            <p class="fade-up delay-2" style="font-size: 0.95rem; line-height: 1.85; color: var(--mist); margin-bottom: 56px;">
-                Each object is hand-numbered and finished to order. Shipping in approximately one week.
-            </p>
-            <a href="shop.html" class="btn btn-large fade-up delay-3">Continue browsing</a>
-        </section>
-
-        <footer id="contact" class="site-footer">
-            <div class="footer-inner">
-                <div class="footer-grid">
-                    <div>
-                        <h4>Join the<br>Stags.</h4>
-                        <p>Our objects are produced in small batches to honour the material's rarity. Subscribe for first access to new releases.</p>
-                        <form class="subscribe" onsubmit="event.preventDefault();">
-                            <input type="email" placeholder="Email Address" required>
-                            <button type="submit">Subscribe</button>
-                        </form>
-                    </div>
-                    <div class="footer-links">
-                        <a href="shop.html">Shop</a>
-                        <a href="index.html#place">Provenance</a>
-                        <a href="index.html#craft">The Craft</a>
-                        <a href="#">Instagram</a>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <span>© 2026 Stag &amp; Steel</span>
-                    <span>Designed by <a href="https://barkerdigital.co.uk" target="_blank" rel="noopener">Barker Digital</a></span>
-                </div>
-            </div>
-        </footer>
-    </main>
-
-    <script src="script.js"></script>
-    <script>
-        // Clear cart after successful payment
-        try { localStorage.removeItem('stag_cart'); } catch (e) {}
-        // Force counter refresh once the script loads
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.js-cart-count').forEach(el => el.textContent = '0');
-            document.querySelectorAll('.cart-btn').forEach(b => b.dataset.hasItems = 'false');
-        });
-    </script>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="story.html">Our Story</a></li>
+          <li><a href="mailto:hello@stagandsteel.co.uk">hello@stagandsteel.co.uk</a></li>
+          <li>UK delivery, £4.50 tracked</li>
+          <li>Returns within 14 days</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-mark wordmark" aria-hidden="true">Stag &amp; Steel</div>
+    <div class="foot-base">
+      <span>&copy; 2026 Stag &amp; Steel &middot; Mauldslie Farm, Temple, Midlothian</span>
+      <span>Payments handled securely by Stripe &middot; Site by <a href="https://barkerdigital.co.uk" class="link-u" style="padding-bottom:2px;letter-spacing:.1em">Barker Digital</a></span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

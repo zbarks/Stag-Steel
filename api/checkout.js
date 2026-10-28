@@ -14,29 +14,23 @@ const Stripe = require('stripe');
 // Prices are in pence (Stripe uses smallest currency unit).
 // ============================================================
 const PRODUCTS = {
-    'tine-opener': {
-        name: 'The Tine Opener',
-        price: 3000, // £30.00
-        image: 'tine_main_white.jpg',
-        description: "From the antler's outer point",
+    'stag-opener': {
+        name: 'The Stag Opener',
+        price: 1500, // £15.00
+        image: 'opener-main.jpg',
+        description: 'Red deer antler and polished steel',
     },
-    'stem-opener': {
-        name: 'The Stem Opener',
-        price: 2500, // £25.00
-        image: 'stem_main_white.jpg',
-        description: "Cut from the antler's main beam",
+    'dog-chew': {
+        name: 'Antler Dog Chew',
+        price: 1000, // £10.00
+        image: 'chew-main.jpg',
+        description: 'Natural red deer antler, nothing added',
     },
-    'corkscrew': {
-        name: 'The Corkscrew',
-        price: 2500, // £25.00
-        image: 'corkscrew_main_white.jpg',
-        description: "From the antler's burr — dense and short",
-    },
-    'the-set': {
-        name: 'The Set',
-        price: 4000, // £40.00
-        image: 'set_main_white.jpg',
-        description: 'Two-piece presentation box',
+    'the-bundle': {
+        name: 'The Bundle',
+        price: 2000, // £20.00
+        image: 'opener-box.jpg',
+        description: 'The Stag Opener and an Antler Dog Chew',
     },
 };
 

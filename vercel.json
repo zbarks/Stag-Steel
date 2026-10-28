@@ -1,5 +1,12 @@
 {
   "version": 2,
   "cleanUrls": false,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/tine-opener.html", "destination": "/stag-opener.html", "permanent": true },
+    { "source": "/stem-opener.html", "destination": "/stag-opener.html", "permanent": true },
+    { "source": "/corkscrew.html", "destination": "/shop.html", "permanent": true },
+    { "source": "/the-set.html", "destination": "/bundle.html", "permanent": true },
+    { "source": "/cart.html", "destination": "/shop.html", "permanent": true }
+  ]
 }

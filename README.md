@@ -4,15 +4,21 @@ Static shop with Stripe Checkout. Completed orders are written to Supabase by a
 webhook, which is what feeds the **admin portal** (separate project).
 
 ```
-index.html                Home (rebuilt — human copy, team, how it's made)
+index.html                Home (hero video, range, bundle band)
 shop.html                 All products
-tine-opener.html …        Product pages
-success.html              Post-purchase page
-style.css / script.js     Styles + cart (localStorage drawer)
+stag-opener.html          The Stag Opener (£15)
+dog-chew.html             Antler Dog Chew (£10)
+bundle.html               The Bundle, opener + chew (£20)
+story.html                Our Story
+success.html              Post-purchase page (clears the basket)
+style.css / app.js        Styles + basket drawer + checkout call
 api/checkout.js           Creates the Stripe Checkout Session (prices live here)
 api/webhook.js            Stripe → Supabase order storage
-assets/                   Images
+assets/                   Photos, hero video (hero.mp4 desktop, hero-sm.mp4 mobile)
 ```
+
+Product IDs (also the `skus` keys the webhook records): `stag-opener`,
+`dog-chew`, `the-bundle`. Old product URLs redirect via `vercel.json`.
 
 ---
 
@@ -54,17 +60,11 @@ should appear in the Supabase `orders` table (and in the portal).
 
 ## Prices
 
-`api/checkout.js` is the source of truth (`PRODUCTS`, in pence). The cart UI in
-`script.js` (`CATALOGUE`, in £) is only for display — the server price wins at
+`api/checkout.js` is the source of truth (`PRODUCTS`, in pence). The basket UI in
+`app.js` (`CATALOGUE`, in £) is only for display — the server price wins at
 checkout. Keep them, and the `£` text in the product HTML, in sync.
 
 Flat UK shipping is `SHIPPING_PENCE` in `api/checkout.js` and `SHIPPING` in
-`script.js`.
+`app.js`.
 
 ---
-
-## Team photos
-
-`index.html` uses `assets/team-harry.jpg` and `assets/team-zach.jpg` — these are
-placeholders. Drop in real square headshots at those paths (same filenames) and
-they'll appear on the home page.
