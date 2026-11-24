@@ -10,7 +10,17 @@
         'the-bundle':  { name: 'The Bundle', price: 20, img: ['assets/opener-main-sm.jpg', 'assets/chew-main-sm.jpg'], url: 'bundle.html', note: 'Opener and dog chew' }
     };
     var SHIPPING_PER_BOX = 4.5, SHIPPING_CAP = 10;
-    function shippingFor(boxes) { return Math.min(SHIPPING_CAP, SHIPPING_PER_BOX * boxes); }
+    var FREE_SHIPPING_CODES = ['INPERSON']; // display only: api/checkout.js enforces
+    var CODE_KEY = 'ss_code_v1';
+    var code = '';
+    try { code = localStorage.getItem(CODE_KEY) || ''; } catch (e) {}
+    function freeShip() { return FREE_SHIPPING_CODES.indexOf(code) !== -1; }
+    function shippingFor(boxes) { return freeShip() ? 0 : Math.min(SHIPPING_CAP, SHIPPING_PER_BOX * boxes); }
+    function setCode(c) {
+        code = (c || '').trim().toUpperCase();
+        try { localStorage.setItem(CODE_KEY, code); } catch (e) {}
+        render();
+    }
     var KEY = 'ss_cart_v2';
 
     /* ---------- storage ---------- */
@@ -96,7 +106,11 @@
         var SHIPPING = shippingFor(n);
         foot.innerHTML =
             '<div class="tot"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
-            '<div class="tot"><span>UK delivery, tracked (' + n + (n === 1 ? ' box' : ' boxes') + ')</span><span>' + money(SHIPPING) + '</span></div>' +
+            '<div class="tot"><span>' + (freeShip() ? 'Delivery (code ' + code + ')' : 'UK delivery, tracked (' + n + (n === 1 ? ' box' : ' boxes') + ')') + '</span><span>' + (freeShip() ? 'Free' : money(SHIPPING)) + '</span></div>' +
+            '<form class="code" data-code>' +
+                '<input type="text" name="code" placeholder="Discount code" autocomplete="off" aria-label="Discount code" value="' + (freeShip() ? '' : code) + '">' +
+                '<button type="submit" class="btn">Apply</button></form>' +
+                (freeShip() ? '<p class="code-ok">Code ' + code + ' applied. <button type="button" class="rm" data-code-clear>Remove</button></p>' : '') +
             '<div class="tot grand"><span>Total</span><span>' + money(sub + SHIPPING) + '</span></div>' +
             '<button class="btn btn-block" type="button" data-checkout>Checkout securely <span class="arr">&rarr;</span></button>' +
             '<p class="err" role="alert"></p>';
@@ -107,6 +121,7 @@
         if (t.dataset.inc) add(t.dataset.inc, 1);
         else if (t.dataset.dec) setQty(t.dataset.dec, qtyOf(t.dataset.dec) - 1);
         else if (t.dataset.rm) setQty(t.dataset.rm, 0);
+        else if (t.hasAttribute('data-code-clear')) setCode('');
         else if (t.hasAttribute('data-swap')) {
             var p = Math.min(qtyOf('stag-opener'), qtyOf('dog-chew'));
             cart = cart.map(function (l) { if (l.id === 'stag-opener' || l.id === 'dog-chew') l.qty -= p; return l; });
@@ -121,7 +136,7 @@
         btn.disabled = true; btn.innerHTML = 'Opening secure checkout';
         fetch('/api/checkout', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ items: cart.map(function (l) { return { id: l.id, qty: l.qty }; }) })
+            body: JSON.stringify({ items: cart.map(function (l) { return { id: l.id, qty: l.qty }; }), code: code })
         }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
           .then(function (res) {
               if (res.ok && res.j.url) { window.location.href = res.j.url; return; }
@@ -201,6 +216,13 @@
     document.addEventListener('DOMContentLoaded', function () {
         buildDrawer();
         drawer.addEventListener('click', onDrawerClick);
+        drawer.addEventListener('submit', function (e) {
+            if (!e.target.hasAttribute('data-code')) return;
+            e.preventDefault();
+            var v = e.target.code.value.trim().toUpperCase();
+            if (FREE_SHIPPING_CODES.indexOf(v) !== -1) { setCode(v); toast('Code applied. Delivery is free.'); }
+            else toast('That code is not valid.');
+        });
         render(); initHeader(); initReveal(); initHero(); initGallery(); initBuy();
         if (document.body.hasAttribute('data-clear-cart')) { cart = []; save(cart); render(); }
     });

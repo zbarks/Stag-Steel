@@ -39,6 +39,9 @@ const PRODUCTS = {
 const SHIPPING_PER_BOX_PENCE = 450; // £4.50
 const SHIPPING_CAP_PENCE = 1000; // £10.00
 
+// Codes that remove shipping entirely (checked server-side, case-insensitive).
+const FREE_SHIPPING_CODES = ['INPERSON'];
+
 // ============================================================
 // Handler
 // ============================================================
@@ -102,7 +105,11 @@ module.exports = async (req, res) => {
             });
         }
 
-        const shippingPence = Math.min(SHIPPING_CAP_PENCE, SHIPPING_PER_BOX_PENCE * boxes);
+        const code = String(body.code || '').trim().toUpperCase();
+        const freeShipping = FREE_SHIPPING_CODES.includes(code);
+        const shippingPence = freeShipping
+            ? 0
+            : Math.min(SHIPPING_CAP_PENCE, SHIPPING_PER_BOX_PENCE * boxes);
 
         // Create the Checkout Session
         const session = await stripe.checkout.sessions.create({
@@ -119,7 +126,7 @@ module.exports = async (req, res) => {
                     shipping_rate_data: {
                         type: 'fixed_amount',
                         fixed_amount: { amount: shippingPence, currency: 'gbp' },
-                        display_name: 'UK delivery',
+                        display_name: freeShipping ? 'Free delivery (in person code)' : 'UK delivery',
                         delivery_estimate: {
                             minimum: { unit: 'business_day', value: 5 },
                             maximum: { unit: 'business_day', value: 7 },
@@ -138,6 +145,7 @@ module.exports = async (req, res) => {
             metadata: {
                 source: 'stagandsteel.co.uk',
                 skus: JSON.stringify(skuMap), // e.g. {"tine-opener":2,"corkscrew":1}
+                ...(freeShipping ? { shipping_code: code } : {}),
             },
 
             // Collect customer email
