@@ -9,7 +9,8 @@
         'dog-chew':    { name: 'Antler Dog Chew', price: 10, img: ['assets/chew-main-sm.jpg'], url: 'dog-chew.html' },
         'the-bundle':  { name: 'The Bundle', price: 20, img: ['assets/opener-main-sm.jpg', 'assets/chew-main-sm.jpg'], url: 'bundle.html', note: 'Opener and dog chew' }
     };
-    var SHIPPING = 4.5;
+    var SHIPPING_PER_BOX = 4.5, SHIPPING_CAP = 10;
+    function shippingFor(boxes) { return Math.min(SHIPPING_CAP, SHIPPING_PER_BOX * boxes); }
     var KEY = 'ss_cart_v2';
 
     /* ---------- storage ---------- */
@@ -92,9 +93,10 @@
         body.innerHTML = html;
 
         var sub = cart.reduce(function (s, l) { return s + CATALOGUE[l.id].price * l.qty; }, 0);
+        var SHIPPING = shippingFor(n);
         foot.innerHTML =
             '<div class="tot"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
-            '<div class="tot"><span>UK delivery, tracked</span><span>' + money(SHIPPING) + '</span></div>' +
+            '<div class="tot"><span>UK delivery, tracked (' + n + (n === 1 ? ' box' : ' boxes') + ')</span><span>' + money(SHIPPING) + '</span></div>' +
             '<div class="tot grand"><span>Total</span><span>' + money(sub + SHIPPING) + '</span></div>' +
             '<button class="btn btn-block" type="button" data-checkout>Checkout securely <span class="arr">&rarr;</span></button>' +
             '<p class="err" role="alert"></p>';
@@ -127,7 +129,7 @@
           })
           .catch(function (e) {
               btn.disabled = false; btn.innerHTML = 'Checkout securely <span class="arr">&rarr;</span>';
-              if (err) err.textContent = 'Sorry, checkout could not open. Please try again or email hello@stagandsteel.co.uk.';
+              if (err) err.textContent = 'Sorry, checkout could not open. Please try again or email zach@barkerdigital.co.uk.';
               console.error(e);
           });
     }

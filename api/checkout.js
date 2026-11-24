@@ -34,8 +34,10 @@ const PRODUCTS = {
     },
 };
 
-// Flat UK shipping
-const SHIPPING_PENCE = 450; // £4.50
+// UK shipping: £4.50 per box, capped at £10 per order.
+// Every unit in the basket (including a bundle) counts as one box.
+const SHIPPING_PER_BOX_PENCE = 450; // £4.50
+const SHIPPING_CAP_PENCE = 1000; // £10.00
 
 // ============================================================
 // Handler
@@ -71,6 +73,7 @@ module.exports = async (req, res) => {
         // Reject anything we don't recognise.
         const origin = getOrigin(req);
         const lineItems = [];
+        let boxes = 0;
         const skuMap = {}; // { 'tine-opener': 2, ... } — recorded in metadata for the webhook
 
         for (const item of items) {
@@ -83,6 +86,7 @@ module.exports = async (req, res) => {
             }
 
             skuMap[id] = (skuMap[id] || 0) + qty;
+            boxes += qty;
 
             lineItems.push({
                 quantity: qty,
@@ -98,6 +102,8 @@ module.exports = async (req, res) => {
             });
         }
 
+        const shippingPence = Math.min(SHIPPING_CAP_PENCE, SHIPPING_PER_BOX_PENCE * boxes);
+
         // Create the Checkout Session
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
@@ -107,12 +113,12 @@ module.exports = async (req, res) => {
             // UK only — collect shipping address
             shipping_address_collection: { allowed_countries: ['GB'] },
 
-            // Flat-rate UK shipping
+            // UK shipping, per box with a cap
             shipping_options: [
                 {
                     shipping_rate_data: {
                         type: 'fixed_amount',
-                        fixed_amount: { amount: SHIPPING_PENCE, currency: 'gbp' },
+                        fixed_amount: { amount: shippingPence, currency: 'gbp' },
                         display_name: 'UK delivery',
                         delivery_estimate: {
                             minimum: { unit: 'business_day', value: 5 },

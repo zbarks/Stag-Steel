@@ -64,7 +64,8 @@ should appear in the Supabase `orders` table (and in the portal).
 `app.js` (`CATALOGUE`, in £) is only for display — the server price wins at
 checkout. Keep them, and the `£` text in the product HTML, in sync.
 
-Flat UK shipping is `SHIPPING_PENCE` in `api/checkout.js` and `SHIPPING` in
-`app.js`.
+UK shipping is £4.50 per box, capped at £10 per order (`SHIPPING_PER_BOX_PENCE` and
+`SHIPPING_CAP_PENCE` in `api/checkout.js`, `SHIPPING_PER_BOX` and `SHIPPING_CAP` in
+`app.js`). Each unit in the basket, including a bundle, counts as one box.
 
 ---
