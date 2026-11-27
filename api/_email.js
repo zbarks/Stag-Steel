@@ -11,7 +11,7 @@
 //                      (the domain must be verified in Resend)
 //    EMAIL_REPLY_TO    where customer replies land (optional)
 //    OWNER_NOTIFY_EMAIL where the new-order alert goes
-//                      (default zach@barkerdigital.co.uk)
+//                      (comma separated; default zach@barkerdigital.co.uk and haroldstevens911@icloud.com)
 //    EMAILS_ENABLED    must be "true" or nothing is sent
 //    CUSTOMER_EMAILS_ENABLED  "true" to also email the customer a
 //                      confirmation (off by default; the owner alert is always on)
@@ -32,7 +32,8 @@ async function send({ to, subject, html, replyTo }) {
     if (!enabled()) return { skipped: 'emails-disabled' };
     if (!to) return { skipped: 'no-recipient' };
     try {
-        const payload = { from: process.env.EMAIL_FROM, to: [to], subject, html };
+        const recipients = (Array.isArray(to) ? to : String(to).split(',')).map((x) => x.trim()).filter(Boolean);
+        const payload = { from: process.env.EMAIL_FROM, to: recipients, subject, html };
         const rt = replyTo || process.env.EMAIL_REPLY_TO || 'help@stagandsteel.co.uk';
         if (rt) payload.reply_to = rt;
         const r = await fetch('https://api.resend.com/emails', {
@@ -119,7 +120,7 @@ function renderOwnerAlert(order) {
 }
 
 async function sendOwnerAlert(order) {
-    const to = process.env.OWNER_NOTIFY_EMAIL || 'zach@barkerdigital.co.uk';
+    const to = process.env.OWNER_NOTIFY_EMAIL || 'zach@barkerdigital.co.uk,haroldstevens911@icloud.com';
     const { subject, html } = renderOwnerAlert(order);
     return send({ to, subject, html, replyTo: order.customer_email || undefined });
 }
