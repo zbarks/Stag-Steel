@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Stag &amp; Steel Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/portal/portal.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="side__brand">STAG &amp; STEEL</div>
+    <div class="side__sub">PORTAL</div>
+    <nav class="side__nav" id="nav">
+      <button data-go="overview" class="is-on">Overview</button>
+      <button data-go="orders">Orders <span class="pill" id="navCount" hidden></span></button>
+      <button data-go="products">Products</button>
+      <button data-go="customers">Customers</button>
+    </nav>
+    <div class="side__foot">Built by Barker Digital</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="top__menu" id="menu" aria-label="Menu">Menu</button>
+      <h1 class="top__title" id="title">Overview</h1>
+      <div class="top__right">
+        <span class="top__status" id="status">Loading</span>
+        <button class="btn btn--ghost" id="refresh">Refresh</button>
+      </div>
+    </header>
+
+    <div class="notice" id="notice" hidden></div>
+
+    <section class="page" id="overview">
+      <div class="range" id="range">
+        <button data-d="7">7 days</button>
+        <button data-d="30" class="is-on">30 days</button>
+        <button data-d="90">90 days</button>
+        <button data-d="0">All time</button>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="card">
+        <div class="card__head"><h2>Revenue by day</h2><span class="muted" id="chartNote"></span></div>
+        <div class="chart" id="chart"></div>
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="card__head"><h2>To send</h2></div><div id="toShip"></div></div>
+        <div class="card"><div class="card__head"><h2>Latest orders</h2></div><div id="latest"></div></div>
+      </div>
+    </section>
+
+    <section class="page" id="orders" hidden>
+      <div class="bar">
+        <div class="tabs" id="tabs">
+          <button data-f="all" class="is-on">All</button>
+          <button data-f="paid">To send</button>
+          <button data-f="shipped">Sent</button>
+        </div>
+        <input class="search" id="search" type="search" placeholder="Search name, email or town" autocomplete="off">
+      </div>
+      <div class="card card--flush"><div id="orderList"></div></div>
+    </section>
+
+    <section class="page" id="products" hidden>
+      <div class="cards" id="productCards"></div>
+    </section>
+
+    <section class="page" id="customers" hidden>
+      <div class="kpis" id="custKpis"></div>
+      <div class="card card--flush"><div id="custList"></div></div>
+    </section>
+  </div>
+</div>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__back" id="drawerBack"></div>
+  <div class="drawer__panel" id="drawerPanel"></div>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script src="/portal/portal.js"></script>
+</body>
+</html>
