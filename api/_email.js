@@ -33,7 +33,7 @@ async function send({ to, subject, html, replyTo }) {
     if (!to) return { skipped: 'no-recipient' };
     try {
         const payload = { from: process.env.EMAIL_FROM, to: [to], subject, html };
-        const rt = replyTo || process.env.EMAIL_REPLY_TO;
+        const rt = replyTo || process.env.EMAIL_REPLY_TO || 'help@stagandsteel.co.uk';
         if (rt) payload.reply_to = rt;
         const r = await fetch('https://api.resend.com/emails', {
             method: 'POST',
@@ -79,37 +79,49 @@ ${itemRows(order.items)}
 <tr><td style="padding:6px 0 0;font-size:16px;font-weight:700;">Total</td><td style="padding:6px 0 0;font-size:16px;font-weight:700;text-align:right;">${gbp(order.amount_total)}</td></tr></table>`;
 }
 
-async function sendCustomerConfirmation(order) {
+function renderCustomerConfirmation(order) {
     const first = (order.customer_name || '').trim().split(/\s+/)[0];
+    const step = (n, t, d) => `<tr><td valign="top" style="padding:0 14px 14px 0;width:30px;"><div style="width:26px;height:26px;border-radius:13px;background:${BRAND.kraft};color:${BRAND.ink};font-size:13px;font-weight:700;text-align:center;line-height:26px;">${n}</div></td>
+<td style="padding:0 0 14px;font-size:14px;line-height:1.5;"><b>${t}</b><br><span style="color:${BRAND.muted};">${d}</span></td></tr>`;
     const inner = `
-<tr><td style="padding:28px 30px 6px;"><div style="font-size:19px;font-weight:600;">Thank you${first ? ', ' + esc(first) : ''}. Your order is confirmed.</div>
-<div style="margin-top:6px;font-size:14px;color:${BRAND.muted};line-height:1.6;">We will pack it by hand and send it out shortly. If we have a tracking number we will email it to you.</div></td></tr>
-<tr><td style="padding:14px 30px 0;">${totals(order)}</td></tr>
-<tr><td style="padding:18px 30px 26px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Delivery to</div>
-<div style="margin-top:6px;font-size:14px;line-height:1.6;">${address(order)}</div></td></tr>`;
-    return send({
-        to: order.customer_email,
-        subject: 'Your Stag & Steel order is confirmed',
-        html: shell(inner, 'Thank you. Your Stag & Steel order is confirmed.'),
-    });
+<tr><td style="padding:34px 30px 8px;"><div style="font-size:11px;letter-spacing:.16em;color:${BRAND.kraft};text-transform:uppercase;">Order confirmed</div>
+<div style="margin-top:8px;font-size:26px;line-height:1.25;font-weight:600;">Thank you${first ? ', ' + esc(first) : ''}.</div>
+<div style="margin-top:10px;font-size:15px;color:${BRAND.muted};line-height:1.6;">We have your order and we are getting started on it. Every piece is made and packed by hand in Scotland.</div></td></tr>
+<tr><td style="padding:22px 30px 0;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;padding-bottom:6px;border-bottom:2px solid ${BRAND.ink};">Your order</div>${totals(order)}</td></tr>
+<tr><td style="padding:24px 30px 4px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Delivery to</div>
+<div style="margin-top:6px;font-size:14px;line-height:1.6;">${address(order)}</div></td></tr>
+<tr><td style="padding:22px 30px 6px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;padding-bottom:12px;">What happens next</div>
+<table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+${step(1, 'We pack it', 'Your order is checked and packed by hand.')}
+${step(2, 'It is on its way', 'We will email you as soon as it is posted, with tracking where we have it.')}
+${step(3, 'Enjoy it', 'Something not right? Just reply to this email and we will sort it.')}
+</table></td></tr>
+<tr><td style="padding:6px 30px 30px;"><a href="mailto:help@stagandsteel.co.uk" style="display:inline-block;border:1.5px solid ${BRAND.ink};color:${BRAND.ink};text-decoration:none;font-size:13px;font-weight:600;padding:10px 18px;border-radius:8px;">Need help? help@stagandsteel.co.uk</a></td></tr>`;
+    return { subject: 'Your Stag & Steel order is confirmed', html: shell(inner, 'Thank you. Your Stag & Steel order is confirmed.') };
+}
+
+async function sendCustomerConfirmation(order) {
+    const { subject, html } = renderCustomerConfirmation(order);
+    return send({ to: order.customer_email, subject, html });
+}
+
+function renderOwnerAlert(order) {
+    const site = (process.env.SITE_URL || 'https://stagandsteel.co.uk').replace(/\/$/, '');
+    const inner = `
+<tr><td style="padding:30px 30px 6px;"><div style="font-size:11px;letter-spacing:.16em;color:${BRAND.kraft};text-transform:uppercase;">New order</div>
+<div style="margin-top:8px;font-size:28px;font-weight:600;">${gbp(order.amount_total)}</div>
+<div style="margin-top:6px;font-size:14px;color:${BRAND.muted};">${esc(order.customer_name || 'A customer')} &middot; <a href="mailto:${esc(order.customer_email || '')}" style="color:${BRAND.muted};">${esc(order.customer_email || '')}</a></div></td></tr>
+<tr><td style="padding:20px 30px 0;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;padding-bottom:6px;border-bottom:2px solid ${BRAND.ink};">Items</div>${totals(order)}</td></tr>
+<tr><td style="padding:22px 30px 8px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Send to</div>
+<div style="margin-top:6px;font-size:14px;line-height:1.6;">${address(order)}</div></td></tr>
+<tr><td style="padding:12px 30px 28px;"><a href="${esc(site)}/portal" style="display:inline-block;background:${BRAND.kraft};color:${BRAND.ink};text-decoration:none;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;">Open the portal</a></td></tr>`;
+    return { subject: `New Stag & Steel order: ${gbp(order.amount_total)}`, html: shell(inner, `New order from ${order.customer_name || 'a customer'}`) };
 }
 
 async function sendOwnerAlert(order) {
     const to = process.env.OWNER_NOTIFY_EMAIL || 'zach@barkerdigital.co.uk';
-    const site = (process.env.SITE_URL || 'https://stagandsteel.co.uk').replace(/\/$/, '');
-    const inner = `
-<tr><td style="padding:28px 30px 6px;"><div style="font-size:19px;font-weight:600;">New order: ${gbp(order.amount_total)}</div>
-<div style="margin-top:6px;font-size:14px;color:${BRAND.muted};">${esc(order.customer_name || 'A customer')} &middot; ${esc(order.customer_email || '')}</div></td></tr>
-<tr><td style="padding:14px 30px 0;">${totals(order)}</td></tr>
-<tr><td style="padding:18px 30px 8px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Send to</div>
-<div style="margin-top:6px;font-size:14px;line-height:1.6;">${address(order)}</div></td></tr>
-<tr><td style="padding:10px 30px 26px;"><a href="${esc(site)}/portal" style="display:inline-block;background:${BRAND.kraft};color:${BRAND.ink};text-decoration:none;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;">Open the portal</a></td></tr>`;
-    return send({
-        to,
-        subject: `New Stag & Steel order: ${gbp(order.amount_total)}`,
-        html: shell(inner, `New order from ${order.customer_name || 'a customer'}`),
-        replyTo: order.customer_email || undefined,
-    });
+    const { subject, html } = renderOwnerAlert(order);
+    return send({ to, subject, html, replyTo: order.customer_email || undefined });
 }
 
-module.exports = { enabled, sendCustomerConfirmation, sendOwnerAlert };
+module.exports = { enabled, sendCustomerConfirmation, sendOwnerAlert, renderCustomerConfirmation, renderOwnerAlert };
