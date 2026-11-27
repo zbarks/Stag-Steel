@@ -9,7 +9,7 @@
         'dog-chew':    { name: 'Antler Dog Chew', price: 10, img: ['assets/chew-main-sm.jpg'], url: 'dog-chew.html' },
         'the-bundle':  { name: 'The Bundle', price: 20, img: ['assets/opener-main-sm.jpg', 'assets/chew-main-sm.jpg'], url: 'bundle.html', note: 'Opener and dog chew' }
     };
-    var SHIPPING_PER_BOX = 4.5;
+    var SHIPPING_PER_BOX = 4.5, SHIPPING_CAP = 20;
     var FREE_SHIPPING_CODES = ['INPERSON']; // display only: api/checkout.js enforces
     var CODE_KEY = 'ss_code_v1';
     var code = '';
@@ -20,7 +20,7 @@
     function unitsOf() { return cart.reduce(function (s, l) { return s + l.qty; }, 0); }
     function minBoxes() { var s = cart.reduce(function (t, l) { return t + (SLOTS[l.id] || 2) * l.qty; }, 0); return Math.max(1, Math.ceil(s / BOX_SLOTS)); }
     function boxesNow() { return (pack === 'separate') ? Math.max(unitsOf(), 1) : minBoxes(); }
-    function shippingFor(boxes) { return freeShip() ? 0 : SHIPPING_PER_BOX * boxes; }
+    function shippingFor(boxes) { return freeShip() ? 0 : Math.min(SHIPPING_CAP, SHIPPING_PER_BOX * boxes); }
     function setCode(c) {
         code = (c || '').trim().toUpperCase();
         try { localStorage.setItem(CODE_KEY, code); } catch (e) {}
@@ -131,12 +131,22 @@
             '<p class="err" role="alert"></p>';
     }
 
+    function packExplain(n, mb) {
+        var names = { 'stag-opener': ['stag opener', 'stag openers'], 'dog-chew': ['dog chew', 'dog chews'], 'the-bundle': ['bundle', 'bundles'] };
+        var parts = cart.map(function (l) { return l.qty + ' ' + names[l.id][l.qty === 1 ? 0 : 1]; });
+        var list = parts.length > 1 ? parts.slice(0, -1).join(', ') + ' and ' + parts[parts.length - 1] : parts[0];
+        if (mb <= 1) return 'Your ' + list + ' fit together in one box.';
+        var hasB = qtyOf('the-bundle') > 0, hasO = qtyOf('stag-opener') + qtyOf('dog-chew') > 0;
+        var rule = hasB && hasO ? 'a box holds 6 items and a bundle counts as 2' : hasB ? 'a box holds 3 bundles' : 'a box holds 6 items';
+        return 'Your ' + list + ' need ' + mb + ' boxes, as ' + rule + '.';
+    }
+
     function packHtml(n, mb) {
         var h = '<div class="pack">';
         if (n > 1) {
             h += '<p class="pack-h">How should we pack it?</p>' +
                 '<label class="pack-opt"><input type="radio" name="pack" value="one-box"' + (pack === 'one-box' ? ' checked' : '') + '>' +
-                    '<span><strong>' + (mb > 1 ? 'Packed together' : 'All in one box') + '</strong><small>' + (mb > 1 ? 'Packed as tightly as possible: ' + mb + ' boxes (a box holds up to 6 openers or chews, or 3 bundles)' : 'Everything together in a single parcel') + '</small></span></label>' +
+                    '<span><strong>' + (mb > 1 ? 'Packed together' : 'All in one box') + '</strong><small>' + packExplain(n, mb) + '</small></span></label>' +
                 '<label class="pack-opt"><input type="radio" name="pack" value="separate"' + (pack === 'separate' ? ' checked' : '') + '>' +
                     '<span><strong>Separate boxes</strong><small>Each item in its own box (' + n + ' boxes), handy for gifts</small></span></label>';
         }
