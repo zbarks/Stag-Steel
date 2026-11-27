@@ -144,7 +144,7 @@ function renderOwnerAlert(order) {
     const inner = `
 <tr><td style="padding:30px 30px 6px;"><div style="font-size:11px;letter-spacing:.16em;color:${BRAND.kraft};text-transform:uppercase;">New order</div>
 <div style="margin-top:8px;font-size:28px;font-weight:600;">${gbp(order.amount_total)}</div>
-<div style="margin-top:6px;font-size:14px;color:${BRAND.muted};">${esc(order.customer_name || 'A customer')} &middot; <a href="mailto:${esc(order.customer_email || '')}" style="color:${BRAND.muted};">${esc(order.customer_email || '')}</a></div></td></tr>
+<div style="margin-top:6px;font-size:14px;color:${BRAND.muted};">${esc(order.customer_name || 'A customer')} &middot; <a href="mailto:${esc(order.customer_email || '')}" style="color:${BRAND.muted};">${esc(order.customer_email || '')}</a>${order.customer_phone ? ' &middot; <a href="tel:' + esc(order.customer_phone) + '" style="color:' + BRAND.muted + ';">' + esc(order.customer_phone) + '</a>' : ''}</div></td></tr>
 <tr><td style="padding:20px 30px 0;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;padding-bottom:6px;border-bottom:2px solid ${BRAND.ink};">Items</div>${totals(order)}</td></tr>
 <tr><td style="padding:22px 30px 8px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Send to</div>
 <div style="margin-top:6px;font-size:14px;line-height:1.6;">${address(order)}</div></td></tr>

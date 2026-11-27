@@ -149,7 +149,7 @@ module.exports = async (req, res) => {
             },
 
             // Collect customer email
-            phone_number_collection: { enabled: false },
+            phone_number_collection: { enabled: true },
 
             // Allow promotion codes (you can create these in Stripe dashboard)
             allow_promotion_codes: true,

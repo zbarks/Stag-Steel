@@ -126,6 +126,7 @@ module.exports = async (req, res) => {
                 session.customer_email ||
                 null,
             customer_name: (session.customer_details && session.customer_details.name) || null,
+            customer_phone: (session.customer_details && session.customer_details.phone) || null,
             amount_total: session.amount_total,        // pence, incl. shipping
             amount_subtotal: session.amount_subtotal,  // pence, ex shipping
             shipping_total:
