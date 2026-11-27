@@ -121,7 +121,7 @@
     $('#orderList').innerHTML = list.length ? list.map(function (o) {
       var sent = o.status === 'shipped';
       return '<button class="row" data-open="' + esc(o.id) + '">' +
-        '<div><div class="row__name">' + esc(o.customer_name || o.customer_email || 'Customer') + '</div><div class="row__sub">' + esc(o.customer_email) + '</div></div>' +
+        '<div><div class="row__name">' + esc(o.customer_name || o.customer_email || 'Customer') + '</div><div class="row__sub">' + esc(o.customer_email) + '</div>' + ((o.packaging === 'separate' || o.customer_note) ? '<div class="row__sub" style="color:#b8936a">' + [o.packaging === 'separate' ? 'Separate boxes' : '', o.customer_note ? 'Has note' : ''].filter(Boolean).join(' · ') + '</div>' : '') + '</div>' +
         '<div><div>' + esc(timeStr(o.created_at)) + '</div><div class="row__sub">' + esc(town(o)) + '</div></div>' +
         '<div class="row__amt">' + gbp(o.amount_total) + (o.exclude_from_revenue ? '<div class="row__sub">left out</div>' : '') + '</div>' +
         '<div style="text-align:right"><span class="tag ' + (sent ? 'tag--shipped' : 'tag--paid') + '">' + (sent ? 'Sent' : 'To send') + '</span></div></button>';
