@@ -149,6 +149,20 @@ async function sendShippedEmail(order, info) {
     return send({ to: order.customer_email, subject, html });
 }
 
+function packLabel(order) {
+    const n = Object.values(order.skus || {}).reduce((s, q) => s + (Number(q) || 0), 0);
+    if (order.packaging === 'separate') return `Separate boxes${n > 1 ? ' (' + n + ' boxes)' : ''}`;
+    if (order.packaging === 'one-box') return 'All in one box';
+    return '';
+}
+function packNoteRow(order) {
+    const p = packLabel(order), note = order.customer_note;
+    if (!p && !note) return '';
+    return `<tr><td style="padding:18px 30px 0;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Packing &amp; note</div>` +
+        (p ? `<div style="margin-top:6px;font-size:15px;font-weight:600;">${esc(p)}</div>` : '') +
+        (note ? `<div style="margin-top:6px;font-size:14px;line-height:1.6;font-style:italic;">&ldquo;${esc(note)}&rdquo;</div>` : '') + `</td></tr>`;
+}
+
 function renderOwnerAlert(order) {
     const site = (process.env.SITE_URL || 'https://stagandsteel.co.uk').replace(/\/$/, '');
     const inner = `
@@ -158,6 +172,7 @@ function renderOwnerAlert(order) {
 <tr><td style="padding:20px 30px 0;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;padding-bottom:8px;border-bottom:1px solid ${BRAND.kraft};">Items</div>${totals(order)}</td></tr>
 <tr><td style="padding:22px 30px 8px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Send to</div>
 <div style="margin-top:6px;font-size:14px;line-height:1.6;">${address(order)}</div></td></tr>
+${packNoteRow(order)}
 <tr><td style="padding:12px 30px 28px;"><a href="${esc(site)}/portal" style="display:inline-block;background:${BRAND.kraft};color:${BRAND.ink};text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:14px 24px;border-radius:2px;">Open the portal</a></td></tr>`;
     return { subject: `New Stag & Steel order: ${gbp(order.amount_total)}`, html: shell(inner, `New order from ${order.customer_name || 'a customer'}`) };
 }

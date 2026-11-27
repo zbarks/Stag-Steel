@@ -22,6 +22,13 @@
         render();
     }
     var KEY = 'ss_cart_v2';
+    var PACK_KEY = 'ss_pack_v1', NOTE_KEY = 'ss_note_v1';
+    var pack = '', note = '';
+    try { pack = localStorage.getItem(PACK_KEY) || ''; note = localStorage.getItem(NOTE_KEY) || ''; } catch (e) {}
+    if (pack !== 'one-box' && pack !== 'separate') pack = '';
+    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    function setPack(v) { pack = v; try { localStorage.setItem(PACK_KEY, v); } catch (e) {} }
+    function setNote(v) { note = v.slice(0, 300); try { localStorage.setItem(NOTE_KEY, note); } catch (e) {} }
 
     /* ---------- storage ---------- */
     function load() {
@@ -57,6 +64,8 @@
         document.body.appendChild(bg); document.body.appendChild(drawer);
         body = drawer.querySelector('.drawer-body'); foot = drawer.querySelector('.drawer-foot');
         drawer.querySelector('.drawer-close').addEventListener('click', closeCart);
+        drawer.addEventListener('change', onDrawerChange);
+        drawer.addEventListener('input', onDrawerInput);
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCart(); });
     }
     function openCart() { document.body.classList.add('cart-open'); drawer.setAttribute('aria-hidden', 'false'); }
@@ -112,8 +121,32 @@
                 '<button type="submit" class="btn">Apply</button></form>' +
                 (freeShip() ? '<p class="code-ok">Code ' + code + ' applied. <button type="button" class="rm" data-code-clear>Remove</button></p>' : '') +
             '<div class="tot grand"><span>Total</span><span>' + money(sub + SHIPPING) + '</span></div>' +
+            packHtml(n) +
             '<button class="btn btn-block" type="button" data-checkout>Checkout securely <span class="arr">&rarr;</span></button>' +
             '<p class="err" role="alert"></p>';
+    }
+
+    function packHtml(n) {
+        var h = '<div class="pack">';
+        if (n > 1) {
+            h += '<p class="pack-h">How should we pack it?</p>' +
+                '<label class="pack-opt"><input type="radio" name="pack" value="one-box"' + (pack === 'one-box' ? ' checked' : '') + '>' +
+                    '<span><strong>All in one box</strong><small>Everything together in a single parcel</small></span></label>' +
+                '<label class="pack-opt"><input type="radio" name="pack" value="separate"' + (pack === 'separate' ? ' checked' : '') + '>' +
+                    '<span><strong>Separate boxes</strong><small>Each item in its own box (' + n + ' boxes), handy for gifts</small></span></label>';
+        }
+        h += '<label class="pack-note"><span>Leave a note <em>(optional)</em></span>' +
+            '<textarea name="note" rows="2" maxlength="300" placeholder="Gift message, delivery instructions, anything we should know">' + esc(note) + '</textarea></label></div>';
+        return h;
+    }
+
+    function onDrawerChange(e) {
+        var t = e.target;
+        if (t && t.name === 'pack') { setPack(t.value); var er = foot.querySelector('.err'); if (er) er.textContent = ''; }
+    }
+    function onDrawerInput(e) {
+        var t = e.target;
+        if (t && t.name === 'note') setNote(t.value);
     }
 
     function onDrawerClick(e) {
@@ -133,10 +166,16 @@
 
     function checkout(btn) {
         var err = foot.querySelector('.err');
+        var units = cart.reduce(function (s, l) { return s + l.qty; }, 0);
+        if (units > 1 && !pack) {
+            if (err) err.textContent = 'Please choose how you would like it packed.';
+            var po = foot.querySelector('.pack'); if (po && po.scrollIntoView) po.scrollIntoView({ block: 'center', behavior: 'smooth' });
+            return;
+        }
         btn.disabled = true; btn.innerHTML = 'Opening secure checkout';
         fetch('/api/checkout', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ items: cart.map(function (l) { return { id: l.id, qty: l.qty }; }), code: code })
+            body: JSON.stringify({ items: cart.map(function (l) { return { id: l.id, qty: l.qty }; }), code: code, packaging: units > 1 ? pack : 'single', note: note })
         }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
           .then(function (res) {
               if (res.ok && res.j.url) { window.location.href = res.j.url; return; }

@@ -20,6 +20,8 @@ module.exports = async (req, res) => {
             customer_name: o.customer_name || o.shipping_name || '',
             customer_email: o.customer_email || '',
             customer_phone: o.customer_phone || '',
+            packaging: o.packaging || '',
+            customer_note: o.customer_note || '',
             amount_total: o.amount_total || 0,
             amount_subtotal: o.amount_subtotal != null ? o.amount_subtotal : (o.amount_total || 0),
             shipping_total: o.shipping_total || 0,

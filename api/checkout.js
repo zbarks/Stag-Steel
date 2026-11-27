@@ -105,6 +105,10 @@ module.exports = async (req, res) => {
             });
         }
 
+        // Packing choice + customer note (free text is cleaned and capped).
+        const packaging = ['one-box', 'separate'].includes(body.packaging) ? body.packaging : (boxes > 1 ? 'unspecified' : 'single');
+        const note = String(body.note || '').replace(/[\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, 300);
+
         const code = String(body.code || '').trim().toUpperCase();
         const freeShipping = FREE_SHIPPING_CODES.includes(code);
         const shippingPence = freeShipping
@@ -145,6 +149,8 @@ module.exports = async (req, res) => {
             metadata: {
                 source: 'stagandsteel.co.uk',
                 skus: JSON.stringify(skuMap), // e.g. {"tine-opener":2,"corkscrew":1}
+                packaging,
+                ...(note ? { note } : {}),
                 ...(freeShipping ? { shipping_code: code } : {}),
             },
 

@@ -191,6 +191,10 @@
       '<div class="sec"><h4>Send to</h4><div class="addr">' + esc(addrText(o)) + '</div><div class="muted" style="margin-top:6px">' + esc(o.customer_email) + '</div>' +
         (o.customer_phone ? '<div style="margin-top:4px"><a href="tel:' + esc(String(o.customer_phone).replace(/[^+\d]/g, '')) + '" style="color:inherit">' + esc(o.customer_phone) + '</a></div>' : '') +
         '<div class="btns"><button class="btn btn--ghost" id="copyAddr">Copy address</button></div></div>' +
+      ((o.packaging === 'one-box' || o.packaging === 'separate' || o.customer_note) ?
+        '<div class="sec"><h4>Packing &amp; note</h4>' +
+          (o.packaging === 'separate' ? '<div><strong>Separate boxes</strong></div>' : o.packaging === 'one-box' ? '<div><strong>All in one box</strong></div>' : '') +
+          (o.customer_note ? '<div class="muted" style="margin-top:6px;font-style:italic;white-space:pre-wrap">“' + esc(o.customer_note) + '”</div>' : '') + '</div>' : '') +
       (sent ?
         '<div class="sec"><h4>Dispatch</h4><div>' + esc(SERVICES[o.shipping_service] || o.shipping_service || 'Sent') + '</div>' +
           (o.tracking_number ? '<div class="muted">Tracking ' + esc(o.tracking_number) + '</div>' : '') +
