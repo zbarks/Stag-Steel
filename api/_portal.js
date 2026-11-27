@@ -14,6 +14,7 @@ const SERVICES = {
     'rm-signed-1st': 'Royal Mail Signed For 1st Class',
     'rm-signed-2nd': 'Royal Mail Signed For 2nd Class',
     'rm-special': 'Royal Mail Special Delivery',
+    'inpost': 'InPost',
     'other': 'Other courier',
 };
 

@@ -8,6 +8,7 @@
 //  Designed by Barker Digital
 // =============================================================
 const { sb, UUID_RE, SERVICES, ORDERS_TABLE } = require('./_portal');
+const { sendShippedEmail } = require('./_email');
 
 module.exports = async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
@@ -48,8 +49,15 @@ module.exports = async (req, res) => {
         });
         if (!rows || !rows.length) return res.status(404).json({ error: 'Order not found.' });
         const o = rows[0];
+        let emailed = false;
+        if (body.action === 'ship' && body.notify === true && o.customer_email) {
+            const r = await sendShippedEmail(o, { service: o.shipping_service, serviceName: SERVICES[o.shipping_service], tracking: o.tracking_number });
+            emailed = !!(r && r.ok);
+            if (!emailed) console.error('[portal-order] shipped email not sent', r);
+        }
         return res.status(200).json({
             ok: true,
+            emailed,
             order: {
                 id: o.id,
                 status: o.status,

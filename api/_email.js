@@ -106,6 +106,39 @@ async function sendCustomerConfirmation(order) {
     return send({ to: order.customer_email, subject, html });
 }
 
+function trackLink(service, tracking) {
+    if (!tracking) return '';
+    const t = encodeURIComponent(tracking);
+    if (/^rm-/.test(service || '')) return `https://www.royalmail.com/track-your-item#/tracking-results/${t}`;
+    if (service === 'inpost') return 'https://inpost.co.uk/track';
+    return '';
+}
+
+function renderShipped(order, { serviceName, service, tracking }) {
+    const first = (order.customer_name || '').trim().split(/\s+/)[0];
+    const link = trackLink(service, tracking);
+    const trackBlock = tracking ? `
+<tr><td style="padding:18px 30px 4px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Tracking</div>
+<div style="margin-top:6px;font-size:14px;line-height:1.6;">${esc(serviceName || 'Courier')}<br><b>${esc(tracking)}</b></div>
+${link ? `<div style="margin-top:12px;"><a href="${esc(link)}" style="display:inline-block;background:${BRAND.kraft};color:${BRAND.ink};text-decoration:none;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;">Track your parcel</a></div>` : ''}</td></tr>` : `
+<tr><td style="padding:18px 30px 4px;"><div style="font-size:14px;color:${BRAND.muted};line-height:1.6;">Sent with ${esc(serviceName || 'our courier')}.</div></td></tr>`;
+    const inner = `
+<tr><td style="padding:34px 30px 8px;"><div style="font-size:11px;letter-spacing:.16em;color:${BRAND.kraft};text-transform:uppercase;">On its way</div>
+<div style="margin-top:8px;font-size:26px;line-height:1.25;font-weight:600;">Good news${first ? ', ' + esc(first) : ''}.</div>
+<div style="margin-top:10px;font-size:15px;color:${BRAND.muted};line-height:1.6;">Your Stag &amp; Steel order has been posted and is on its way to you.</div></td></tr>
+${trackBlock}
+<tr><td style="padding:22px 30px 4px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;padding-bottom:6px;border-bottom:2px solid ${BRAND.ink};">In your parcel</div>${totals(order)}</td></tr>
+<tr><td style="padding:22px 30px 4px;"><div style="font-size:11px;letter-spacing:.12em;color:${BRAND.muted};text-transform:uppercase;">Delivering to</div>
+<div style="margin-top:6px;font-size:14px;line-height:1.6;">${address(order)}</div></td></tr>
+<tr><td style="padding:18px 30px 30px;"><a href="mailto:help@stagandsteel.co.uk" style="display:inline-block;border:1.5px solid ${BRAND.ink};color:${BRAND.ink};text-decoration:none;font-size:13px;font-weight:600;padding:10px 18px;border-radius:8px;">Need help? help@stagandsteel.co.uk</a></td></tr>`;
+    return { subject: 'Your Stag & Steel order is on its way', html: shell(inner, 'Your Stag & Steel order has been posted.') };
+}
+
+async function sendShippedEmail(order, info) {
+    const { subject, html } = renderShipped(order, info || {});
+    return send({ to: order.customer_email, subject, html });
+}
+
 function renderOwnerAlert(order) {
     const site = (process.env.SITE_URL || 'https://stagandsteel.co.uk').replace(/\/$/, '');
     const inner = `
@@ -125,4 +158,4 @@ async function sendOwnerAlert(order) {
     return send({ to, subject, html, replyTo: order.customer_email || undefined });
 }
 
-module.exports = { enabled, sendCustomerConfirmation, sendOwnerAlert, renderCustomerConfirmation, renderOwnerAlert };
+module.exports = { enabled, sendCustomerConfirmation, sendOwnerAlert, renderCustomerConfirmation, renderOwnerAlert, renderShipped, sendShippedEmail };

@@ -9,6 +9,7 @@
     'rm-signed-1st': 'Royal Mail Signed For 1st Class',
     'rm-signed-2nd': 'Royal Mail Signed For 2nd Class',
     'rm-special': 'Royal Mail Special Delivery',
+    'inpost': 'InPost',
     'other': 'Other courier'
   };
   var NAMES = { 'stag-opener': 'The Stag Opener', 'dog-chew': 'Antler Dog Chew', 'the-bundle': 'The Bundle' };
@@ -196,6 +197,7 @@
           '<div class="btns"><button class="btn btn--ghost" id="unship">Mark as not sent</button></div></div>' :
         '<div class="sec"><h4>Mark as sent</h4><label class="f" for="svc">Service</label><select class="in" id="svc">' + opts + '</select>' +
           '<label class="f" for="trk">Tracking number (optional)</label><input class="in" id="trk" autocomplete="off" maxlength="60">' +
+          '<label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:13px;"><input type="checkbox" id="emailCust" checked> Email the customer that it is on its way</label>' +
           '<div class="btns"><button class="btn btn--solid" id="ship">Mark as sent</button></div></div>') +
       '<div class="sec"><h4>Revenue</h4><div class="muted" style="margin-bottom:8px">Leave out test or free orders so they do not count in the figures.</div>' +
         '<button class="btn btn--ghost" id="excl">' + (o.exclude_from_revenue ? 'Count in revenue' : 'Leave out of revenue') + '</button></div>';
@@ -208,7 +210,7 @@
     return api('/api/portal-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(function (d) {
       var o = state.orders.filter(function (x) { return x.id === body.id; })[0];
       if (o && d.order) Object.assign(o, d.order);
-      toast(okMsg); render(); if (state.open) openDrawer(state.open);
+      toast(body.notify ? (d.emailed ? okMsg + ', customer emailed' : okMsg + ', but the email did not send') : okMsg); render(); if (state.open) openDrawer(state.open);
     }).catch(function (e) { toast(e.message); if (btn) btn.disabled = false; });
   }
 
@@ -241,7 +243,7 @@
     var o = state.orders.filter(function (x) { return x.id === state.open; })[0];
     if (!o) return;
     if (t.closest('#copyAddr')) { try { navigator.clipboard.writeText(addrText(o)).then(function () { toast('Address copied'); }); } catch (_) { toast('Could not copy'); } return; }
-    if (t.closest('#ship')) return act({ id: o.id, action: 'ship', service: $('#svc').value, tracking: $('#trk').value }, t.closest('#ship'), 'Marked as sent');
+    if (t.closest('#ship')) return act({ id: o.id, action: 'ship', service: $('#svc').value, tracking: $('#trk').value, notify: $('#emailCust') ? $('#emailCust').checked : false }, t.closest('#ship'), 'Marked as sent');
     if (t.closest('#unship')) return act({ id: o.id, action: 'unship' }, t.closest('#unship'), 'Marked as not sent');
     if (t.closest('#excl')) return act({ id: o.id, action: 'exclude', value: !o.exclude_from_revenue }, t.closest('#excl'), o.exclude_from_revenue ? 'Counted in revenue' : 'Left out of revenue');
   });
