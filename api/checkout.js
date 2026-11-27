@@ -35,7 +35,10 @@ const PRODUCTS = {
 };
 
 // UK shipping: £4.50 per box, capped at £10 per order.
-// Every unit in the basket (including a bundle) counts as one box.
+// A box holds up to 6 openers/chews or 4 bundles (opener=2, chew=2, bundle=3 of 12 slots).
+// "Separate boxes" = one box per unit. "One box" = the fewest boxes that fit everything.
+const SLOTS = { 'stag-opener': 2, 'dog-chew': 2, 'the-bundle': 3 };
+const BOX_SLOTS = 12;
 const SHIPPING_PER_BOX_PENCE = 450; // £4.50
 const SHIPPING_CAP_PENCE = 1000; // £10.00
 
@@ -76,7 +79,8 @@ module.exports = async (req, res) => {
         // Reject anything we don't recognise.
         const origin = getOrigin(req);
         const lineItems = [];
-        let boxes = 0;
+        let units = 0;
+        let slots = 0;
         const skuMap = {}; // { 'tine-opener': 2, ... } — recorded in metadata for the webhook
 
         for (const item of items) {
@@ -89,7 +93,8 @@ module.exports = async (req, res) => {
             }
 
             skuMap[id] = (skuMap[id] || 0) + qty;
-            boxes += qty;
+            units += qty;
+            slots += SLOTS[id] * qty;
 
             lineItems.push({
                 quantity: qty,
@@ -105,8 +110,17 @@ module.exports = async (req, res) => {
             });
         }
 
-        // Packing choice + customer note (free text is cleaned and capped).
-        const packaging = ['one-box', 'separate'].includes(body.packaging) ? body.packaging : (boxes > 1 ? 'unspecified' : 'single');
+        // Packing choice: required whenever there is more than one item.
+        let packaging = 'single';
+        if (units > 1) {
+            if (!['one-box', 'separate'].includes(body.packaging)) {
+                return res.status(400).json({ error: 'Please choose how you would like it packed.' });
+            }
+            packaging = body.packaging;
+        }
+        const minBoxes = Math.max(1, Math.ceil(slots / BOX_SLOTS));
+        // Never fewer than the minimum that physically fits; separate = one per unit.
+        const boxes = packaging === 'separate' ? units : minBoxes;
         const note = String(body.note || '').replace(/[\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, 300);
 
         const code = String(body.code || '').trim().toUpperCase();
@@ -130,7 +144,7 @@ module.exports = async (req, res) => {
                     shipping_rate_data: {
                         type: 'fixed_amount',
                         fixed_amount: { amount: shippingPence, currency: 'gbp' },
-                        display_name: freeShipping ? 'Free delivery (in person code)' : 'UK delivery',
+                        display_name: freeShipping ? 'Free delivery (in person code)' : `UK delivery (${boxes} ${boxes === 1 ? 'box' : 'boxes'})`,
                         delivery_estimate: {
                             minimum: { unit: 'business_day', value: 5 },
                             maximum: { unit: 'business_day', value: 7 },
@@ -150,6 +164,7 @@ module.exports = async (req, res) => {
                 source: 'stagandsteel.co.uk',
                 skus: JSON.stringify(skuMap), // e.g. {"tine-opener":2,"corkscrew":1}
                 packaging,
+                boxes: String(boxes),
                 ...(note ? { note } : {}),
                 ...(freeShipping ? { shipping_code: code } : {}),
             },

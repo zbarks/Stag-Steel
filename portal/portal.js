@@ -121,7 +121,7 @@
     $('#orderList').innerHTML = list.length ? list.map(function (o) {
       var sent = o.status === 'shipped';
       return '<button class="row" data-open="' + esc(o.id) + '">' +
-        '<div><div class="row__name">' + esc(o.customer_name || o.customer_email || 'Customer') + '</div><div class="row__sub">' + esc(o.customer_email) + '</div>' + ((o.packaging === 'separate' || o.customer_note) ? '<div class="row__sub" style="color:#b8936a">' + [o.packaging === 'separate' ? 'Separate boxes' : '', o.customer_note ? 'Has note' : ''].filter(Boolean).join(' · ') + '</div>' : '') + '</div>' +
+        '<div><div class="row__name">' + esc(o.customer_name || o.customer_email || 'Customer') + '</div><div class="row__sub">' + esc(o.customer_email) + '</div>' + ((o.boxes > 1 || o.customer_note) ? '<div class="row__sub" style="color:#b8936a">' + [o.boxes > 1 ? o.boxes + ' boxes' : '', o.customer_note ? 'Has note' : ''].filter(Boolean).join(' · ') + '</div>' : '') + '</div>' +
         '<div><div>' + esc(timeStr(o.created_at)) + '</div><div class="row__sub">' + esc(town(o)) + '</div></div>' +
         '<div class="row__amt">' + gbp(o.amount_total) + (o.exclude_from_revenue ? '<div class="row__sub">left out</div>' : '') + '</div>' +
         '<div style="text-align:right"><span class="tag ' + (sent ? 'tag--shipped' : 'tag--paid') + '">' + (sent ? 'Sent' : 'To send') + '</span></div></button>';
@@ -193,7 +193,7 @@
         '<div class="btns"><button class="btn btn--ghost" id="copyAddr">Copy address</button></div></div>' +
       ((o.packaging === 'one-box' || o.packaging === 'separate' || o.customer_note) ?
         '<div class="sec"><h4>Packing &amp; note</h4>' +
-          (o.packaging === 'separate' ? '<div><strong>Separate boxes</strong></div>' : o.packaging === 'one-box' ? '<div><strong>All in one box</strong></div>' : '') +
+          (o.packaging === 'separate' ? '<div><strong>Separate boxes' + (o.boxes > 1 ? ' (' + o.boxes + ' boxes)' : '') + '</strong></div>' : o.packaging === 'one-box' ? '<div><strong>' + (o.boxes > 1 ? 'Packed together (' + o.boxes + ' boxes)' : 'All in one box') + '</strong></div>' : '') +
           (o.customer_note ? '<div class="muted" style="margin-top:6px;font-style:italic;white-space:pre-wrap">“' + esc(o.customer_note) + '”</div>' : '') + '</div>' : '') +
       (sent ?
         '<div class="sec"><h4>Dispatch</h4><div>' + esc(SERVICES[o.shipping_service] || o.shipping_service || 'Sent') + '</div>' +

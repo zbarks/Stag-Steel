@@ -150,10 +150,10 @@ async function sendShippedEmail(order, info) {
 }
 
 function packLabel(order) {
-    const n = Object.values(order.skus || {}).reduce((s, q) => s + (Number(q) || 0), 0);
-    if (order.packaging === 'separate') return `Separate boxes${n > 1 ? ' (' + n + ' boxes)' : ''}`;
-    if (order.packaging === 'one-box') return 'All in one box';
-    return '';
+    const b = Number(order.boxes) || 0;
+    if (order.packaging === 'separate') return `Separate boxes${b > 1 ? ' (' + b + ' boxes)' : ''}`;
+    if (order.packaging === 'one-box') return b > 1 ? `Packed together (${b} boxes, as few as possible)` : 'All in one box';
+    return b > 1 ? `${b} boxes` : '';
 }
 function packNoteRow(order) {
     const p = packLabel(order), note = order.customer_note;

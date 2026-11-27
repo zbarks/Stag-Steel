@@ -15,6 +15,11 @@
     var code = '';
     try { code = localStorage.getItem(CODE_KEY) || ''; } catch (e) {}
     function freeShip() { return FREE_SHIPPING_CODES.indexOf(code) !== -1; }
+    // Box capacity: 6 openers/chews per box, 4 bundles per box (opener=2, chew=2, bundle=3, box=12).
+    var SLOTS = { 'stag-opener': 2, 'dog-chew': 2, 'the-bundle': 3 }, BOX_SLOTS = 12;
+    function unitsOf() { return cart.reduce(function (s, l) { return s + l.qty; }, 0); }
+    function minBoxes() { var s = cart.reduce(function (t, l) { return t + (SLOTS[l.id] || 2) * l.qty; }, 0); return Math.max(1, Math.ceil(s / BOX_SLOTS)); }
+    function boxesNow() { return (pack === 'separate') ? Math.max(unitsOf(), 1) : minBoxes(); }
     function shippingFor(boxes) { return freeShip() ? 0 : Math.min(SHIPPING_CAP, SHIPPING_PER_BOX * boxes); }
     function setCode(c) {
         code = (c || '').trim().toUpperCase();
@@ -112,26 +117,26 @@
         body.innerHTML = html;
 
         var sub = cart.reduce(function (s, l) { return s + CATALOGUE[l.id].price * l.qty; }, 0);
-        var SHIPPING = shippingFor(n);
+        var boxes = boxesNow(), SHIPPING = shippingFor(boxes);
         foot.innerHTML =
             '<div class="tot"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
-            '<div class="tot"><span>' + (freeShip() ? 'Delivery (code ' + code + ')' : 'UK delivery, tracked (' + n + (n === 1 ? ' box' : ' boxes') + ')') + '</span><span>' + (freeShip() ? 'Free' : money(SHIPPING)) + '</span></div>' +
+            '<div class="tot"><span>' + (freeShip() ? 'Delivery (code ' + code + ')' : 'UK delivery, tracked (' + boxes + (boxes === 1 ? ' box' : ' boxes') + ')') + '</span><span>' + (freeShip() ? 'Free' : money(SHIPPING)) + '</span></div>' +
             '<form class="code" data-code>' +
                 '<input type="text" name="code" placeholder="Discount code" autocomplete="off" aria-label="Discount code" value="' + (freeShip() ? '' : code) + '">' +
                 '<button type="submit" class="btn">Apply</button></form>' +
                 (freeShip() ? '<p class="code-ok">Code ' + code + ' applied. <button type="button" class="rm" data-code-clear>Remove</button></p>' : '') +
             '<div class="tot grand"><span>Total</span><span>' + money(sub + SHIPPING) + '</span></div>' +
-            packHtml(n) +
+            packHtml(n, minBoxes()) +
             '<button class="btn btn-block" type="button" data-checkout>Checkout securely <span class="arr">&rarr;</span></button>' +
             '<p class="err" role="alert"></p>';
     }
 
-    function packHtml(n) {
+    function packHtml(n, mb) {
         var h = '<div class="pack">';
         if (n > 1) {
             h += '<p class="pack-h">How should we pack it?</p>' +
                 '<label class="pack-opt"><input type="radio" name="pack" value="one-box"' + (pack === 'one-box' ? ' checked' : '') + '>' +
-                    '<span><strong>All in one box</strong><small>Everything together in a single parcel</small></span></label>' +
+                    '<span><strong>' + (mb > 1 ? 'Packed together' : 'All in one box') + '</strong><small>' + (mb > 1 ? 'Packed as tightly as possible: ' + mb + ' boxes (a box holds up to 6 openers or chews, or 4 bundles)' : 'Everything together in a single parcel') + '</small></span></label>' +
                 '<label class="pack-opt"><input type="radio" name="pack" value="separate"' + (pack === 'separate' ? ' checked' : '') + '>' +
                     '<span><strong>Separate boxes</strong><small>Each item in its own box (' + n + ' boxes), handy for gifts</small></span></label>';
         }
@@ -142,7 +147,7 @@
 
     function onDrawerChange(e) {
         var t = e.target;
-        if (t && t.name === 'pack') { setPack(t.value); var er = foot.querySelector('.err'); if (er) er.textContent = ''; }
+        if (t && t.name === 'pack') { setPack(t.value); render(); }
     }
     function onDrawerInput(e) {
         var t = e.target;

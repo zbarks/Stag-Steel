@@ -128,6 +128,7 @@ module.exports = async (req, res) => {
             customer_name: (session.customer_details && session.customer_details.name) || null,
             customer_phone: (session.customer_details && session.customer_details.phone) || null,
             packaging: (session.metadata && session.metadata.packaging) || null,
+            boxes: parseInt((session.metadata && session.metadata.boxes) || '', 10) || null,
             customer_note: (session.metadata && session.metadata.note) || null,
             amount_total: session.amount_total,        // pence, incl. shipping
             amount_subtotal: session.amount_subtotal,  // pence, ex shipping
