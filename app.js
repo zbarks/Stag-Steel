@@ -9,18 +9,18 @@
         'dog-chew':    { name: 'Antler Dog Chew', price: 10, img: ['assets/chew-main-sm.jpg'], url: 'dog-chew.html' },
         'the-bundle':  { name: 'The Bundle', price: 20, img: ['assets/opener-main-sm.jpg', 'assets/chew-main-sm.jpg'], url: 'bundle.html', note: 'Opener and dog chew' }
     };
-    var SHIPPING_PER_BOX = 4.5, SHIPPING_CAP = 10;
+    var SHIPPING_PER_BOX = 4.5;
     var FREE_SHIPPING_CODES = ['INPERSON']; // display only: api/checkout.js enforces
     var CODE_KEY = 'ss_code_v1';
     var code = '';
     try { code = localStorage.getItem(CODE_KEY) || ''; } catch (e) {}
     function freeShip() { return FREE_SHIPPING_CODES.indexOf(code) !== -1; }
-    // Box capacity: 6 openers/chews per box, 4 bundles per box (opener=2, chew=2, bundle=3, box=12).
-    var SLOTS = { 'stag-opener': 2, 'dog-chew': 2, 'the-bundle': 3 }, BOX_SLOTS = 12;
+    // Box capacity: 6 openers/chews per box, 3 bundles per box, 6 items max (opener=2, chew=2, bundle=4, box=12).
+    var SLOTS = { 'stag-opener': 2, 'dog-chew': 2, 'the-bundle': 4 }, BOX_SLOTS = 12;
     function unitsOf() { return cart.reduce(function (s, l) { return s + l.qty; }, 0); }
     function minBoxes() { var s = cart.reduce(function (t, l) { return t + (SLOTS[l.id] || 2) * l.qty; }, 0); return Math.max(1, Math.ceil(s / BOX_SLOTS)); }
     function boxesNow() { return (pack === 'separate') ? Math.max(unitsOf(), 1) : minBoxes(); }
-    function shippingFor(boxes) { return freeShip() ? 0 : Math.min(SHIPPING_CAP, SHIPPING_PER_BOX * boxes); }
+    function shippingFor(boxes) { return freeShip() ? 0 : SHIPPING_PER_BOX * boxes; }
     function setCode(c) {
         code = (c || '').trim().toUpperCase();
         try { localStorage.setItem(CODE_KEY, code); } catch (e) {}
@@ -136,7 +136,7 @@
         if (n > 1) {
             h += '<p class="pack-h">How should we pack it?</p>' +
                 '<label class="pack-opt"><input type="radio" name="pack" value="one-box"' + (pack === 'one-box' ? ' checked' : '') + '>' +
-                    '<span><strong>' + (mb > 1 ? 'Packed together' : 'All in one box') + '</strong><small>' + (mb > 1 ? 'Packed as tightly as possible: ' + mb + ' boxes (a box holds up to 6 openers or chews, or 4 bundles)' : 'Everything together in a single parcel') + '</small></span></label>' +
+                    '<span><strong>' + (mb > 1 ? 'Packed together' : 'All in one box') + '</strong><small>' + (mb > 1 ? 'Packed as tightly as possible: ' + mb + ' boxes (a box holds up to 6 openers or chews, or 3 bundles)' : 'Everything together in a single parcel') + '</small></span></label>' +
                 '<label class="pack-opt"><input type="radio" name="pack" value="separate"' + (pack === 'separate' ? ' checked' : '') + '>' +
                     '<span><strong>Separate boxes</strong><small>Each item in its own box (' + n + ' boxes), handy for gifts</small></span></label>';
         }

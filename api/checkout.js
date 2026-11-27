@@ -34,13 +34,12 @@ const PRODUCTS = {
     },
 };
 
-// UK shipping: £4.50 per box, capped at £10 per order.
-// A box holds up to 6 openers/chews or 4 bundles (opener=2, chew=2, bundle=3 of 12 slots).
+// UK shipping: £4.50 per box, no cap.
+// A box holds max 6 items: 6 openers/chews or 3 bundles (opener=2, chew=2, bundle=4 of 12 slots).
 // "Separate boxes" = one box per unit. "One box" = the fewest boxes that fit everything.
-const SLOTS = { 'stag-opener': 2, 'dog-chew': 2, 'the-bundle': 3 };
+const SLOTS = { 'stag-opener': 2, 'dog-chew': 2, 'the-bundle': 4 };
 const BOX_SLOTS = 12;
 const SHIPPING_PER_BOX_PENCE = 450; // £4.50
-const SHIPPING_CAP_PENCE = 1000; // £10.00
 
 // Codes that remove shipping entirely (checked server-side, case-insensitive).
 const FREE_SHIPPING_CODES = ['INPERSON'];
@@ -127,7 +126,7 @@ module.exports = async (req, res) => {
         const freeShipping = FREE_SHIPPING_CODES.includes(code);
         const shippingPence = freeShipping
             ? 0
-            : Math.min(SHIPPING_CAP_PENCE, SHIPPING_PER_BOX_PENCE * boxes);
+            : SHIPPING_PER_BOX_PENCE * boxes;
 
         // Create the Checkout Session
         const session = await stripe.checkout.sessions.create({
