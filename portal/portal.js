@@ -189,7 +189,7 @@
         '<div class="line"><span class="muted">Shipping</span><span>' + gbp(o.shipping_total) + '</span></div>' +
         '<div class="line line--total"><span>Total</span><span>' + gbp(o.amount_total) + '</span></div></div>' +
       '<div class="sec"><h4>Send to</h4><div class="addr">' + esc(addrText(o)) + '</div><div class="muted" style="margin-top:6px">' + esc(o.customer_email) + '</div>' +
-        (o.customer_phone ? '<div style="margin-top:4px"><a href="tel:' + esc(o.customer_phone) + '" style="color:inherit">' + esc(o.customer_phone) + '</a></div>' : '') +
+        (o.customer_phone ? '<div style="margin-top:4px"><a href="tel:' + esc(String(o.customer_phone).replace(/[^+\d]/g, '')) + '" style="color:inherit">' + esc(o.customer_phone) + '</a></div>' : '') +
         '<div class="btns"><button class="btn btn--ghost" id="copyAddr">Copy address</button></div></div>' +
       (sent ?
         '<div class="sec"><h4>Dispatch</h4><div>' + esc(SERVICES[o.shipping_service] || o.shipping_service || 'Sent') + '</div>' +
