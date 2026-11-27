@@ -4,7 +4,7 @@
 //  Protected by middleware.js (HTTP Basic Auth).
 //  Designed by Barker Digital
 // =============================================================
-const { sb } = require('./_portal');
+const { sb, ORDERS_TABLE } = require('./_portal');
 
 module.exports = async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
         return res.status(405).json({ error: 'Method not allowed' });
     }
     try {
-        const rows = await sb('orders?select=*&order=created_at.desc&limit=1000');
+        const rows = await sb(ORDERS_TABLE + '?select=*&order=created_at.desc&limit=1000');
         const orders = (rows || []).map((o) => ({
             id: o.id,
             created_at: o.created_at,

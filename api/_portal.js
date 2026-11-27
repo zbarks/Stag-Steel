@@ -4,6 +4,8 @@
 //  Designed by Barker Digital
 // =============================================================
 
+const ORDERS_TABLE = process.env.ORDERS_TABLE || 'stag_steel_orders';
+
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 const SERVICES = {
@@ -44,4 +46,4 @@ async function sb(path, opts) {
     return data;
 }
 
-module.exports = { sb, UUID_RE, SERVICES };
+module.exports = { sb, UUID_RE, SERVICES, ORDERS_TABLE };

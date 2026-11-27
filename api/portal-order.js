@@ -7,7 +7,7 @@
 //  Protected by middleware.js (HTTP Basic Auth).
 //  Designed by Barker Digital
 // =============================================================
-const { sb, UUID_RE, SERVICES } = require('./_portal');
+const { sb, UUID_RE, SERVICES, ORDERS_TABLE } = require('./_portal');
 
 module.exports = async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const rows = await sb(`orders?id=eq.${encodeURIComponent(id)}`, {
+        const rows = await sb(`${ORDERS_TABLE}?id=eq.${encodeURIComponent(id)}`, {
             method: 'PATCH',
             headers: { Prefer: 'return=representation' },
             body: JSON.stringify(patch),

@@ -18,6 +18,11 @@
 
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
+const { sendCustomerConfirmation, sendOwnerAlert } = require('./_email');
+
+// Orders live in the shared Barker Digital Supabase project, so the table is
+// prefixed to keep it apart from other clients.
+const ORDERS_TABLE = process.env.ORDERS_TABLE || 'stag_steel_orders';
 
 // Vercel: turn OFF automatic body parsing so we can verify the raw signature.
 module.exports.config = { api: { bodyParser: false } };
@@ -142,7 +147,7 @@ module.exports = async (req, res) => {
 
         // Idempotent: if Stripe retries, don't double-insert the same session.
         const { error } = await supabase
-            .from('orders')
+            .from(ORDERS_TABLE)
             .upsert(order, { onConflict: 'stripe_session_id' });
 
         if (error) {
@@ -152,6 +157,33 @@ module.exports = async (req, res) => {
         }
 
         console.log('Order stored:', session.id);
+
+        // Emails: claim the order first (only one delivery of the webhook can
+        // win this), so a Stripe retry never sends the same emails twice.
+        // Never lets an email problem fail the webhook: the order is saved.
+        try {
+            const { data: claimed } = await supabase
+                .from(ORDERS_TABLE)
+                .update({ confirmation_email_sent_at: new Date().toISOString() })
+                .eq('stripe_session_id', session.id)
+                .is('confirmation_email_sent_at', null)
+                .select('id');
+            if (claimed && claimed.length) {
+                // The customer confirmation stays OFF unless CUSTOMER_EMAILS_ENABLED=true.
+                const customerOn = process.env.CUSTOMER_EMAILS_ENABLED === 'true';
+                const results = await Promise.allSettled([
+                    customerOn ? sendCustomerConfirmation(order) : Promise.resolve({ skipped: 'customer-emails-off' }),
+                    sendOwnerAlert(order),
+                ]);
+                results.forEach((r, i) => {
+                    const v = r.status === 'fulfilled' ? r.value : { error: r.reason && r.reason.message };
+                    if (v && v.error) console.error(`Email ${i === 0 ? 'customer' : 'owner'} failed:`, v.error);
+                });
+            }
+        } catch (mailErr) {
+            console.error('Email step failed:', mailErr && mailErr.message);
+        }
+
         return res.status(200).json({ received: true, stored: true });
     } catch (err) {
         console.error('Webhook handler error:', err);
