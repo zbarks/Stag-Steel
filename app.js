@@ -184,8 +184,18 @@
 
     function initHero() {
         var v = document.querySelector('.hero video'); if (!v) return;
+        // The clip fades up from black, so start (and restart each loop) a little
+        // way in. The first couple of seconds are almost completely black.
+        var START = 2;
         var show = function () { v.classList.add('ready'); };
-        if (v.readyState >= 2) show(); else v.addEventListener('loadeddata', show, { once: true });
+        var seek = function () { try { if (v.currentTime < START) v.currentTime = START; } catch (e) {} };
+        if (v.readyState >= 1) seek(); else v.addEventListener('loadedmetadata', seek, { once: true });
+        v.addEventListener('seeked', show, { once: true });
+        setTimeout(show, 2000);
+        v.addEventListener('ended', function () {
+            try { v.currentTime = START; } catch (e) {}
+            var r = v.play && v.play(); if (r && r.catch) r.catch(function () {});
+        });
         var p = v.play && v.play(); if (p && p.catch) p.catch(function () { show(); });
     }
 
