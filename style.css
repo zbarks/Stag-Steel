@@ -548,3 +548,10 @@ body.cart-open .drawer-bg { opacity: 1; visibility: visible; }
 .pack-note { display: block; margin-top: 12px; font-size: 12px; letter-spacing: .08em; color: var(--mist); }
 .pack-note em { font-style: normal; opacity: .7; }
 .pack-note textarea { display: block; width: 100%; margin-top: 8px; padding: 10px 12px; background: transparent; border: 1px solid rgba(255,255,255,.25); color: var(--cream); font: inherit; font-size: 14px; letter-spacing: 0; resize: vertical; min-height: 56px; }
+
+/* Whole drawer scrolls as one so the basket is never squashed by the packing options */
+.drawer { overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.drawer-head { position: sticky; top: 0; z-index: 3; background: inherit; flex: none; }
+.drawer-body { flex: none; overflow: visible; min-height: 120px; }
+.drawer-foot { flex: none; }
+.drawer-foot [data-checkout] { position: sticky; bottom: 0; z-index: 2; box-shadow: 0 -14px 14px -8px rgba(18,15,13,.95); }
