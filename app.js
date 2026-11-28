@@ -221,7 +221,7 @@
           })
           .catch(function (e) {
               btn.disabled = false; btn.innerHTML = 'Checkout securely <span class="arr">&rarr;</span>';
-              if (err) err.textContent = 'Sorry, checkout could not open. Please try again or email zach@barkerdigital.co.uk.';
+              if (err) err.textContent = 'Sorry, checkout could not open. Please try again or email help@stagandsteel.co.uk.';
               console.error(e);
           });
     }
