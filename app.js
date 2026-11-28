@@ -53,8 +53,24 @@
         cart = cart.filter(function (x) { return x.qty > 0; });
         save(cart); render();
     }
-    function add(id, q) { setQty(id, qtyOf(id) + (q || 1)); }
+    function add(id, q) {
+        var p = CATALOGUE[id], n = q || 1;
+        if (p) track('AddToCart', { content_type: 'product', content_ids: [id], content_name: p.name, contents: [{ id: id, quantity: n, item_price: p.price }], value: p.price * n, currency: 'GBP' });
+        setQty(id, qtyOf(id) + n);
+    }
     var money = function (n) { return '£' + (n % 1 ? n.toFixed(2) : n); };
+
+    /* ---------- Meta Pixel events ---------- */
+    function track(ev, data, custom, eventID) {
+        try {
+            if (!window.fbq) return;
+            var opts = eventID ? { eventID: eventID } : undefined;
+            if (custom) window.fbq('trackCustom', ev, data || {}, opts);
+            else window.fbq('track', ev, data || {}, opts);
+        } catch (e) {}
+    }
+    function pixContents() { return cart.map(function (l) { return { id: l.id, quantity: l.qty, item_price: CATALOGUE[l.id].price }; }); }
+    function cartSub() { return cart.reduce(function (s, l) { return s + CATALOGUE[l.id].price * l.qty; }, 0); }
 
     /* ---------- drawer ---------- */
     var drawer, body, foot;
@@ -73,7 +89,10 @@
         drawer.addEventListener('input', onDrawerInput);
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCart(); });
     }
-    function openCart() { document.body.classList.add('cart-open'); drawer.setAttribute('aria-hidden', 'false'); }
+    function openCart() {
+        document.body.classList.add('cart-open'); drawer.setAttribute('aria-hidden', 'false');
+        track('ViewCart', { value: cartSub(), currency: 'GBP', num_items: cart.reduce(function (n, l) { return n + l.qty; }, 0) }, true);
+    }
     function closeCart() { document.body.classList.remove('cart-open'); drawer.setAttribute('aria-hidden', 'true'); }
 
     function render() {
@@ -187,6 +206,10 @@
             var po = foot.querySelector('.pack'); if (po && po.scrollIntoView) po.scrollIntoView({ block: 'center', behavior: 'smooth' });
             return;
         }
+        var orderTotal = cartSub() + shippingFor(boxesNow());
+        var order = { value: orderTotal, num_items: units, contents: pixContents(), ts: Date.now() };
+        track('InitiateCheckout', { content_type: 'product', contents: order.contents, num_items: units, value: orderTotal, currency: 'GBP' });
+        try { localStorage.setItem('ss_pix_order', JSON.stringify(order)); } catch (e) {}
         btn.disabled = true; btn.innerHTML = 'Opening secure checkout';
         fetch('/api/checkout', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -277,6 +300,33 @@
         });
     }
 
+    function initTracking() {
+        // ViewContent on product pages
+        var pb = document.querySelector('[data-add]:not([data-one])');
+        if (pb && CATALOGUE[pb.dataset.add]) {
+            var pr = CATALOGUE[pb.dataset.add];
+            track('ViewContent', { content_type: 'product', content_ids: [pb.dataset.add], content_name: pr.name, value: pr.price, currency: 'GBP' });
+        }
+        // Purchase on the thank-you page, once per Stripe session
+        if (document.body.hasAttribute('data-clear-cart')) {
+            var sid = '';
+            try { sid = new URLSearchParams(window.location.search).get('session_id') || ''; } catch (e) {}
+            var done = '', order = null;
+            try { done = localStorage.getItem('ss_pix_done') || ''; order = JSON.parse(localStorage.getItem('ss_pix_order') || 'null'); } catch (e) {}
+            if (sid && sid !== done && order && order.value > 0) {
+                track('Purchase', { content_type: 'product', contents: order.contents, num_items: order.num_items, value: order.value, currency: 'GBP' }, false, sid);
+                try { localStorage.setItem('ss_pix_done', sid); localStorage.removeItem('ss_pix_order'); } catch (e) {}
+            }
+        }
+        // What people click: contact links and button links
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a'); if (!a) return;
+            var href = a.getAttribute('href') || '';
+            if (href.indexOf('mailto:') === 0) track('Contact', {});
+            else if (a.classList.contains('btn')) track('CTAClick', { label: (a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40), href: href }, true);
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         buildDrawer();
         drawer.addEventListener('click', onDrawerClick);
@@ -287,7 +337,7 @@
             if (FREE_SHIPPING_CODES.indexOf(v) !== -1) { setCode(v); toast('Code applied. Delivery is free.'); }
             else toast('That code is not valid.');
         });
-        render(); initHeader(); initReveal(); initHero(); initGallery(); initBuy();
+        render(); initHeader(); initReveal(); initHero(); initGallery(); initBuy(); initTracking();
         if (document.body.hasAttribute('data-clear-cart')) { cart = []; save(cart); render(); }
     });
 })();
